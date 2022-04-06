@@ -377,3 +377,4 @@ void separaParabrasEnArray( char *array[], char enunciado[], char separador[]){
 
 }
 
+

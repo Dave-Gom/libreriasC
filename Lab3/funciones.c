@@ -63,3 +63,10 @@ int cantidadHermososEnArreglo (int arreglo[], int dim){
 
   return contador;
 }
+
+void imprimeArreglo( int arreglo[], int longitud){
+  int i;
+  for(i = 0; i<longitud; i++){
+    printf("%d", arreglo[i]);
+  }
+}
