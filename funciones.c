@@ -251,7 +251,7 @@ void cargaMatriz( const int fila, const int colum, int matriz[][colum] ){
 void imprimeArreglo( int arreglo[], const int longitud){
   int i;
   for(i = 0; i<longitud; i++){
-    printf("%d", arreglo[i]);
+    printf(" %d\t", arreglo[i]);
   }
 }
 
@@ -364,7 +364,8 @@ void leeConEspacios( char cadena[] ){
 /* separa las palabras de un enunciado en un array
 los argumentos son ( el array contenedor, el enunciado a dividir, el separador )
  */
-void separaParabrasEnArray( char *array[], char enunciado[], char separador[]){
+void separaParabrasEnArray( char *array[], char enunciado[], char separador[])
+{
 
   int i;
   char *ptrToken = strtok(enunciado, separador);
@@ -377,4 +378,362 @@ void separaParabrasEnArray( char *array[], char enunciado[], char separador[]){
 
 }
 
+
+int verificaCeros(int fila, int col, int matriz[][col])  /* Verifica la existencia  de ceros en una matriz, si existe, devuelce -1 si no existen devuelce cero */
+{  int i, j;
+  for( i = 0;i<fila; i++){
+    for ( j = 0; j < col; j++)
+    {
+      if( matriz[i][j] == 0){
+        return -1;
+      }
+    }
+  }
+
+  return 0;
+}
+
+void imprimeCamino( int fila, int col, int a[][col]) /* imprime el camino que recorrio una en una matriz */
+{
+  int i, j, elem;
+  for(elem = 1; elem <= fila*col +1; elem++){
+    for ( i = 0; i < fila; i++)
+    {
+      for ( j = 0; j < col; j++)
+      {
+        if( a[i][j] == elem){
+          printf("%c%d ", getLetra(i+1), j);
+        }
+      }
+    }
+  }
+}
+
+char getLetra(int val){ /* letras de la A a la H para rempresentar las columnas del tablero de ajedrez */
+  switch (val)
+  {
+  case 1:
+    return 'a';
+    break;
+  case 2:
+    return 'b';
+    break;
+  case 3:
+    return 'c';
+    break;
+  case 4:
+    return 'd';
+    break;
+  case 5:
+    return 'e';
+    break;
+  case 6:
+    return 'f';
+    break;
+  case 7:
+    return 'g';
+    break;
+  case 8:
+    return 'h';
+    break;
+  default:
+    return 'x';
+    break;
+  }
+}
+
+void imprimeMatrizFormat( int filas, int columnas, int Matriz[][columnas]){
+  int i;
+  int j;
+
+  /* printf("\n\nEste es el tablero:\n\n "); */
+  for ( i = 0; i < filas; i++ )
+  { 
+    for ( j = 0; j < columnas; j++)
+    { 
+      printf(" %d\t",  Matriz[i][j]);
+    } 
+    printf("\n");
+  }
+
+  printf("\n");
+} 
+
+
+void primeraAparicion ( char exp[], char p) //devuelce la posicion de primera a paricion de un caracter en una cadena
+{
+  int i;
+  for(i = 0; i< strlen(exp); i++){
+    if( exp[i] == p){
+      printf("%c aparece en la posicion %d\n", p, i);
+      break;
+    }
+  }
+}
+
+void vocales( char exp[])//devuelve la cantidada de apariciones de cada vocal en una cadena
+{
+  int cantidadAparicion[5] = {0}; /* posiciones 0 = a , 1 = e,... 4 = u */
+  char vocalesstr[] = "aeiou";
+  int longitud, i;
+  longitud = strlen(exp);
+  for ( i = 0; i < longitud; i++)
+  {
+    if( exp[i] == 'a' || exp[i] == 'A'){
+      cantidadAparicion[0]++;
+    }
+    if( exp[i] == 'e' || exp[i] == 'E'){
+      cantidadAparicion[1]++;
+    }
+    if( exp[i] == 'i' || exp[i] == 'I'){
+      cantidadAparicion[2]++;
+    }
+    if( exp[i] == 'o' || exp[i] == 'O'){
+      cantidadAparicion[3]++;
+    }
+    if( exp[i] == 'u' || exp[i] == 'U'){
+      cantidadAparicion[4]++;
+    }
+    
+  }
+  
+  for(i = 0; i< 5; i++){
+    if( cantidadAparicion[i] != 0){
+      printf("la vocal %c aparece %d veces \n su pocentaje de aparicion es %d prociento\n", vocalesstr[i], cantidadAparicion[i], 100*(cantidadAparicion[i]/longitud) );
+    }
+    else
+    {
+      printf("La vocal %c no existe o no tiene repeticion\n", vocalesstr[i]);
+    }
+    
+  }
+}
+
+void cargaMatrizDeDigitos(int fila, int columna, int mat[][columna])//lee solo digitos del 0 al 9 a una matriz dada
+{
+
+  int i,j;
+  int val;
+  for( i = 0; i< fila; i++){
+    for( j = 0; j < columna ; j++){
+      scanf("%d", &val);
+      while (val < 0 || val > 9)
+      {
+        printf("valor incorrecto reingrese");
+        scanf("%d", &val);
+        
+      }
+      mat[i][j] = val;
+    }
+  }
+}
+
+void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite)
+{ /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
+  /* incluir stdlib para usar rand() y time() */
+  int i,j;
+  srand(time(NULL));
+  for ( i = 0; i < fila; i++)
+  {
+    for ( j = 0; j < columna; j++)
+    {
+      arreglo[i][j] = rand() % valLimite;
+    }
+    
+  }
+}
+
+
+int esHermosa( int fila, int columna, int matriz[][columna])  //retorna cero si la matriz es hermosa, 1 en caso contario
+{
+  /* para que una matriz sea hermosa, 
+  la suma de todas sus filas, debe ser igual a la suma de todas sus comumnas es igual a la suma de sus diagonales */
+
+  
+  int isBeauty = 0; //presuponemos que es hermmosa
+  if(fila != columna){
+    printf("No es Cuadrada\n");
+    return 1; //para se hermosa debe ser cuadrada
+
+  }
+  int i;
+  int sumadeFilas[fila];
+  int sumadeColumnas[columna];
+
+  sumaDeColumnas( fila,  columna,  matriz, sumadeColumnas);
+  sumaDeFilas( fila,  columna,  matriz, sumadeFilas);
+  for ( i = 0; i < columna; i++)
+  {
+    if( sumadeColumnas[i] != sumadeFilas[i])
+      return 1;
+  }
+
+  if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz))
+  {
+    return -1;
+  }
+  
+  return isBeauty;
+}
+
+
+
+void sumaDeColumnas(int fila, int col , int matriz[][col], int sumaCol[]) /* devuelve en un array la suma de todas las filas de la matriz */
+{
+  int i, j, acum = 0;
+  for(i = 0; i< col; i++){
+    for ( j = 0; j < fila; j++)
+    {
+      acum += matriz[j][i];
+    }
+    sumaCol[i] = acum;
+    acum = 0;
+  }
+}
+
+void sumaDeFilas(int fila, int col , int matriz[][col], int sumaFilas[]) /* devuelve en un array la suma de todas las filas de la matriz */
+{
+  int i, j, acum = 0;
+  for(i = 0; i< fila; i++){
+    for ( j = 0; j < col; j++)
+    {
+      acum += matriz[i][j];
+    }
+    sumaFilas[i] = acum;
+    acum = 0;
+  }
+}
+
+int sumaDiagonalPrincipal(int fila, int columna, int matriz[][columna])
+{
+  int i, j, acum = 0;
+  for ( i = 0; i < fila; i++)
+  {
+    for ( j = 0; j < columna; j++)
+    {
+      if ( i == j)
+      {
+        acum += matriz[i][j];
+        break;
+      }
+      
+    }
+    
+  }
+  return acum;
+
+}
+
+int sumaDiagonalSecundaria(int fila, int columna, int matriz[][columna])
+{
+  /* trabajamos con matrices cuadradas, lo que implica que fila == comulna */
+  if( fila != columna)
+    return 'x';
+  
+
+  int i,j, acum = 0;
+  for ( i = 0; i < fila; i++)
+  {
+    for ( j = 0; j < columna; j++)
+    {
+      if( i+j == fila-1)
+      {
+        acum += matriz[i][j];
+        break;
+      }
+
+    }
+    
+  }
+  printf("\n");
+  return acum;
+}
+
+void arrayAleatorio( int arreglo[], int longitud, int valorLimite){
+  /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
+  /* incluir stdlib para usar rand() y time() */
+  int i,j;
+  srand(time(NULL));
+  for ( i = 0; i < longitud; i++)
+  {
+    arreglo[i] = rand() % valorLimite;
+  }
+  
+  
+}
+
+void ordIntecambio( int arreglo[], int longitud)
+{
+  int i, j, aux;
+
+  for ( i = 0; i < longitud -1; i++)
+  {
+    for ( j = i+1; j < longitud; j++)
+    {
+      if (arreglo[i] > arreglo[j])
+      {
+        aux = arreglo[i];
+        arreglo[i] = arreglo[j];
+        arreglo[j] = aux;
+      }
+      
+    }
+    
+  }
+  
+}
+
+void ordSeleccionRecusiva( int arreglo[], int longitud)
+{
+  int aux, posicionMenor;
+  if( longitud >1){
+    posicionMenor = posMenor( arreglo, longitud);
+    aux = arreglo[0];
+    //printf("%d\n", arreglo[posicionMenor]);
+    arreglo[0] = arreglo[posicionMenor];
+    arreglo[posicionMenor] = aux;
+    ordSeleccionRecusiva( &arreglo[1], longitud-1);
+  }
+}
+
+/* retorna la posicion  del menor elemento de un arreglo */
+int posMenor( const int arreglo[], const int longitud){
+
+  int menor, i;
+  for(i=0; i<longitud; i++){
+
+    if(i==0)
+      menor=i;
+
+    if( arreglo[i]<arreglo[menor])
+      menor = i;
+
+  }
+  return menor;
+}
+
+void ordSeleccion( int arreglo[], int longitud) //ejemplo joyanes
+{
+  printf("seleccion\n");
+  int indiceMenor, i,j;
+  double aux;
+  for ( i = 0; i < longitud -1; i++)
+  {
+    indiceMenor = i;
+
+    for ( j = i+1; j < longitud; j++)
+    {
+      if( arreglo[j] < arreglo[indiceMenor])
+        indiceMenor = j; /* situa el elemento menor */
+    }
+    
+    if( i!= indiceMenor){ /* si existia un elemento menor lo intercambia por la posicion actual del puntero */
+      aux = arreglo[i];
+      arreglo[i] = arreglo[indiceMenor];
+      arreglo[indiceMenor] = aux;
+    }
+
+  }
+  
+}
 
