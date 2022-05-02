@@ -15,8 +15,9 @@ int main(){
 
     int filaSig;
     int columSig;
-      while (verifica( p, q, Arreglo) != 0 && contador != 1000){      
-      contador = 1; /* cuenta los pasos */
+    contador = 1; /* cuenta los pasos */
+    while (verifica( p, q, Arreglo) != 0 && contador != 1000){      
+      
       int ciclos = 0; /* cada vez que se falla se limpian las casillas */
       int s;
       int t;
@@ -40,9 +41,9 @@ int main(){
         filaSig = rand() % p;
         columSig =  rand() % q;
 
-        if ( 2 == fabs(x - filaSig))
+        if ( 2 == abs(x - filaSig))
         {      
-          if ( 1 == fabs(y - columSig)){
+          if ( 1 == abs(y - columSig)){
             /* if( filaSig > 1 && columSig >1 && columSig < q+1 && filaSig < p+1){ */
               if ( 0 == Arreglo[filaSig][columSig] )
               {     
@@ -56,9 +57,9 @@ int main(){
             
         }     
 
-        if ( fabs(fabs(x) - fabs(filaSig)) == 1)
+        if ( abs(abs(x) - abs(filaSig)) == 1)
         {  
-          if ( fabs(fabs(y) - fabs(columSig)) == 2  )
+          if ( abs(abs(y) - abs(columSig)) == 2  )
             /* if( filaSig > 1 && columSig >1 && columSig < q+1 && filaSig < p+1){ */
               if ( 0 == Arreglo[filaSig][columSig] )
               {    
@@ -70,7 +71,8 @@ int main(){
             /* } */
         }   
 
-      } }  
+      } 
+    }  
 
     printf("Escenario #%d\n", iteradorD +1);
     if(verifica( p, q, Arreglo) == 0){

@@ -17,7 +17,7 @@ void Imprime( int filas, int columnas, int Matriz[][columnas]){
   printf("\n\n\n");
 } 
 
-int verificaCeros(int fila, int col, int matriz[][col]){
+int verifica(int fila, int col, int matriz[][col]){
   int i, j;
   for( i = 0;i<fila; i++){
     for ( j = 0; j < col; j++)

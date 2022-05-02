@@ -1,5 +1,91 @@
 #include"header.h"
 
+/**
+ * Funciones para testeo
+ * 
+ */
+
+
+void arrayAleatorio( int arreglo[], int longitud, int valorLimite){
+  /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
+  /* incluir stdlib para usar rand() y time() */
+  int i,j;
+  srand(time(NULL));
+  for ( i = 0; i < longitud; i++)
+  {
+    arreglo[i] = rand() % valorLimite;
+  }
+  
+}
+
+void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite)
+{ /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
+  /* incluir stdlib para usar rand() y time() */
+  int i,j;
+  srand(time(NULL));
+  for ( i = 0; i < fila; i++)
+  {
+    for ( j = 0; j < columna; j++)
+    {
+      arreglo[i][j] = rand() % valLimite;
+    }
+    
+  }
+}
+
+int enteroAleatorio(int limite){//devuelve un numero entero positivo, negativo o cero aleatorio
+
+  int valor1 = (rand() % limite);
+  int valor2 = (rand() % limite);
+
+  return valor1-valor2;
+
+}
+
+int enteroAleatorioEntre(int limiteInf, int limiteSup){//devuelve un numero aleatorio entre el limite inferior y el superior
+
+  int valor = limiteInf + (rand() % (limiteSup - limiteInf));
+  return valor;
+
+}
+
+float flotanteAleatorio(){//devuelve un numero flotante aleatorio
+  //INT32_MAX es el limite maximo de los int de 32 bits
+  int numerador = enteroAleatorioEntre(1, INT32_MAX) ; //OPTIENE el numerador de forma aleatoria
+  int denominador = 1 + enteroAleatorioEntre( 1, INT32_MAX -1); //OPTIENE el denominador de forma aleatoria el valor no puede ser cero
+  float flotante = numerador / denominador;
+
+  return flotante;
+}
+
+char caracterAleatorio(){ // devuelve un caracter aleatorio 
+  char caracter = enteroAleatorioEntre(61, 122) + '0'; //asigna el valor aleatorio la variable
+  return caracter;
+}
+
+void cadenaAleatoria( char cadena[], int longitud){ //agrega varacteres aleatorios a la cadena
+  int i;
+  for ( i = 0; i < longitud-1; i++)
+  {
+    cadena[i] = caracterAleatorio(); //asigna caracteres de forma aleatoria a la cadena
+  }
+  cadena[longitud -1] = '\0'; // asigna caracter de escape al ultimo caracter de la cadena
+}
+
+char *cadenaAleatoriaLongAleatoria(){ //devuelve el apuntador a una cadena de longitud aleatoria
+  int longitud = enteroAleatorioEntre(5, 500);
+  char Cadena[longitud];
+  cadenaAleatoria(Cadena, longitud);
+  return &Cadena[0];
+}
+
+
+/**
+ * funciones de lab creo
+ * 
+
+ */
+
 int resta_errad(int n){
   int res;
   int ult = n%10;
@@ -528,22 +614,6 @@ void cargaMatrizDeDigitos(int fila, int columna, int mat[][columna])//lee solo d
   }
 }
 
-void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite)
-{ /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
-  /* incluir stdlib para usar rand() y time() */
-  int i,j;
-  srand(time(NULL));
-  for ( i = 0; i < fila; i++)
-  {
-    for ( j = 0; j < columna; j++)
-    {
-      arreglo[i][j] = rand() % valLimite;
-    }
-    
-  }
-}
-
-
 int esHermosa( int fila, int columna, int matriz[][columna])  //retorna cero si la matriz es hermosa, 1 en caso contario
 {
   /* para que una matriz sea hermosa, 
@@ -649,19 +719,6 @@ int sumaDiagonalSecundaria(int fila, int columna, int matriz[][columna])
   return acum;
 }
 
-void arrayAleatorio( int arreglo[], int longitud, int valorLimite){
-  /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
-  /* incluir stdlib para usar rand() y time() */
-  int i,j;
-  srand(time(NULL));
-  for ( i = 0; i < longitud; i++)
-  {
-    arreglo[i] = rand() % valorLimite;
-  }
-  
-  
-}
-
 void ordIntecambio( int arreglo[], int longitud)
 {
   int i, j, aux;
@@ -738,6 +795,10 @@ void ordSeleccion( int arreglo[], int longitud) //ejemplo joyanes
 }
 
 /* Estructuras de datos Listas, Pilas y Colas */
+void imprimeRegistro(Registro datos){
+  printf("{ %d|%d|%s|%.3f|%c }", datos.id, datos.entero, datos.nombre, datos.datoFlotante, datos.caracter); //aqui imprimir el registro dependiendo de los datos que se especifiquen arriba
+}
+
 int listaEstaVacia( Lista ListaVal){ //retorna -1 si la lista esta vacia, 0 en caso contrario
   if(ListaVal.cabeza == NULL && ListaVal.cola == NULL){
     return -1;
@@ -747,7 +808,7 @@ int listaEstaVacia( Lista ListaVal){ //retorna -1 si la lista esta vacia, 0 en c
   }
 }
 
-Nodo *creaNodo( int dato){ // crea un nodo de una lista y devuelve su direccion en memoria
+Nodo *creaNodo( Registro dato){ // crea un nodo de una lista y devuelve su direccion en memoria
   Nodo *nuevoNodo = malloc( sizeof ( Nodo));
   if( nuevoNodo != NULL){
     nuevoNodo->dato = dato;
@@ -760,10 +821,10 @@ Nodo *creaNodo( int dato){ // crea un nodo de una lista y devuelve su direccion 
     printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
     return NULL;
   }
-  
+
 }
 
-void insertarEnCola( int dato, Lista *listaDestino){ //Inserta Por la cola de la lista (tabien valido para Colas)
+void insertarEnCola( Registro dato, Lista *listaDestino){ //Inserta Por la cola de la lista (tabien valido para Colas)
    /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
   Nodo *ptrNuevoNodo = creaNodo(dato);
 
@@ -781,13 +842,47 @@ void insertarEnCola( int dato, Lista *listaDestino){ //Inserta Por la cola de la
   }
 }
 
+void insertarEnCabeza( Registro dato, Lista *listaDestino){ //Inserta Por la cabeza de la lista (tambien valido para pila)
+   /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+   /* obs: para una pila, si inserto desde la cabeza tambien debo leer desde la cabeza */
+  Nodo *ptrNuevoNodo = creaNodo(dato);
+
+  if( ptrNuevoNodo != NULL ){
+    listaDestino->cantidadElem++;
+
+    if(listaEstaVacia( *listaDestino) == -1){ //si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+    }
+    else{ // si la lista no esta vacia
+      ptrNuevoNodo->sig = listaDestino->cabeza; //asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+      listaDestino->cabeza->ante = ptrNuevoNodo; //asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+      listaDestino->cabeza = ptrNuevoNodo; //asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+    }
+  }
+}
+
 void imprimeDesdeLaCabeza( const Lista *listaObjetivo){ //imprime una lista desde la cabeza (tambien valido para una Cola)
   printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
   Nodo *ptrNodoObjetivo = listaObjetivo->cabeza;
   while ( ptrNodoObjetivo != NULL)
   {
-    printf("%d -> ", ptrNodoObjetivo->dato);
+    imprimeRegistro(ptrNodoObjetivo->dato); //imprimie el registro asociado al nodo
+    printf(" -> ");
     ptrNodoObjetivo = ptrNodoObjetivo->sig;
+  }
+  printf("NULL\n");
+}
+
+void imprimeDesdeLaCola( const Lista *listaObjetivo){ //imprime una lista desde la Cola (tambien valido para una Pila)
+  /* obs: para una pila, si leo desde la cola es porque cargue los datos desde la cola */
+
+  printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+  Nodo *ptrNodoObjetivo = listaObjetivo->cola;
+  while ( ptrNodoObjetivo != NULL)
+  {
+    imprimeRegistro(ptrNodoObjetivo->dato); //imprimie el registro asociado al nodo
+    printf(" -> ");
+    ptrNodoObjetivo = ptrNodoObjetivo->ante;
   }
   printf("NULL\n");
 }
@@ -800,4 +895,256 @@ void despliegaMenu(){ // Operaciones basicas con Listas
   printf("3 - Salir\n");
   printf("Su Opcion = ");
 
+}
+
+
+/**
+ * FUnciones de archivos
+ * 
+ * 
+ * 
+ */
+
+void menuArchivos(){ //despliega el menu
+  printf("Selecciones su opcion\n1- Informe EN archivo txt.\n2-AcualizarUnRegistro\n3-Agregar Un Registro.\n4- Eliminar un registro \n5-Salir Del Programa.\nOpcion=");
+}
+
+FILE *creaArchivo(){ //crea un arichivo y devuelce su apuntador
+
+  char nombreArchivo[150] = "";
+  char modo[5] = "";
+  FILE *ptrNuevoArchivo = NULL; //inicializa el puntero al archivo en null
+  
+  printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+  scanf("%s", nombreArchivo);//ingresa el nombre y formato del archivo
+  printf("\nIngrese el codigo del Modo de apertura del archivo: ");
+  scanf("%s", modo); //ingresa el formato de apertura del archivo
+  if( (ptrNuevoArchivo = fopen(nombreArchivo, modo)) == NULL){
+    printf("No se pudo crear el archivo.\nERROR\n");//retorna null si no se pudo abrir el archivo
+    return NULL;
+  }
+  else
+  {
+    return ptrNuevoArchivo; //retorna el puntero al archivo si hubo exito
+  }
+  
+}
+
+
+Registro creaRegistro(){ // crea un registro nuevo, lee sus valor y devuelve una copia
+
+  Registro *ptrNuevoRegistro = malloc( sizeof( Registro)); // libera espacio en memoria para el nuevo registro
+
+  printf("Funcion Crear Nuevo Registro\n");
+  ptrNuevoRegistro->id = 0;
+  printf("Ingrese Numero De cuenta: ");
+  scanf("%d", &ptrNuevoRegistro->numeroCuenta);
+  printf("Ingrese El nombre del Propietario de la Cuenta: ");
+  scanf("%s", ptrNuevoRegistro->nombre);
+  printf("ingrese EL estado de la cuenta: ");
+  scanf("%lf", &ptrNuevoRegistro->estadoDeCuenta);
+
+  return *ptrNuevoRegistro; // retorna una copia del registro creado
+}
+
+
+void nuevoRegistro( FILE *ptrArchivo){
+
+  Registro nuevoRegistro, auxRegistro = { 0, 0, "", 0};
+
+  nuevoRegistro = creaRegistro(); // crea un nuevo registro 
+
+  fseek( ptrArchivo, (nuevoRegistro.numeroCuenta) * sizeof(Registro), SEEK_SET); //establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+  fread( &auxRegistro, sizeof( Registro ), 1, ptrArchivo ); //almacena la lectura del puntero del archivo al registro auxiliar
+
+  if( auxRegistro.numeroCuenta != 0 ){ // si la cuenta del reigistro ya existe
+    printf("\nERROR: La cuenta %d Ya existe\n", auxRegistro.numeroCuenta);
+  }
+  else{ //sino, guarda el nuevo registro en esa direccion
+    fseek( ptrArchivo, (nuevoRegistro.numeroCuenta) * sizeof(Registro), SEEK_SET);  //establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+    fwrite( &nuevoRegistro, sizeof( Registro ), 1, ptrArchivo ); //escribe el contenido del registro nuevo en la direccion especificada
+    printf("\nRegistro Agregado Exitosamente!\n\n");
+    rewind(ptrArchivo);
+  }
+
+}
+
+void actualizaRegistro(FILE * ptrArchivo){
+  /* inicializar los valores a editar del  */
+
+  Registro registroAux;
+  int cuenta;
+  double transaccion;
+
+  printf("Introduzca los el numero de cuenta para actualizar: ");
+  scanf("%d", &cuenta); //solicita el numero de cuenta a editar
+
+  fseek(ptrArchivo, (cuenta)*sizeof(Registro), SEEK_SET); //establece el apuntado al registro a editar
+
+  fread( &registroAux, sizeof(Registro), 1, ptrArchivo); //lee el registro a editar en el registro auxiliar
+
+  if( registroAux.numeroCuenta == 0 ){ // si el registro auxiliar tiene cuenta cero esta vacio
+    printf("\nLa cuenta #%d no tiene informacion\n", registroAux.numeroCuenta);
+  }
+  else
+  {
+    printf( "Numero de cuenta: %d\nNombre Titular: %s\nSaldo: %lf\n\n",
+      registroAux.numeroCuenta,
+      registroAux.nombre, registroAux.estadoDeCuenta 
+    ); //Imprime con formato los datos de la cuenta
+    printf("Intruduzca el cargo (+) o el pago (-): ");//Aqui debe ingresarse los campos a modificar
+    scanf("%lf", &transaccion);//solicita el ingreso del valor a modificar
+    /**
+     * aqui se podrian editar los campos que deseemos
+     * 
+     * 
+     */
+
+    registroAux.estadoDeCuenta = registroAux.estadoDeCuenta + transaccion;
+
+    fseek(ptrArchivo, (cuenta)*sizeof(Registro), SEEK_SET); //situa el apuntador a la direccion del registro a editar
+    fwrite( &registroAux, sizeof( Registro), 1, ptrArchivo); // escribe el registro auxiliar ya editado en la direccion
+    printf("\n Cuenta actualizada Correctamente!\nSaldo actual:%lf\n\n", registroAux.estadoDeCuenta); //mensaje de exito
+
+
+  }
+  
+}
+
+void eliminaRegistro(FILE *ptrArchivo){ //establece en blanco un registro en el archivo
+
+  Registro registroAux; 
+  Registro regEnBlanco = { 0, 0, "", 0}; // tambien podemos hacer un borrado Logico estableciendo en valor de la id a -1
+
+  int numeroCuenta;
+  printf("Introduzca el numero de Cuenta a Eliminar: ");
+  scanf("%d", &numeroCuenta); //solicita el numero de cuenta a eliminar
+
+  fseek( ptrArchivo, ( numeroCuenta - 1) * sizeof( Registro), SEEK_SET);//situa el apuntador a la direccion del registro a eliminar
+  fread(&registroAux, sizeof(Registro), 1, ptrArchivo);//lee el registro
+
+  if (registroAux.id == 0 && registroAux.numeroCuenta == 0) //verifica si el archivo ya esta vacio de antemano
+  {
+    printf("La cuenta %d no existe", numeroCuenta);
+  }
+  else //edita el archivo
+  {
+    fseek( ptrArchivo, ( numeroCuenta - 1) * sizeof( Registro), SEEK_SET);
+    fwrite(&regEnBlanco, sizeof(Registro), 1, ptrArchivo);
+    printf("\n\tRegistro Eliminado Exitosamente\n");//mensaje de exito
+  }
+  
+}
+
+
+/* crea un archivo de texto con formato para impresión */
+/* crea un archivo de texto con formato para impresión */
+void informeTxt(FILE *ptrArchivo){
+
+  FILE *ptrInforme; //apuntador al archivo Resultado
+
+  Registro datos = { -1, 0, "", 0.0, '\n'};//inicializa
+
+  if( (ptrInforme = fopen("Informe.txt", "w")) == NULL )
+    printf("\n\tERROR: No se pudo crear el Archivo\n\n");
+  else
+  {
+    rewind(ptrArchivo);//establece el puntero al principio del archivo
+    fprintf(ptrInforme, "%s\t%s\t%s\t%s\t%s\n","id.","entero", "nombre","flotante","caracter");//imprime la cabecera
+    while (!feof(ptrArchivo)){
+
+      fread(&datos, sizeof(Registro), 1, ptrArchivo);//lee los datos en el Registro datos
+      if( datos.id != -1){
+
+        fprintf(ptrInforme, "%d\t%d\t%s\t%3.f\t%c\n",datos.id, datos.entero, datos.nombre, datos.datoFlotante, datos.caracter);//imprime los datos en el arvhivo informe
+
+      }else
+      {
+        printf("No se leyo Nada\n");//informa que no se pudo leer nada desde el archivo origen
+        break;
+      }
+
+    }
+    
+    fclose(ptrInforme);//cierra el archivo de informe
+    printf("\n\tInforme Generado exitosamente!\n\n");
+  }
+  
+}
+
+void cargaRegistrosAleatoriosEnArchivo( FILE *ptrArchivo){
+  int cantidad, iterador;
+  Registro nuevoRegistro = { -1, 0, "", 0.0, '\n'};//inicializo los valore -1 para indicar registro vacio;
+  printf("Ingrese la cantidad de datos a ingresar:");
+  scanf("%d", &cantidad);
+  for ( iterador = 0; iterador < cantidad; iterador++)
+  {
+    nuevoRegistro = creaRegistroAleatorio();
+    nuevoRegistro.id = iterador;
+    guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistro); //guardo el registro en el archivo
+  }
+  
+}
+
+Registro creaRegistroAleatorio(){ // crea un registro nuevo con datos aleatorios y devuelve una copia
+
+  Registro *ptrNuevoRegistro = malloc( sizeof( Registro)); // libera espacio en memoria para el nuevo registro
+  ptrNuevoRegistro->entero = enteroAleatorio(INT32_MAX);
+  ptrNuevoRegistro->datoFlotante = flotanteAleatorio();
+  ptrNuevoRegistro->nombre = cadenaAleatoriaLongAleatoria();
+  ptrNuevoRegistro->caracter = caracterAleatorio();
+  printf("cadena aleatoria: %s\n", ptrNuevoRegistro->nombre);
+  return *ptrNuevoRegistro; // retorna una copia del registro creado
+}
+
+
+void guardaRegistroEnArchivo( FILE *ptrArchivo, Registro *aGuardar)
+{
+
+    fseek( ptrArchivo, ( aGuardar->id ) *sizeof( Registro ), SEEK_SET );//establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+    fwrite( aGuardar, sizeof(  Registro ), 1, ptrArchivo ); //escribe el contenido del registro nuevo en la direccion especificada
+}
+
+
+FILE *creaArchivoBin()
+{ //crea un arichivo y devuelce su apuntador
+
+  char nombreArchivo[150] = "";
+  char modo[5] = "";
+  FILE *ptrNuevoArchivo = NULL; //inicializa el puntero al archivo en null
+  
+  printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+  scanf("%s", nombreArchivo);//ingresa el nombre y formato del archivo
+  printf("\nIngrese el codigo del Modo de apertura del archivo: ");
+  scanf("%s", modo); //ingresa el formato de apertura del archivo
+  if( (ptrNuevoArchivo = fopen(nombreArchivo, modo)) == NULL){
+    if( (ptrNuevoArchivo = fopen(nombreArchivo, "wb+")) == NULL)
+      return ptrNuevoArchivo; //retorna el puntero al archivo si hubo exito
+    else
+    {
+      printf("No se pudo Abir Ni crear el archivo");
+      return NULL;
+    }
+    
+  }
+  else
+  {
+    if(strcmp("w", modo) == 0){
+      fclose(ptrNuevoArchivo);
+      ptrNuevoArchivo = fopen(nombreArchivo, "rb+");
+      return ptrNuevoArchivo;
+    }
+    else
+      return ptrNuevoArchivo; //retorna el puntero al archivo si hubo exito
+  }
+  
+}
+
+void guardaColaEnArchivo(FILE *ptrArchivo, Lista ListaDatos){
+  Nodo *ptrNodoObjetivo = ListaDatos.cabeza;
+  while ( ptrNodoObjetivo != NULL)
+  {
+    guardaRegistroEnArchivo( ptrArchivo, &ptrNodoObjetivo->dato);
+    ptrNodoObjetivo = ptrNodoObjetivo->sig;
+  }
 }
