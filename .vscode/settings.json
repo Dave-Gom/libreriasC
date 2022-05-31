@@ -3,6 +3,13 @@
     "limits.h": "c",
     "stdio.h": "c",
     "cstdio": "c",
-    "pruebas.h": "c"
+    "pruebas.h": "c",
+    "arreglos.h": "c",
+    "cmath": "c",
+    "*.tcc": "c",
+    "estructuras.h": "c",
+    "archivos.h": "c",
+    "colasdeprioridad.h": "c",
+    "listas.h": "c"
   }
 }

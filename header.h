@@ -138,3 +138,4 @@ void guardaColaEnArchivo(FILE *ptrArchivo, Lista ListaDatos);//recibe una Lista 
 
 
 
+Registro creaRegistroAleatorio();// crea un registro nuevo, lee sus valor y devuelve una copia

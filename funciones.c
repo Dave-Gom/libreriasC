@@ -167,6 +167,23 @@ int calc_pasos(int dist){
   return pasos;
 }
 
+/* devuelve la minnima cantidad de pasos necesarios para subir la cima de una escalera teniendo en cuenta que se pueden tomar pasos de 1 o 2 escalonnes a la vez */
+int sube_escalera( int n ){
+  if( n < 0 )
+    return 0;
+  if( n == 0 )
+    return 1;
+  return sube_escalera(n-1) + sube_escalera(n-2);
+}
+
+
+/**
+ * @brief funciones de Arreglos
+ * 
+ */
+
+
+
 /* retorna la posicion de un valor dentro de un arreglo, -1 si el 
 no se encuentra */
 int busqueda_lineal(  int arreglo[], const int longitud, int valorABuscar){
@@ -280,14 +297,10 @@ int busquedaBinaria( int arreglo[], int valBuscado, int inicio, int fin){
   return -1;
 }
 
-/* devuelve la minnima cantidad de pasos necesarios para subir la cima de una escalera teniendo en cuenta que se pueden tomar pasos de 1 o 2 escalonnes a la vez */
-int sube_escalera( int n ){
-  if( n < 0 )
-    return 0;
-  if( n == 0 )
-    return 1;
-  return sube_escalera(n-1) + sube_escalera(n-2);
-}
+
+//
+
+
 
 /* genera un interador que carga valores en un arrego de dimension dada */
 void cargaVector( int arreglo[], const int lenght){
@@ -379,15 +392,6 @@ void copiaPrimerafilaEnMatriz( const int fila, const int colum, int matriz[][col
 }
 
 
-/* recibe un digito char del 0 al 9 y devuelve su valor entero */
-int charToInt( char caracter){
-  return caracter - '0';
-}
-
-/* entero a char */
-char enteroACaracter(int numero){
-    return numero + '0';
-}
 
 void quickSort( double array[], int inicio, int fin){
   int i,j,central;
@@ -421,6 +425,17 @@ void quickSort( double array[], int inicio, int fin){
   }
 
 }
+
+/* recibe un digito char del 0 al 9 y devuelve su valor entero */
+int charToInt( char caracter){
+  return caracter - '0';
+}
+
+/* entero a char */
+char enteroACaracter(int numero){
+    return numero + '0';
+}
+
 
 /* imprime recursivamente los caracteres de una cadena en orden inverso */
 void inverso( const char * const ptrS )
@@ -794,8 +809,18 @@ void ordSeleccion( int arreglo[], int longitud) //ejemplo joyanes
   
 }
 
-/* Estructuras de datos Listas, Pilas y Colas */
-void imprimeRegistro(Registro datos){
+
+
+
+/**
+ * @brief 
+ * 
+ * @param datos 
+ * @return * Estructuras Autoreferenciadass
+ */
+
+
+/* void imprimeRegistro(Registro datos){
   printf("{ %d|%d|%s|%.3f|%c }", datos.id, datos.entero, datos.nombre, datos.datoFlotante, datos.caracter); //aqui imprimir el registro dependiendo de los datos que se especifiquen arriba
 }
 
@@ -806,7 +831,7 @@ int listaEstaVacia( Lista ListaVal){ //retorna -1 si la lista esta vacia, 0 en c
   else{
     return 0;
   }
-}
+} */
 
 Nodo *creaNodo( Registro dato){ // crea un nodo de una lista y devuelve su direccion en memoria
   Nodo *nuevoNodo = malloc( sizeof ( Nodo));
@@ -897,6 +922,20 @@ void despliegaMenu(){ // Operaciones basicas con Listas
 
 }
 
+Registro extraerCabeza( Lista *listaObjetivo){ 
+  Nodo *ptrNodoObjetivo;
+  Registro Dato; //contenedor Auxiliar
+  ptrNodoObjetivo = listaObjetivo->cabeza;
+
+  Dato = ptrNodoObjetivo->dato; 
+  listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+  listaObjetivo->cantidadElem--; //resta uno a la cantidad de elementos de la lista
+  if(listaObjetivo->cantidadElem == 0)
+    listaObjetivo->cola = NULL;
+  
+  return Dato;
+
+}
 
 /**
  * FUnciones de archivos
@@ -1147,4 +1186,57 @@ void guardaColaEnArchivo(FILE *ptrArchivo, Lista ListaDatos){
     guardaRegistroEnArchivo( ptrArchivo, &ptrNodoObjetivo->dato);
     ptrNodoObjetivo = ptrNodoObjetivo->sig;
   }
+}
+
+void extraerCabeza( Pila *listaObjetivo){ //no se necesita leer ni imprimir nada, simplemente saca  una apertura de parentesis de la pila //para otros casos se puede retornar el valor contenido en el nodo Cabeza
+  
+  Nodo *ptrNodoObjetivo = listaObjetivo->cabeza;
+  listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+  listaObjetivo->cantidadElem--; //resta uno a la cantidad de elementos de la pila
+  if(listaObjetivo->cantidadElem == 0)
+    listaObjetivo->cola = NULL;
+
+}
+
+void insertaEnOrden( Registro dato, Lista *listaDestino){
+
+  Nodo *ptrNuevoNodo = creaNodo(dato);
+
+  if( ptrNuevoNodo != NULL ){
+    listaDestino->cantidadElem++;
+
+    if(listaEstaVacia( *listaDestino) == -1){ //si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+    }
+    else
+    {
+      Nodo *ptrNodoMayor = dirMayor(dato, listaDestino);
+      if(ptrNodoMayor == listaDestino->cabeza){
+        insertarEnCabeza(dato, listaDestino);
+      }
+      else
+      {
+        if (ptrNodoMayor != NULL)
+        {
+          insertaAntesDe(ptrNodoMayor , dato);
+        }
+        else
+        {
+          insertarEnCola(dato, listaDestino);
+        }
+        
+      }
+    }
+  }
+}
+
+void insertaAntesDe( Nodo *nodoMayor, Registro dato){ //inserta en la lista, detras del nodo especificado
+  
+  Nodo *ptrNuevoNodo = creaNodo(dato);
+
+  ptrNuevoNodo->sig = nodoMayor; //asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
+  ptrNuevoNodo->ante = nodoMayor->ante; //asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
+  nodoMayor->ante->sig = ptrNuevoNodo;
+  nodoMayor->ante = ptrNuevoNodo;
+
 }
