@@ -11,10 +11,11 @@ Registro creaRegistro(){ // crea un registro nuevo, lee sus valor y devuelve una
   
   Registro *ptrNuevoRegistro; // libera espacio en memoria para el nuevo registro
 
-  printf("Funcion Crear Nuevo Registro\n");
+  printf("Funcion Crear Nuevo Registro\n\n");
   /*   ptrNuevoRegistro->id = 0; */
-  printf("Ingrese Numero De los valores del registro: ");
+  printf("Ingrese valor a ser almacenado: ");
   scanf("%d", &ptrNuevoRegistro->valor);
+  printf("usted selecciono: %d", &ptrNuevoRegistro->valor);
   /*   printf("Ingrese El nombre del Propietario de la Cuenta: ");
   scanf("%s", ptrNuevoRegistro->nombre);
   printf("ingrese EL estado de la cuenta: ");

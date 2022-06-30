@@ -13,7 +13,7 @@ ColaDePrioridad CreaColaPrioridad(int cantidadDePrioridades)
     NuevaCola.Prioridades[i].cantidadElem = 0;
 
   }
-
+    printf("hola");
   NuevaCola.CantPrioridades = cantidadDePrioridades; //Indica cuantas prioridades hay en la Cola
   return NuevaCola;
   

@@ -20,3 +20,4 @@ typedef struct REGISTRO //registro de archivos
 
 Registro creaRegistro();
 void borraRegistro(Registro *);
+
