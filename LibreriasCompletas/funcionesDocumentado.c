@@ -1684,7 +1684,8 @@ Archivo *creaArchivo()
   else
   {
     ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
-    return ptrNuevoArchivo;                 // retorna el puntero al archivo si hubo exito
+    optenerCantidadElementos(ptrNuevoArchivo);
+    return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
   }
 }
 
@@ -1740,16 +1741,11 @@ Archivo *creaArchivoBin()
  */
 void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar)
 {
-  if (aGuardar->estaEliminado == 0)
-  {                                                                                            // si el archivo no ha sido eliminado logicamente
-    fseek(ptrArchivo->punteroArchivo, (aGuardar->id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
-    fwrite(aGuardar, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                  // escribe el contenido del registro nuevo en la direccion especificada
-    rewind(ptrArchivo->punteroArchivo);
-  }
-  else
-  {
-    printf("No se puede Guardar un archivo dado de Baja");
-  }
+
+  // si el archivo no ha sido eliminado logicamente
+  fseek(ptrArchivo->punteroArchivo, (aGuardar->id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+  fwrite(aGuardar, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                  // escribe el contenido del registro nuevo en la direccion especificada
+  rewind(ptrArchivo->punteroArchivo);
 }
 
 /**
@@ -1760,20 +1756,22 @@ void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar)
 void nuevoRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo nuevoRegistro, auxRegistro = {0, 1, {0}};
+  RegistroArchivo nuevoRegistro = {ptrArchivo->cantidadElementos + 1, 1, {0}}, auxRegistro = {0, 0, {0}};
 
   nuevoRegistro.Dato = creaRegistro(); // crea un nuevo registro
+  nuevoRegistro.estaEliminado = 1;
 
-  fseek(ptrArchivo->punteroArchivo, (nuevoRegistro.id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
-  fread(&auxRegistro, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                   // almacena la lectura del puntero del archivo al registro auxiliar
+  fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos + 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+  fread(&auxRegistro, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                                // almacena la lectura del puntero del archivo al registro auxiliar
 
-  if (auxRegistro.id != 0 && auxRegistro.estaEliminado != 1)
+  if (auxRegistro.id != 0)
   { // si la cuenta del reigistro ya existe, o si existe y no esta esliminado
     printf("\nERROR: La cuenta %d Ya existe\n", auxRegistro.id);
   }
   else
   { // sino, guarda el nuevo registro en esa direccion
-
+    printf("estatus nR: %d \n", nuevoRegistro.estaEliminado);
+    imprimeRegistro(&nuevoRegistro.Dato);
     guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistro);
     ptrArchivo->cantidadElementos++;
     printf("\nRegistro Agregado Exitosamente!\n\n");
@@ -1788,8 +1786,7 @@ void nuevoRegistro(Archivo *ptrArchivo)
 void eliminaRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo registroAux;
-  RegistroArchivo regEnBlanco = {0, 0, {0}}; // tambien podemos hacer un borrado Logico estableciendo en valor de la id a -1
+  RegistroArchivo registroAux = {0, 0, {0}};
 
   int id;
   printf("Introduzca el id a Eliminar: ");
@@ -1798,14 +1795,14 @@ void eliminaRegistro(Archivo *ptrArchivo)
   fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // situa el apuntador a la direccion del registro a eliminar
   fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro
 
-  if (registroAux.estaEliminado == 1) // verifica si el archivo ya esta vacio de antemano
+  if (registroAux.estaEliminado == -1 || registroAux.id == 0 || registroAux.estaEliminado == 0) // verifica si el archivo ya esta vacio de antemano
   {
     printf("El registro %d no existe", id);
   }
   else // edita el archivo
   {
-    regEnBlanco.id = id;
-    guardaRegistroEnArchivo(ptrArchivo, &regEnBlanco); // guarda un registro en blanco en la id especificada
+    registroAux.estaEliminado = -1;
+    guardaRegistroEnArchivo(ptrArchivo, &registroAux); // guarda un registro en blanco en la id especificada
     ptrArchivo->cantidadElementos--;
     printf("\n\tRegistro Eliminado Exitosamente\n"); // mensaje de exito
   }
@@ -1823,23 +1820,23 @@ void actualizaRegistro(Archivo *ptrArchivo)
   int id;
   Registro NuevosDatos;
 
-  printf("Introduzca id del registro a actualizar"); // este debe ser un identificador para el registro del archivo.
-  scanf("%d", &id);                                  // solicita el numero de cuenta a editar
+  printf("\nIntroduzca id del registro a actualizar: "); // este debe ser un identificador para el registro del archivo.
+  scanf("%d", &id);                                      // solicita el numero de cuenta a editar
 
   fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntado al registro a editar
   fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro a editar en el registro auxiliar
 
-  if (registroAux.estaEliminado == 1)
+  if (registroAux.estaEliminado == 0)
   {
     printf("\nLa cuenta #%d no tiene informacion\n", registroAux.id);
   }
   else
   {
-    imprimeRegistro(&registroAux.Dato); // imprime el registro
-    printf("Introduzaca los nuevos Valores\n");
+    printf("\nIntroduzaca los nuevos Valores para el registro de ID Nro %d \n", registroAux.id);
     NuevosDatos = creaRegistro();
     registroAux.Dato = NuevosDatos;
     guardaRegistroEnArchivo(ptrArchivo, &registroAux);
+    printf("\nRegistro #%d actualizado Correctamente", registroAux.id)
   }
 }
 
@@ -1926,4 +1923,25 @@ void guardaDesdeColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos)
 void menuArchivos()
 { // despliega el menu
   printf("Selecciones su opcion\n1- Informe EN archivo txt.\n2-AcualizarUnRegistro\n3-Agregar Un Registro.\n4- Eliminar un registro \n5-Salir Del Programa.\nOpcion=");
+}
+
+void optenerCantidadElementos(Archivo *ptrArchivo)
+{
+  RegistroArchivo registroAux = {0, 0, {0}};
+  do
+  {
+    registroAux.estaEliminado = 0;
+    fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); //
+    fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                            // almacena la lectura del puntero del archivo al registro auxiliar
+    // printf("Registro id: %d\n Registro estatus %s\n", registroAux.id, registroAux.estaEliminado == 0 ? "Nunca escrito" : "Con datos");
+
+    ptrArchivo->cantidadElementos++;
+    if (registroAux.estaEliminado != -1)
+      ptrArchivo->registros++; // cuenta la cantidad de registro no eliminados
+
+  } while (registroAux.estaEliminado != 0);
+
+  if (ptrArchivo->cantidadElementos != 0)
+    ptrArchivo->cantidadElementos--;
+  printf("Cantidad de elementos inicial id: %d\n", ptrArchivo->cantidadElementos);
 }
