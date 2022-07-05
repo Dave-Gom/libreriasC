@@ -1038,8 +1038,8 @@ int enteroAleatorioEntre(int limiteInf, int limiteSup)
 float flotanteAleatorio()
 { // devuelve un numero flotante aleatorio
   // INT32_MAX es el limite maximo de los int de 32 bits
-  int numerador = enteroAleatorio(INT32_MAX);                   // OPTIENE el numerador de forma aleatoria
-  int denominador = 1 + enteroAleatorioEntre(1, INT32_MAX - 1); // OPTIENE el denominador de forma aleatoria el valor no puede ser cero
+  int numerador = enteroAleatorio(INT_MAX);                   // OPTIENE el numerador de forma aleatoria
+  int denominador = 1 + enteroAleatorioEntre(1, INT_MAX - 1); // OPTIENE el denominador de forma aleatoria el valor no puede ser cero
   float flotante = numerador / denominador;
 
   return flotante;
@@ -1684,6 +1684,7 @@ Archivo *creaArchivo()
   else
   {
     ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
+     ptrNuevoArchivo->registros = 0; // establece la cantidad de registtros hab en cero
     optenerCantidadElementos(ptrNuevoArchivo);
     return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
   }
@@ -1699,7 +1700,7 @@ Archivo *creaArchivoBin()
 
   char nombreArchivo[150] = "";
   char modo[5] = "";
-  Archivo *ptrNuevoArchivo = NULL; // inicializa el puntero al archivo en null
+  Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
 
   printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
   scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
@@ -1731,6 +1732,7 @@ Archivo *creaArchivoBin()
       ptrNuevoArchivo->cantidadElementos = 0;
     return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
   }
+
 }
 
 /**
@@ -1742,7 +1744,6 @@ Archivo *creaArchivoBin()
 void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar)
 {
 
-  // si el archivo no ha sido eliminado logicamente
   fseek(ptrArchivo->punteroArchivo, (aGuardar->id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
   fwrite(aGuardar, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                  // escribe el contenido del registro nuevo en la direccion especificada
   rewind(ptrArchivo->punteroArchivo);
@@ -1760,8 +1761,8 @@ void nuevoRegistro(Archivo *ptrArchivo)
 
   nuevoRegistro.Dato = creaRegistro(); // crea un nuevo registro
   nuevoRegistro.estaEliminado = 1;
-
-  fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos + 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+  printf("id Asignado: %d\n",ptrArchivo->cantidadElementos + 1 );
+  fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
   fread(&auxRegistro, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                                // almacena la lectura del puntero del archivo al registro auxiliar
 
   if (auxRegistro.id != 0)
@@ -1770,7 +1771,8 @@ void nuevoRegistro(Archivo *ptrArchivo)
   }
   else
   { // sino, guarda el nuevo registro en esa direccion
-    printf("estatus nR: %d \n", nuevoRegistro.estaEliminado);
+    printf("Estatus registo: %s \n", 
+      (nuevoRegistro.estaEliminado == 0 || nuevoRegistro.estaEliminado == -1)? "Vacio\n":"Contiene Datos\n");
     imprimeRegistro(&nuevoRegistro.Dato);
     guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistro);
     ptrArchivo->cantidadElementos++;
@@ -1794,6 +1796,7 @@ void eliminaRegistro(Archivo *ptrArchivo)
 
   fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // situa el apuntador a la direccion del registro a eliminar
   fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro
+  printf("Registro: {id: %d, estuatus: %s, valor: %d, dirMem: %p }\n", registroAux.id, registroAux.estaEliminado == 1? "Contiene Datos": "Esta Vacio",  registroAux.Dato.valor, ptrArchivo->punteroArchivo);
 
   if (registroAux.estaEliminado == -1 || registroAux.id == 0 || registroAux.estaEliminado == 0) // verifica si el archivo ya esta vacio de antemano
   {
@@ -1803,7 +1806,9 @@ void eliminaRegistro(Archivo *ptrArchivo)
   {
     registroAux.estaEliminado = -1;
     guardaRegistroEnArchivo(ptrArchivo, &registroAux); // guarda un registro en blanco en la id especificada
-    ptrArchivo->cantidadElementos--;
+    // ptrArchivo->cantidadElementos--;
+
+    ptrArchivo->registros--;
     printf("\n\tRegistro Eliminado Exitosamente\n"); // mensaje de exito
   }
 }
@@ -1816,7 +1821,7 @@ void eliminaRegistro(Archivo *ptrArchivo)
 void actualizaRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo registroAux;
+  RegistroArchivo registroAux = { 0, 0, {0}};
   int id;
   Registro NuevosDatos;
 
@@ -1836,7 +1841,7 @@ void actualizaRegistro(Archivo *ptrArchivo)
     NuevosDatos = creaRegistro();
     registroAux.Dato = NuevosDatos;
     guardaRegistroEnArchivo(ptrArchivo, &registroAux);
-    printf("\nRegistro #%d actualizado Correctamente", registroAux.id)
+    printf("\nRegistro #%d actualizado Correctamente", registroAux.id);
   }
 }
 
@@ -1858,24 +1863,23 @@ void informeTxt(Archivo *ptrArchivo)
     printf("\n\tERROR: No se pudo crear el Archivo\n\n");
   else
   {
-    rewind(ptrArchivo->punteroArchivo);                                                             // establece el puntero al principio del archivo
+    rewind(ptrArchivo->punteroArchivo); // establece el puntero al principio del archivo
     fprintf(ptrInforme, "%s\t%s\t%s\t%s\t%s\n", "id.", "entero", "nombre", "flotante", "caracter"); // imprime la cabecera. Esto depende de los campos a imprimir del registro
     while (!feof(ptrArchivo->punteroArchivo))
     {
-
+      datos.estaEliminado = 0;
       fread(&datos, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo); // lee los datos en el Registro datos
-      if (datos.id != -1)
+      if ( datos.estaEliminado == 1) 
       {
 
-        /* fprintf(ptrInforme, "%d\t%d\t%s\t%3.f\t%c\n",datos.id, datos.entero, datos.nombre, datos.datoFlotante, datos.caracter); */ // imprime los datos en el arvhivo informe
+        fprintf(ptrInforme, "%d\n", datos.Dato.valor);
+        //imprimir aqui en el formato que pida el ejercicio
       }
       else
       {
-        printf("No se leyo Nada\n"); // informa que no se pudo leer nada desde el archivo origen
-        break;
+        printf("Registro Vacio\n"); // informa que no se pudo leer nada desde el archivo origen
       }
     }
-
     fclose(ptrInforme); // cierra el archivo de informe
     printf("\n\tInforme Generado exitosamente!\n\n");
   }
@@ -1928,6 +1932,9 @@ void menuArchivos()
 void optenerCantidadElementos(Archivo *ptrArchivo)
 {
   RegistroArchivo registroAux = {0, 0, {0}};
+
+  printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
+
   do
   {
     registroAux.estaEliminado = 0;
@@ -1936,12 +1943,21 @@ void optenerCantidadElementos(Archivo *ptrArchivo)
     // printf("Registro id: %d\n Registro estatus %s\n", registroAux.id, registroAux.estaEliminado == 0 ? "Nunca escrito" : "Con datos");
 
     ptrArchivo->cantidadElementos++;
-    if (registroAux.estaEliminado != -1)
+
+    if (registroAux.estaEliminado == 1)
       ptrArchivo->registros++; // cuenta la cantidad de registro no eliminados
 
   } while (registroAux.estaEliminado != 0);
 
   if (ptrArchivo->cantidadElementos != 0)
     ptrArchivo->cantidadElementos--;
-  printf("Cantidad de elementos inicial id: %d\n", ptrArchivo->cantidadElementos);
+
+  rewind(ptrArchivo->punteroArchivo);
+
+  if( ptrArchivo->registros != 0 && ptrArchivo->cantidadElementos !=0 )
+    printf("\nEl archivo ya contiene Datos!\n");
+  else
+    printf("\nArchivo en blanco\n");
+
+  printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
 }
