@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 #include <ctype.h>
+#include <limits.h>
+#include <time.h>
+#define MAXNODOS 1001 // VARIABLE GLOBAL CANTIDAD MAXIMA DE NODOS
 
 /**
  * @brief
@@ -27,24 +32,39 @@ NodoArbol *creaNodoArbol();
 void cargaArbol(Arbol *ArbolObjetivo, int valor);
 void despliegaMenuArboles();
 void insertaNodoEnArbol(NodoArbol **, NodoArbol *);
+void insertaNodoEnArbolConRep(NodoArbol **, NodoArbol *);
+
 void inOrden(NodoArbol *ptrNodoArbol);
 void preOrden(NodoArbol *);
 void postOrden(NodoArbol *ptrNodoArbol);
 void imprimirArbol(Arbol *);
 
+void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
+void arrayAleatorio(int arreglo[], int longitud, int valorLimite);
+void imprimeArreglo(int arreglo[], const int longitud);
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);
+
 int main(int argc, char const *argv[])
 {
-  int dato;
+  int opcion;
+  int dim = 20;
+  int indece = 0;
   Arbol MiPrimerArbol = {NULL}; // inicializa el arbol
   despliegaMenuArboles();
-  scanf("%d", &dato);
-  while (dato != 3)
+  scanf("%d", &opcion);
+  int arreglo[dim];
+  while (opcion != 3)
   {
-    switch (dato)
+    switch (opcion)
     {
     case 1:
-      scanf("%d", &dato);
-      cargaArbol(&MiPrimerArbol, dato);
+      arrayAleatorio(arreglo, dim, 50);
+      printf("\nEl arreglo es: \n");
+      imprimeArreglo(arreglo, dim);
+      cargaArregloEnArbol(&MiPrimerArbol, arreglo, dim);
+      inOrdenArray(MiPrimerArbol.Raiz, arreglo, &indece);
+      printf("\nEl arreglo ordenado es: \n");
+      imprimeArreglo(arreglo, dim);
       break;
     case 2:
       imprimirArbol(&MiPrimerArbol); // solo envia una copia del arbol
@@ -52,7 +72,8 @@ int main(int argc, char const *argv[])
     default:
       break;
     }
-    scanf("%d", &dato);
+    despliegaMenuArboles();
+    scanf("%d", &opcion);
   }
 
   return 0;
@@ -167,5 +188,65 @@ void imprimirArbol(Arbol *aImprimir)
       printf("Opcion Invalida");
       break;
     }
+  }
+}
+
+void insertaNodoEnArbolConRep(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
+{
+  if (*SubArbol == NULL) // si el arbol esta vacio
+  {
+    *SubArbol = ptrNuvoNodo;
+  }
+  else // si no esta vacio
+  {
+    if ((*SubArbol)->dato > ptrNuvoNodo->dato)
+      insertaNodoEnArbolConRep(&(*SubArbol)->izq, ptrNuvoNodo);
+
+    if ((*SubArbol)->dato <= ptrNuvoNodo->dato)
+      insertaNodoEnArbolConRep(&(*SubArbol)->der, ptrNuvoNodo);
+  }
+}
+
+void arrayAleatorio(int arreglo[], int longitud, int valorLimite)
+{
+  /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
+  /* incluir stdlib para usar rand() y time() */
+  int i, j;
+  srand(time(NULL));
+  for (i = 0; i < longitud; i++)
+  {
+    arreglo[i] = rand() % valorLimite;
+  }
+}
+
+void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud)
+{
+  int i;
+  for (i = 0; i < longitud; i++)
+  {
+    insertaNodoEnArbolConRep(&ArbolObjetivo->Raiz, creaNodoArbol(array[i]));
+  }
+}
+
+void imprimeArreglo(int arreglo[], const int longitud)
+{
+  int i;
+  printf("[");
+  for (i = 0; i < longitud; i++)
+  {
+    printf(" %d, ", arreglo[i]);
+  }
+  printf("]\n");
+}
+
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension)
+{
+  int bandera = 0;
+  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+  {
+    inOrdenArray(ptrNodoArbol->izq, arreglo, dimension);
+    arreglo[*dimension] = ptrNodoArbol->dato;
+    *dimension = *dimension + 1;
+    inOrdenArray(ptrNodoArbol->der, arreglo, dimension);
   }
 }
