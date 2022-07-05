@@ -178,3 +178,35 @@ void informeTxt(Archivo *prtF);                                  // imprime un i
 void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una Lista y guarda los registros en un archivo desde la cabeza de la listavoid menuArchivos();
 void menuArchivos();
 void optenerCantidadElementos(Archivo *ptrArchivo);
+
+/**
+ * @brief Definiciones de funciones y estructuras para manejo de Arboles y monticulos
+ * 
+ */
+
+typedef struct NODOARBOL
+{
+  int dato; // puede ser un registro o de cualqier tipo
+  struct NODOARBOL *izq;
+  struct NODOARBOL *der;
+
+} NodoArbol;
+
+typedef struct ARBOL
+{
+  NodoArbol *Raiz;
+} Arbol;
+
+NodoArbol *creaNodoArbol();
+void cargaArbol(Arbol *ArbolObjetivo, int valor);
+void despliegaMenuArboles();
+void insertaNodoEnArbol(NodoArbol **, NodoArbol *);
+void insertaNodoEnArbolConRep(NodoArbol **, NodoArbol *);
+
+void inOrden(NodoArbol *ptrNodoArbol);
+void preOrden(NodoArbol *);
+void postOrden(NodoArbol *ptrNodoArbol);
+void imprimirArbol(Arbol *);
+
+void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);

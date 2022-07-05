@@ -1961,3 +1961,220 @@ void optenerCantidadElementos(Archivo *ptrArchivo)
 
   printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
 }
+
+
+/**
+ * @brief Funciones de Arboles Binarios y monticulos
+ * 
+ */
+
+/**
+ * @brief Despliega el menu de operaciones basicas con arboles binarios
+ * 
+ */
+void despliegaMenuArboles()
+{
+  printf("Que desea Hacer?\n");
+  printf("Opciones:\n");
+  printf("1 - Insertar Nodo En arbol\n");
+  printf("2 - Imprimir Arbol\n");
+  printf("3 - Salir\n");
+  printf("Su Opcion = ");
+}
+
+/**
+ * @brief Carga un valor entero en un arbol
+ * 
+ * @param ArbolObjetivo 
+ * @param valor 
+ */
+void cargaArbol(Arbol *ArbolObjetivo, int valor)
+{
+  NodoArbol *ptrNuevoNodo = creaNodoArbol(valor);
+  insertaNodoEnArbol(&ArbolObjetivo->Raiz, ptrNuevoNodo);
+}
+
+/**
+ * @brief Crea un nuevo nodo de arbol y retorna su direccion de memoria
+ * 
+ * @param dato 
+ * @return NodoArbol* 
+ */
+NodoArbol *creaNodoArbol(int dato)
+{
+  NodoArbol *nuevoNodo = malloc(sizeof(NodoArbol)); // libera espacio en memora para el nuevo nodo
+  if (nuevoNodo != NULL)
+  {
+    nuevoNodo->dato = dato;
+    nuevoNodo->izq = NULL;
+    nuevoNodo->der = NULL;
+    return nuevoNodo;
+  }
+  else
+  {
+    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+    return NULL;
+  }
+}
+
+/**
+ * @brief Inserta un Nodo nuevo en un Arbol
+ * 
+ * @param SubArbol 
+ * @param ptrNuvoNodo 
+ */
+void insertaNodoEnArbol(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
+{
+  if (*SubArbol == NULL) // si el arbol esta vacio
+  {
+    *SubArbol = ptrNuvoNodo;
+  }
+  else // si no esta vacio
+  {
+    if ((*SubArbol)->dato > ptrNuvoNodo->dato)
+      insertaNodoEnArbol(&(*SubArbol)->izq, ptrNuvoNodo);
+
+    if ((*SubArbol)->dato < ptrNuvoNodo->dato)
+      insertaNodoEnArbol(&(*SubArbol)->der, ptrNuvoNodo);
+  }
+}
+
+/**
+ * @brief Imprime un Arbol binario en orden
+ * 
+ * @param ptrNodoArbol 
+ */
+void inOrden(NodoArbol *ptrNodoArbol)
+{
+  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+  {
+    inOrden(ptrNodoArbol->izq);
+    printf(" %d -", ptrNodoArbol->dato);
+    inOrden(ptrNodoArbol->der);
+  }
+}
+
+/**
+ * @brief Imprime un arbol binario en preOrden
+ * 
+ * @param ptrNodoArbol 
+ */
+void preOrden(NodoArbol *ptrNodoArbol)
+{
+  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+  {
+    printf(" %d -", ptrNodoArbol->dato);
+    preOrden(ptrNodoArbol->izq);
+    preOrden(ptrNodoArbol->der);
+  }
+}
+
+/**
+ * @brief imprime un arbol en PostOrden
+ * 
+ * @param ptrNodoArbol 
+ */
+void postOrden(NodoArbol *ptrNodoArbol)
+{
+  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+  {
+    postOrden(ptrNodoArbol->der);
+    printf(" %d -", ptrNodoArbol->dato);
+    postOrden(ptrNodoArbol->izq);
+  }
+}
+
+/**
+ * @brief Funcion Imprimir arbol, desplega las opciones posibles para imprimmir el arbol
+ * 
+ * @param aImprimir 
+ */
+void imprimirArbol(Arbol *aImprimir)
+{
+  int opcion;
+  if (aImprimir->Raiz == NULL)
+  {
+    printf("Arbol Vacio!\n");
+  }
+  else
+  {
+    printf("Como desea Visualizar el Arbol\n");
+    printf("Ingrese su Opcion\n");
+    printf("1- InOrden\n");
+    printf("2- preOrden\n");
+    printf("3- posOrden\n");
+    scanf("%d", &opcion);
+    switch (opcion)
+    {
+    case 1:
+      inOrden(aImprimir->Raiz);
+      break;
+    case 2:
+      preOrden(aImprimir->Raiz);
+      break;
+    case 3:
+      postOrden(aImprimir->Raiz);
+      break;
+    default:
+      printf("Opcion Invalida");
+      break;
+    }
+  }
+}
+
+/**
+ * @brief Inserta un Nodo en el arbol (acepta datos duplicado)
+ * 
+ * @param SubArbol 
+ * @param ptrNuvoNodo 
+ */
+void insertaNodoEnArbolConRep(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
+{
+  if (*SubArbol == NULL) // si el arbol esta vacio
+  {
+    *SubArbol = ptrNuvoNodo;
+  }
+  else // si no esta vacio
+  {
+    if ((*SubArbol)->dato > ptrNuvoNodo->dato)
+      insertaNodoEnArbolConRep(&(*SubArbol)->izq, ptrNuvoNodo);
+
+    if ((*SubArbol)->dato <= ptrNuvoNodo->dato)
+      insertaNodoEnArbolConRep(&(*SubArbol)->der, ptrNuvoNodo);
+  }
+}
+
+/**
+ * @brief Carga un array en un arbol binario
+ * 
+ * @param ArbolObjetivo 
+ * @param array 
+ * @param longitud 
+ */
+void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud)
+{
+  int i;
+  for (i = 0; i < longitud; i++)
+  {
+    insertaNodoEnArbolConRep(&ArbolObjetivo->Raiz, creaNodoArbol(array[i]));
+  }
+}
+
+/**
+ * @brief Carga los datos del arbol en orden en un arreglo
+ * 
+ * @param ptrNodoArbol 
+ * @param arreglo 
+ * @param dirIteradorDelArray direccin de memoria del iterador 
+ */
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dirIteradorDelArray)
+{
+  int bandera = 0;
+  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+  {
+    inOrdenArray(ptrNodoArbol->izq, arreglo, dirIteradorDelArray);
+    arreglo[*dirIteradorDelArray] = ptrNodoArbol->dato;
+    *dirIteradorDelArray = *dirIteradorDelArray + 1;
+    inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
+  }
+}
