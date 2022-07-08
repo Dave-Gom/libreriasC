@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -75,9 +74,8 @@ char *cadenaAleatoriaLongAleatoria();              // devuelve el apuntador a un
 typedef struct REGISTRO // registro de archivos
 {
   /* Aqui deben ir los Argumentos del registro */
-  int valor;
-  /*   char nombre[60];
-    double estadoDeCuenta; */
+  char nombre[20];
+  char fecha[20];
 
 } Registro;
 
@@ -211,3 +209,21 @@ void imprimirArbol(Arbol *);
 
 void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
 void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);
+
+/**
+ * @brief Segundo final
+ *
+ */
+#define LONGITUDCADENA 250
+#define CANTIDAD_MAXIMA_PALABRAS 250 // NO PUEDE HABER MAS DE LA MITAD DE PALABRAS QUE DE LETRAS
+
+typedef struct REGISTROCANTPALABRAS
+{
+  char palabra[24]; // la palabra mas larga del idioma españoj tiene 23 letras
+  int cantidad;     // contara la cantidad de apariciones de esa parabra
+} CantidadAparicionPalabra;
+
+void imprimeArrayPalabras(char *palabras[]);
+void incicializaContador(int palabras[], int longitud);
+void copyString(char *t, char *s);
+void cuentaPalDelArreglo(int arregloCont[], int longitud, char *palabras[]);

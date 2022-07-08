@@ -10,6 +10,9 @@
     "estructuras.h": "c",
     "archivos.h": "c",
     "colasdeprioridad.h": "c",
-    "listas.h": "c"
+    "listas.h": "c",
+    "headerdocumentado.h": "c",
+    "__locale": "c",
+    "cstring": "c"
   }
 }

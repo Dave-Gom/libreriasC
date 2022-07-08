@@ -1,4 +1,4 @@
-#include "headerDocumentado.h"
+#include "header.h"
 
 /* FUNCIONES CON ARREGLOS UNIDIMENSIONALES */
 
@@ -653,16 +653,17 @@ void leeConEspacios(char cadena[])
 }
 
 /**
- * @brief Separa las palabras de un enunciado en un array
+ * @brief Separa las palabras de un enunciado en un array, retorna la cantidad de palabras
  *
  * @param array Array destino
  * @param enunciado Cadena a ser Spliteada
  * @param separador Caracter separador
+ * @return int
  */
-void separaParabrasEnArray(char *array[], char enunciado[], char separador[])
+int separaParabrasEnArray(char *array[], char enunciado[], char separador[])
 {
 
-  int i;
+  int i = 0;
   char *ptrToken = strtok(enunciado, separador);
 
   while (ptrToken != NULL)
@@ -670,6 +671,8 @@ void separaParabrasEnArray(char *array[], char enunciado[], char separador[])
     array[i++] = ptrToken;
     ptrToken = strtok(NULL, separador);
   }
+
+  return i;
 }
 
 /**
@@ -1099,12 +1102,10 @@ Registro creaRegistro()
 
   printf("\n** Crea un Registro **\n");
   Registro *ptrNuevoRegistro = malloc(sizeof(Registro)); // libera espacio en memoria para el nuevo registro
-  printf("Ingresa el valor a ser insertado en el Registro: ");
-  scanf("%d", &ptrNuevoRegistro->valor);
-  /*   printf("Ingrese El nombre del Propietario de la Cuenta: ");
+  printf("Ingresa el Nombre del Propietario: ");
   scanf("%s", ptrNuevoRegistro->nombre);
-  printf("ingrese EL estado de la cuenta: ");
-  scanf("%lf", &ptrNuevoRegistro->estadoDeCuenta); */
+  printf("Ingresa la fecha: ");
+  scanf("%s", ptrNuevoRegistro->fecha);
 
   return *ptrNuevoRegistro; // retorna una copia del registro creado
 }
@@ -1121,7 +1122,7 @@ void borraRegistro(Registro *ptrRegistro)
 
 void imprimeRegistro(Registro *ptrRegistro)
 {
-  printf("%d", ptrRegistro->valor);
+  printf("\nNombre: %s \t Fecha: %s", ptrRegistro->nombre, ptrRegistro->fecha);
 }
 
 /**
@@ -1131,7 +1132,7 @@ void imprimeRegistro(Registro *ptrRegistro)
  */
 void imprimeCopiaRegistro(Registro ptrRegistro)
 {
-  printf("%d", ptrRegistro.valor);
+  // printf("%d", ptrRegistro.valor);
 }
 
 /* Listas Enlazadas */
@@ -1156,7 +1157,8 @@ Nodo *creaNodo(Registro dato)
   Nodo *nuevoNodo = malloc(sizeof(Nodo));
   if (nuevoNodo != NULL)
   {
-    nuevoNodo->dato = dato;
+    strcpy(nuevoNodo->dato.fecha, dato.fecha);
+    strcpy(nuevoNodo->dato.nombre, dato.nombre);
     nuevoNodo->sig = NULL;
     nuevoNodo->ante = NULL;
     return nuevoNodo;
@@ -1232,17 +1234,20 @@ void insertarDatoEnCola(Registro dato, Lista *listaDestino)
 {
   /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
   Nodo *ptrNuevoNodo = creaNodo(dato);
-
-  if (ptrNuevoNodo != NULL)
+  if (ptrNuevoNodo == NULL)
   {
-    listaDestino->cantidadElem++;
+    printf("HOla");
+
+    // listaDestino->cantidadElem++;
 
     if (listaEstaVacia(*listaDestino) == -1)
     { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
       listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
     }
     else
-    {                                          // si la lista no esta vacia
+    {
+      printf("chau");
+      // si la lista no esta vacia
       ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
       listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
       listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
@@ -1257,7 +1262,6 @@ void insertarDatoEnCola(Registro dato, Lista *listaDestino)
  */
 void insertarEnCabeza(Lista *ACargar)
 {
-  int valor;
   Registro RegistroAInsertar = creaRegistro();
   insertarDatoEnCabeza(RegistroAInsertar, ACargar);
 }
@@ -1269,7 +1273,6 @@ void insertarEnCabeza(Lista *ACargar)
  */
 void insertarEnCola(Lista *ACargar)
 {
-  int valor;
   Registro RegistroAInsertar = creaRegistro();
   insertarDatoEnCola(RegistroAInsertar, ACargar);
 }
@@ -1400,12 +1403,12 @@ Nodo *dirMayor(int Dato, Lista *listaDestino)
   Nodo *ptrNodoEvaluado = listaDestino->cabeza;
   while (ptrNodoEvaluado != NULL)
   {
-    if (ptrNodoEvaluado->dato.valor > Dato)
-    { // compara el valor
-      return ptrNodoEvaluado;
-    }
-    else
-      ptrNodoEvaluado = ptrNodoEvaluado->sig;
+    // if (ptrNodoEvaluado->dato.valor > Dato)
+    // { // compara el valor
+    //   return ptrNodoEvaluado;
+    // }
+    // else
+    //   ptrNodoEvaluado = ptrNodoEvaluado->sig;
   }
 
   return NULL;
@@ -1470,22 +1473,22 @@ void insertaEnOrden(Registro dato, Lista *listaDestino)
     }
     else
     {
-      Nodo *ptrNodoMayor = dirMayor(dato.valor, listaDestino);
-      if (ptrNodoMayor == listaDestino->cabeza)
-      {
-        insertarDatoEnCabeza(dato, listaDestino);
-      }
-      else
-      {
-        if (ptrNodoMayor != NULL)
-        {
-          insertaNodoAntesDe(ptrNodoMayor, ptrNodoMayor);
-        }
-        else
-        {
-          insertarDatoEnCola(dato, listaDestino);
-        }
-      }
+      // Nodo *ptrNodoMayor = dirMayor(dato.valor, listaDestino);
+      // if (ptrNodoMayor == listaDestino->cabeza)
+      // {
+      //   insertarDatoEnCabeza(dato, listaDestino);
+      // }
+      // else
+      // {
+      //   if (ptrNodoMayor != NULL)
+      //   {
+      //     insertaNodoAntesDe(ptrNodoMayor, ptrNodoMayor);
+      //   }
+      //   else
+      //   {
+      //     insertarDatoEnCola(dato, listaDestino);
+      //   }
+      // }
     }
   }
 }
@@ -1580,7 +1583,7 @@ void leerColaDePrioridades(ColaDePrioridad *colaDePrioridad)
   if (ColaPrioridadVacia(*colaDePrioridad) != -1)
   {
     Registro aux = DesencolaPrioridad(colaDePrioridad);
-    printf("El Prime Dato era: %d", aux.valor); // aqui deban inr las operaciones requeridas para hacer con el dato de la cola de prioridad
+    // printf("El Prime Dato era: %d", aux.valor); // aqui deban inr las operaciones requeridas para hacer con el dato de la cola de prioridad
   }
   else
   {
@@ -1805,7 +1808,7 @@ void eliminaRegistro(Archivo *ptrArchivo)
 
   fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // situa el apuntador a la direccion del registro a eliminar
   fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro
-  printf("Registro: {id: %d, estuatus: %s, valor: %d, dirMem: %p }\n", registroAux.id, registroAux.estaEliminado == 1 ? "Contiene Datos" : "Esta Vacio", registroAux.Dato.valor, ptrArchivo->punteroArchivo);
+  // printf("Registro: {id: %d, estuatus: %s, valor: %d, dirMem: %p }\n", registroAux.id, registroAux.estaEliminado == 1 ? "Contiene Datos" : "Esta Vacio", registroAux.Dato.valor, ptrArchivo->punteroArchivo);
 
   if (registroAux.estaEliminado == -1 || registroAux.id == 0 || registroAux.estaEliminado == 0) // verifica si el archivo ya esta vacio de antemano
   {
@@ -1881,7 +1884,7 @@ void informeTxt(Archivo *ptrArchivo)
       if (datos.estaEliminado == 1)
       {
 
-        fprintf(ptrInforme, "%d\n", datos.Dato.valor);
+        // fprintf(ptrInforme, "%d\n", datos.Dato);
         // imprimir aqui en el formato que pida el ejercicio
       }
       else
@@ -2185,4 +2188,74 @@ void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dirIteradorDelArr
     *dirIteradorDelArray = *dirIteradorDelArray + 1;
     inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
   }
+}
+
+/**
+ * @brief Segundo parcial
+ *
+ */
+
+void cuentaPalDelArreglo(int arregloCont[], int longitud, char *palabras[])
+{
+  int bandera = 0;
+  int i, j;
+  for (i = 0; i < longitud; i++)
+  {
+    bandera = 0;
+    for (j = i + 1; j < longitud - 1; j++)
+    {
+      if (strcmp(palabras[i], palabras[j]) == 0)
+      {
+        bandera = 1;
+        break;
+      }
+    }
+    if (bandera == 1)
+    {
+      arregloCont[j] = -2000; // representa a las palabras repetidas
+    }
+  }
+
+  for (i = 0; i < longitud; i++)
+  {
+    for (j = 0; j < longitud; j++)
+    {
+      if (strcmp(palabras[i], palabras[j]) == 0)
+      {
+        arregloCont[i] += 1;
+      }
+    }
+  }
+
+  imprimeArreglo(arregloCont, longitud);
+}
+
+void imprimeArrayPalabras(char *palabras[])
+{
+  int i = 0;
+  printf("\n{");
+  while (palabras[i] != NULL)
+  {
+    printf(" %s, ", palabras[i]);
+    i++;
+  }
+  printf("}\n");
+}
+
+void incicializaContador(int palabras[], int longitud)
+{
+  int i;
+  for (i = 0; i < longitud; i++)
+  {
+    palabras[i] = 0;
+  }
+}
+
+void copyString(char *t, char *s)
+{
+  // (return ASCII value which is True,
+  // therefore will be in the loop
+  // till the condition is False
+  while (*t++ = *s++)
+    ;
 }

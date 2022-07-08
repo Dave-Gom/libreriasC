@@ -1,89 +1,53 @@
-#include"headerDocumentado.h"
+#include "headerDocumentado.h"
 
 void insertarEnCola(Lista *ACargar);
 void insertarEnCabeza(Lista *ACargar);
-
+void despliegaMenuListasYArchivos();
 int main()
 {
   int opcion;
-    Archivo* ptrArchivo = creaArchivo();
+  Lista ColaParaArchivos = {NULL, NULL, 0};
 
-  if( ptrArchivo != NULL){
-    do
+  do
+  {
+    despliegaMenuListasYArchivos();
+    scanf("%d", &opcion);
+
+    switch (opcion)
     {
-      menuArchivos();
-      scanf("%d", &opcion);
-      switch (opcion)
-      {
-        case 1:
-          informeTxt( ptrArchivo);
-          break;
-        case 2:
-            actualizaRegistro( ptrArchivo);
-            break;
-        case 3:
-            nuevoRegistro( ptrArchivo);
-            break;
-        case 4:
-            eliminaRegistro( ptrArchivo);
-            break;
-        case 5:
-          printf("Adios...\n");
-          break;
-        default:
-          break;
-      }
+    case 1:
+      insertarEnCabeza(&ColaParaArchivos);
+      break;
+    case 2:
+      insertarEnCola(&ColaParaArchivos);
+      break;
+    case 3:
+      imprimeCopiaRegistro(extraerCabeza(&ColaParaArchivos));
+      break;
+    case 4:
+      imprimeCopiaRegistro(extraerCola(&ColaParaArchivos));
+    case 5:
+      imprimeDesdeLaCabeza(&ColaParaArchivos);
+      break;
 
-    } while (opcion != 5);
-    
-  }
-
+    default:
+      break;
+    }
+  } while (opcion != 5);
 
   return 0;
 }
 
-/* int main(int argc, char const *argv[])
+void despliegaMenuListasYArchivos()
 {
-    //modo de uso Funciones de Listas, pilas y colas
-  Nodo primero = { 5, NULL, NULL};
-  Lista ListaDePrueba = { NULL, NULL, 0};
-  int opcion, valor;
-  //Nodo elementos[12]; //no se puede declarar un arreglo vacio elementos[], no esta permitido
 
-  do
-  {
-    despliegaMenuListas();
-    scanf("%d", &opcion);
-    switch (opcion)
-    {
-    
-    case 1:
-        insertarEnCabeza(&ListaDePrueba);
-        break;
-    case 2:
-        insertarEnCola( &ListaDePrueba);
-        break;
-    case 3:
-        printf("El valor extraido es %d", (extraerCabeza(&ListaDePrueba)).valor );
-        imprimeDesdeLaCabeza( &ListaDePrueba);
-        break;
-    case 4: 
-        printf("El valor extraido es %d", (extraerCola(&ListaDePrueba)).valor );
-        imprimeDesdeLaCabeza(&ListaDePrueba);
-        break;
-    case 5: 
-        // imprimeDesdeLaCabeza(&ListaDePrueba);
-        printf("\nimprimiendo desde la cola: ");
-        imprimeDesdeLaCola(&ListaDePrueba);
-        break;
-      default:
-        printf("Opcion Invalida. Favor Reinsertar!\n");
-        break;
-    }
-  } while (opcion != 6);
-  
-  system("pause");
-  return 0;
-} */
-
-
+  printf("Que desea Hacer?\n");
+  printf("Opciones:\n");
+  printf("1 - Insertar en la Cabeza de la lista Lista\n");
+  printf("2 - Insertar en la Cola de la Lista\n");
+  printf("3 - Extraer de la cabeza la Lista\n");
+  printf("4 - Extraer de la cola la Lista\n");
+  printf("5 - Imprimir la Lista\n");
+  printf("6 - Salir\n");
+  printf("Su Opcion = ");
+}
