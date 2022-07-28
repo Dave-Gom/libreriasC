@@ -170,7 +170,7 @@ void insertaNodoAntesDe(Nodo *nodoMayor, Nodo *ptrNuevoNodo);
 void insertaEnOrden(Registro dato, Lista *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
 void despliegaMenuListas();                              // despliega menu de opciones para listas
 
-//lista int
+//listas int
 NodoInt *creaNodoInt(int);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
 int listaIntEstaVacia(ListaInt);                                     // retorna -1 si la lista esta vacia, 0 si no
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
@@ -186,6 +186,23 @@ void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato);
 void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo);
 void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
 void despliegaMenuListasInt(); 
+
+//listas de char
+NodoChar *creaNodoChar(char);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
+int listaCharEstaVacia(ListaChar);                                     // retorna -1 si la lista esta vacia, 0 si no
+void insertarCharEnCabeza(char dato, ListaChar *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
+void insertarCharEnCola(char dato, ListaChar *);               // Inserta Por la cola de la lista (tabien valido para Colas)
+void insertarEnCabezaListaChar(ListaChar *listaDestino);
+void insertarEnColaListaChar(ListaChar *ACargar);
+int extraerCabezaListaChar(ListaChar *listaObjetivo);
+int extraerColaListaChar(ListaChar *listaObjetivo);
+void imprimeDesdeLaCabezaListaChar(const ListaChar *); // imprime una lista desde la cabeza (tambien valido para una Cola)
+void imprimeDesdeLaColaListaChar(const ListaChar *);   // imprime una lista desde la cola (tambien valido para una Pila)
+NodoInt *dirMayorEnListaChar(char Dato, ListaChar *listaDestino);
+void insertaDatoAntesDeEnListaChar(NodoChar *nodoMayor, char dato);
+void insertaNodoAntesDeEnListaChar(NodoChar *nodoMayor, NodoChar *ptrNuevoNodo);
+void insertaEnOrdenEnListaChar(char dato, NodoChar *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
+void despliegaMenuListasChar(); 
 
 /* funciones de Colas de prioridad */
 #define CANTIDADPRIORIDADES 4

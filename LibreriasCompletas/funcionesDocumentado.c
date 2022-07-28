@@ -1565,7 +1565,7 @@ void despliegaMenuListas()
 
 NodoInt *creaNodoInt(int dato)
 {
-  NodoInt *nuevoNodo = malloc(sizeof(int));
+  NodoInt *nuevoNodo = malloc(sizeof(NodoInt));//liberamos espacio en memoria del tamanio de un nodo int
   if (nuevoNodo != NULL)
   {
     nuevoNodo->dato = dato;
@@ -1914,6 +1914,244 @@ void despliegaMenuListasInt()
   printf("Su Opcion = ");
 }
 
+//Listas enlazadas de Caracteres 
+/**
+ * @brief Crea un nodo de una lista y devuelve su direccion en memoria
+ *
+ * @param dato Dato a ser insertado en el Nodo, en esta caso int
+ * @return NodoInt*
+ *
+ * @author Dave Gomez
+ */
+
+NodoChar *creaNodoChar(char dato)
+{
+  NodoChar *nuevoNodo = malloc(sizeof(NodoChar)); // liberamos espacio en memoria del espacio de un nodo de char
+  if (nuevoNodo != NULL)
+  {
+    nuevoNodo->dato = dato;
+    nuevoNodo->sig = NULL;
+    nuevoNodo->ante = NULL;
+    return nuevoNodo;
+  }
+  else
+  {
+    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+    return NULL;
+  }
+}
+
+/**
+ * @brief Retorna -1 si la lista esta vacia, 0 en caso contrario
+ *
+ * @param ListaVal Lista a ser Evaluada
+ * @return int
+ *
+ * @author Dave Gomez
+ */
+int listaCharEstaVacia(ListaChar ListaVal)
+{
+  if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
+  { // si la cabeza y la cola son iguales a NULL
+    return -1;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
+/**
+ * @brief Crea un nodo y lo inserta en la cabeza de la lista (tambien valido para pila)
+ * Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0}.
+ * Obs: para una pila, si inserto desde la cabeza tambien debo leer desde la cabeza.
+ *
+ * @param dato Dato a ser ingresado en la Cabeza de la Lista
+ * @param listaDestino Lista en la que se insertara el nuevo nodo
+ *
+ * @author Dave Gomez
+ */
+void insertarCharEnCabeza(char dato, ListaChar *listaDestino)
+{
+  NodoChar *ptrNuevoNodo = creaNodoChar(dato); // crea el nodo con el dato
+
+  if (ptrNuevoNodo != NULL)
+  {
+    listaDestino->cantidadElem++;
+    if (listaCharEstaVacia(*listaDestino) == -1)
+    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+    }
+    else
+    {                                            // si la lista no esta vacia
+      ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+      listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+      listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+    }
+  }
+}
+
+/**
+ * @brief Crea un nodo y lo inserta en cola de la lista (tabien valido para Colas)
+ * Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0}
+ *
+ * @param dato Dato a ser ingresado en la Cabeza de la Lista
+ * @param listaDestino Lista en la que se insertara el nuevo nodo
+ *
+ * @author Dave Gomez
+ */
+void insertarCharEnCola(char dato, ListaChar *listaDestino)
+{
+  /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+  NodoChar *ptrNuevoNodo = creaNodoChar(dato);
+
+  if (ptrNuevoNodo != NULL)
+  {
+    listaDestino->cantidadElem++;
+
+    if (listaCharEstaVacia(*listaDestino) == -1)
+    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+    }
+    else
+    {                                          // si la lista no esta vacia
+      ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
+      listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
+      listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+    }
+  }
+}
+
+/**
+ * @brief crea un registro y lo inserta en la cabeza de la lista
+ *
+ * @param ACargar
+ */
+void insertarEnCabezaListaChar(ListaChar *ACargar)
+{
+  char valor = ' ';
+  printf("\nIngrese un caracter: ");
+  getchar();
+  valor = getchar();
+  insertarCharEnCabeza(valor, ACargar);
+  
+}
+
+/**
+ * @brief crea un registro y lo inserta en la cola de la lista
+ *
+ * @param ACargar
+ */
+void insertarEnColaListaChar(ListaChar *ACargar)
+{
+  char valor = ' ';
+  printf("\nIngrese un caracter: ");
+  scanf(" %c", &valor);
+  insertarCharEnCola(valor, ACargar);
+}
+
+/**
+ * @brief Extrae un el dato de la cabeza de la lista y lo retorna
+ *
+ * @param listaObjetivo Lista objetivo
+ * @return char
+ *
+ * @author Dave Gomez
+ */
+int extraerCabezaListaChar(ListaChar *listaObjetivo)
+{
+
+  char contenedor = '\0'; // contenedor Auxiliar
+  if (listaCharEstaVacia(*listaObjetivo) != -1)
+  {
+
+    NodoChar *ptrNodoObjetivo;
+
+    ptrNodoObjetivo = listaObjetivo->cabeza;
+
+    contenedor = ptrNodoObjetivo->dato;
+    listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+    listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+    listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
+    if (listaObjetivo->cantidadElem == 0)
+      listaObjetivo->cola = NULL;
+
+    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+  }
+  else
+    printf("\nLa lista esta vacia\n");
+
+  return contenedor; // retorna una copia del registro extraido
+}
+
+/**
+ * @brief Extrae un el dato de la cola de la lista y lo retorna
+ *
+ * @param listaObjetivo Lista objetivo
+ * @return char
+ *
+ * @author Dave Gomez
+ */
+int extraerColaListaChar(ListaChar *listaObjetivo)
+{
+  NodoChar *ptrNodoObjetivo;
+  char Dato = '\0';                         // contenedor Auxiliar
+  ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
+
+  Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
+  listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
+
+  listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
+  if (listaObjetivo->cantidadElem == 0)
+    listaObjetivo->cabeza = NULL;
+  else
+    listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
+
+  free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+  return Dato;
+}
+
+/**
+ * @brief Imprime una lista desde la cabeza (tambien valido para una Cola)
+ *
+ * @param listaObjetivo Lista a ser impresa
+ *
+ * @author Dave Gomez
+ */
+void imprimeDesdeLaCabezaListaChar(const ListaChar *listaObjetivo)
+{
+  printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+  NodoChar *ptrNodoObjetivo = listaObjetivo->cabeza;
+  while (ptrNodoObjetivo != NULL)
+  {
+    printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+    printf(" -> ");
+    ptrNodoObjetivo = ptrNodoObjetivo->sig;
+  }
+  printf("NULL\n");
+}
+
+/**
+ * @brief imprime una lista desde la Cola (tambien valido para una Pila)
+ * Obs: para una pila, si leo desde la cola es porque cargue los datos desde la cola
+ *
+ * @param listaObjetivo Lista a ser impresa
+ *
+ * @author Dave Gomez
+ */
+void imprimeDesdeLaColaListaChar(const ListaChar *listaObjetivo)
+{
+
+  printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+  NodoChar *ptrNodoObjetivo = listaObjetivo->cola;
+  while (ptrNodoObjetivo != NULL)
+  {
+    printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+    printf(" -> ");
+    ptrNodoObjetivo = ptrNodoObjetivo->ante;
+  }
+  printf("NULL\n");
+}
 
 /* Funciones de colas de prioridad */
 

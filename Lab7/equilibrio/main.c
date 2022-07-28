@@ -1,31 +1,68 @@
 #include"header.h"
 
-int main()
+void inicializaVector( Vector *V, int valorInicial);
+void cargarVector( Vector *V);
+int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad);
+
+void main()
 {
 
-  Vector FuerzaResultante = { 0, 0, 0};
 
 
   int cantidadFuerzas, i, x, y, z;
   scanf("%d", &cantidadFuerzas);
 
+  Vector Fuerzas[cantidadFuerzas];
+
   for ( i = 0; i < cantidadFuerzas; i++)
   {
-    scanf("%d", &x);
-    scanf("%d", &y);
-    scanf("%d", &z);
-    FuerzaResultante.x += x;
-    FuerzaResultante.y += y;
-    FuerzaResultante.y += y;
+    inicializaVector( &Fuerzas[i], 0);
+  }
+  
 
+  for ( i = 0; i < cantidadFuerzas; i++)
+  {
+    cargarVector(&Fuerzas[i]);
   }
 
-  if(FuerzaResultante.x  == 0  && FuerzaResultante.y  == 0 && FuerzaResultante.z  == 0){
+  if( FuerzasEnEquilibrio(Fuerzas, cantidadFuerzas) == 0){
     printf("SI");
   }
   else
   {
     printf("NO");
   }
-  return 0;
+}
+
+
+void inicializaVector( Vector *V, int valorInicial){
+  V->x = valorInicial;
+  V->y = valorInicial;
+  V->z = valorInicial;
+}
+
+void cargarVector( Vector *V){
+  int aux;
+  printf("Ingrese la componente de la fuerza en x: ");
+  scanf("%d", &aux);
+  V->x = aux;
+  printf("Ingrese la componente de la fuerza en Y: ");
+  scanf("%d", &aux);
+  V->y= aux;
+  printf("Ingrese la componente de la fuerza en z: ");
+  scanf("%d", &aux);
+  V->x = aux;
+}
+
+
+int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad){
+  int i = 0, x = 0, y = 0 , z = 0, bandera = 0;
+  for ( i = 0; i < cantidad; i++)
+  {
+    x += Fuerzas[i].x;
+    y += Fuerzas[i].y;
+    z += Fuerzas[i].z;
+  }
+  
+  return x+y+z;
 }
