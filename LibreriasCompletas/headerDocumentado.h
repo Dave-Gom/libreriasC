@@ -203,6 +203,7 @@ void insertaDatoAntesDeEnListaChar(NodoChar *nodoMayor, char dato);
 void insertaNodoAntesDeEnListaChar(NodoChar *nodoMayor, NodoChar *ptrNuevoNodo);
 void insertaEnOrdenEnListaChar(char dato, NodoChar *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
 void despliegaMenuListasChar(); 
+int simbolosValanceados( char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre);
 
 /* funciones de Colas de prioridad */
 #define CANTIDADPRIORIDADES 4
@@ -334,3 +335,6 @@ int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad);
 //lab 8
 int esPrimo( long numero);
 int tipoNumero( long numero);
+
+//funciones extra
+int esPalidromo( char cadena[]);

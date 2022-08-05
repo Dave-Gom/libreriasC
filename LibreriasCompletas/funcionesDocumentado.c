@@ -2031,7 +2031,7 @@ void insertarEnCabezaListaChar(ListaChar *ACargar)
 {
   char valor = ' ';
   printf("\nIngrese un caracter: ");
-  getchar();
+  fflush(stdin);
   valor = getchar();
   insertarCharEnCabeza(valor, ACargar);
   
@@ -2046,7 +2046,8 @@ void insertarEnColaListaChar(ListaChar *ACargar)
 {
   char valor = ' ';
   printf("\nIngrese un caracter: ");
-  scanf(" %c", &valor);
+  fflush(stdin);
+  valor = getchar();
   insertarCharEnCola(valor, ACargar);
 }
 
@@ -2069,7 +2070,7 @@ int extraerCabezaListaChar(ListaChar *listaObjetivo)
 
     ptrNodoObjetivo = listaObjetivo->cabeza;
 
-    contenedor = ptrNodoObjetivo->dato;
+    contenedor = ptrNodoObjetivo->dato; //guarda el dato de la cabeza
     listaObjetivo->cabeza = ptrNodoObjetivo->sig;
     listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
     listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
@@ -3238,14 +3239,14 @@ int tipoNumero( long numero)
  * @param simboloCierre 
  * @return int 
  */
-int simbolosValanceados( char cadena[], Lista pilaContenedora, char simboloApertura, char simboloCierre){
+int simbolosValanceados( char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre){
   int bandera = 0, i= 0;
-  Registro contenedor;
+  char aux;
   while (cadena[i] != '\0' && cadena[i] != '\n')
   {
+    printf("\n%c", cadena[i]);
     if(cadena[i] == simboloApertura){
-      contenedor.valor = simboloApertura;
-      insertarDatoEnCabeza( contenedor, &pilaContenedora);// si encuentra apertura de parentesis agrega a la pila
+      insertarCharEnCabeza( cadena[i], &pilaContenedora);// si encuentra apertura de parentesis agrega a la pila
     }
     if(cadena[i] == simboloCierre){
       if(pilaContenedora.cantidadElem == 0){ // si encuentra una cierre de parentesis y la pila esta vacia retorna bandera 1 
@@ -3253,15 +3254,38 @@ int simbolosValanceados( char cadena[], Lista pilaContenedora, char simboloApert
         break;
       }
       else {
-        contenedor = extraerCabeza( &pilaContenedora);
+        aux = extraerCabezaListaChar( &pilaContenedora);
+        printf("El valor extraido fue: %c", aux);
       }
     }
     i++;
   }
 
+  // imprimeDesdeLaCabezaListaChar(&pilaContenedora);
   if(pilaContenedora.cantidadElem != 0){
     bandera = 1;
   }
 
   return bandera;
+}
+
+//funciones extra
+
+/**
+ * @brief determina si una palabra es un palindromo o no
+ * 
+ * @param cadena 
+ * @return int ( 1 si es palindromo 0 en caso contrario)
+ */
+int esPalidromo( char cadena[]){
+  int longitud = strlen(cadena);
+  if( longitud <=1 ) return 1; // las palabras de una sola letra son siempre palindromos
+  int inicio = 0, fin = longitud - 1;
+  while (cadena[inicio] == cadena[fin])
+  {
+    if( inicio >= fin) return 1; // si sigue en el bucle e inicio y fin ya son iguales retorna 1(es palindromo)
+    inicio++;
+    fin--;
+  }
+  return 0; // si sale del bucle entonces no es palindromo
 }
