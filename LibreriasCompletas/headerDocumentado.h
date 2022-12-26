@@ -49,6 +49,7 @@ char getLetra(int val);
 void vocales(char exp[]);
 void primeraAparicion(char exp[], char p);
 void leeFechaFormat(char cadena[]);
+void enteroAString(int valor, char *cadena);
 
 /* ordenamientos */
 void ordIntecambio(int arreglo[], int longitud);
@@ -74,10 +75,10 @@ char *cadenaAleatoriaLongAleatoria();              // devuelve el apuntador a un
 
 typedef struct REGISTRO // registro de archivos
 {
-  /* Aqui deben ir los Argumentos del registro */
-  int valor;
-  /*   char nombre[60];
-    double estadoDeCuenta; */
+    /* Aqui deben ir los Argumentos del registro */
+    int valor;
+    /*   char nombre[60];
+      double estadoDeCuenta; */
 
 } Registro;
 
@@ -89,62 +90,61 @@ void borraRegistro(Registro *);
 /* Listas Enlazadas */
 
 typedef struct NODO // nodo de registro
-{                // los nodos tendran un registro dentro para mayor
-  Registro dato; // EL DATO PUEDE SER DE CUALQUIER TIPO
-  struct NODO *sig;
-  struct NODO *ante;
+{                   // los nodos tendran un registro dentro para mayor
+    Registro dato;  // EL DATO PUEDE SER DE CUALQUIER TIPO
+    struct NODO *sig;
+    struct NODO *ante;
 } Nodo; // define un alias para una estructura NODO
 
 typedef struct NODOENTERO // nodo cuyo dato es un valor entero
-{                // los nodos tendran un registro dentro para mayor
-  int dato; // EL DATO PUEDE SER DE CUALQUIER TIPO
-  struct NODOENTERO *sig;
-  struct NODOENTERO *ante;
+{                         // los nodos tendran un registro dentro para mayor
+    int dato;             // EL DATO PUEDE SER DE CUALQUIER TIPO
+    struct NODOENTERO *sig;
+    struct NODOENTERO *ante;
 } NodoInt; // define un alias para una estructura NODO
 
 typedef struct NODOCHAR // nodo nodo cuyo dato es un caracter
-{                // los nodos tendran un registro dentro para mayor
-  char dato; // EL DATO PUEDE SER DE CUALQUIER TIPO
-  struct NODOCHAR *sig;
-  struct NODOCHAR *ante;
+{                       // los nodos tendran un registro dentro para mayor
+    char dato;          // EL DATO PUEDE SER DE CUALQUIER TIPO
+    struct NODOCHAR *sig;
+    struct NODOCHAR *ante;
 } NodoChar; // define un alias para una estructura NODO
-
 
 #define LONGITUDMAXSTRINGDENODO 100
 
-typedef struct NODOSTRING // nodo cuyo dato es una cadena
-{                // los nodos tendran un registro dentro para mayor
-  char dato[LONGITUDMAXSTRINGDENODO]; // EL DATO PUEDE SER DE CUALQUIER TIPO
-  struct NODOSTRING *sig;
-  struct NODOSTRING *ante;
+typedef struct NODOSTRING               // nodo cuyo dato es una cadena
+{                                       // los nodos tendran un registro dentro para mayor
+    char dato[LONGITUDMAXSTRINGDENODO]; // EL DATO PUEDE SER DE CUALQUIER TIPO
+    struct NODOSTRING *sig;
+    struct NODOSTRING *ante;
 } NodoSting; // define un alias para una estructura NODO
 
 typedef struct LISTA
 {
-  Nodo *cabeza;
-  Nodo *cola;
-  int cantidadElem;
+    Nodo *cabeza;
+    Nodo *cola;
+    int cantidadElem;
 } Lista, Pila, Cola; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
 
 typedef struct LISTAINT
 {
-  NodoInt *cabeza;
-  NodoInt *cola;
-  int cantidadElem;
+    NodoInt *cabeza;
+    NodoInt *cola;
+    int cantidadElem;
 } ListaInt; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
 
 typedef struct LISTACHAR
 {
-  NodoChar *cabeza;
-  NodoChar *cola;
-  int cantidadElem;
+    NodoChar *cabeza;
+    NodoChar *cola;
+    int cantidadElem;
 } ListaChar; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
 
 typedef struct LISTASTRING
 {
-  NodoSting *cabeza;
-  NodoSting *cola;
-  int cantidadElem;
+    NodoSting *cabeza;
+    NodoSting *cola;
+    int cantidadElem;
 } ListaString; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
 
 /**
@@ -153,7 +153,7 @@ typedef struct LISTASTRING
  * @author Dave Gomez
  */
 
-//listas de registros
+// listas de registros
 Nodo *creaNodo(Registro);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
 int listaEstaVacia(Lista);                                     // retorna -1 si la lista esta vacia, 0 si no
 void insertarDatoEnCabeza(Registro dato, Lista *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
@@ -170,9 +170,9 @@ void insertaNodoAntesDe(Nodo *nodoMayor, Nodo *ptrNuevoNodo);
 void insertaEnOrden(Registro dato, Lista *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
 void despliegaMenuListas();                              // despliega menu de opciones para listas
 
-//listas int
-NodoInt *creaNodoInt(int);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-int listaIntEstaVacia(ListaInt);                                     // retorna -1 si la lista esta vacia, 0 si no
+// listas int
+NodoInt *creaNodoInt(int);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
+int listaIntEstaVacia(ListaInt);                            // retorna -1 si la lista esta vacia, 0 si no
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarIntEnCola(int dato, ListaInt *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaInt(ListaInt *listaDestino);
@@ -185,11 +185,11 @@ NodoInt *dirMayorEnListaInt(int Dato, ListaInt *listaDestino);
 void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato);
 void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo);
 void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
-void despliegaMenuListasInt(); 
+void despliegaMenuListasInt();
 
-//listas de char
-NodoChar *creaNodoChar(char);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-int listaCharEstaVacia(ListaChar);                                     // retorna -1 si la lista esta vacia, 0 si no
+// listas de char
+NodoChar *creaNodoChar(char);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
+int listaCharEstaVacia(ListaChar);                             // retorna -1 si la lista esta vacia, 0 si no
 void insertarCharEnCabeza(char dato, ListaChar *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarCharEnCola(char dato, ListaChar *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaChar(ListaChar *listaDestino);
@@ -202,22 +202,22 @@ NodoInt *dirMayorEnListaChar(char Dato, ListaChar *listaDestino);
 void insertaDatoAntesDeEnListaChar(NodoChar *nodoMayor, char dato);
 void insertaNodoAntesDeEnListaChar(NodoChar *nodoMayor, NodoChar *ptrNuevoNodo);
 void insertaEnOrdenEnListaChar(char dato, NodoChar *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
-void despliegaMenuListasChar(); 
-int simbolosValanceados( char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre);
+void despliegaMenuListasChar();
+int simbolosValanceados(char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre);
 
 /* funciones de Colas de prioridad */
 #define CANTIDADPRIORIDADES 4
 typedef struct REGISTROPRIORIDAD
 {
-  Nodo *nodo;
-  int prioridad;
+    Nodo *nodo;
+    int prioridad;
 } RegistroDePrioridad;
 
 typedef struct COLAPRIORIDAD
 {
-  int CantPrioridades;                   // cantidad de priridades en la cola
-  Cola Prioridades[CANTIDADPRIORIDADES]; // array de Colas
-} ColaDePrioridad;                       // tipo de dato personalizado "Cola"
+    int CantPrioridades;                   // cantidad de priridades en la cola
+    Cola Prioridades[CANTIDADPRIORIDADES]; // array de Colas
+} ColaDePrioridad;                         // tipo de dato personalizado "Cola"
 
 void insertarDatosEnColaDePriridad(ColaDePrioridad *colaDePrioridad);
 ColaDePrioridad CreaColaPrioridad(int prioridades);
@@ -236,16 +236,16 @@ void despliegaMenuColasDePrioridad();
 
 typedef struct ESTRUCTURAARCHIVOS
 {
-  int cantidadElementos;
-  int registros;
-  FILE *punteroArchivo;
+    int cantidadElementos;
+    int registros;
+    FILE *punteroArchivo;
 } Archivo;
 
 typedef struct REGISTRORARCHIVO
 {
-  unsigned int id;
-  int estaEliminado; // esta eliminado valors, 0 registro en blanco, nunca escrito, 1 registro con datos, -1 registro dado de baja
-  Registro Dato;
+    unsigned int id;
+    int estaEliminado; // esta eliminado valors, 0 registro en blanco, nunca escrito, 1 registro con datos, -1 registro dado de baja
+    Registro Dato;
 } RegistroArchivo;
 
 RegistroArchivo creaRegistroArchivo();
@@ -268,15 +268,15 @@ void despliegaMenuListasYArchivos();
 
 typedef struct NODOARBOL
 {
-  int dato; // puede ser un registro o de cualqier tipo
-  struct NODOARBOL *izq;
-  struct NODOARBOL *der;
+    int dato; // puede ser un registro o de cualqier tipo
+    struct NODOARBOL *izq;
+    struct NODOARBOL *der;
 
 } NodoArbol;
 
 typedef struct ARBOL
 {
-  NodoArbol *Raiz;
+    NodoArbol *Raiz;
 } Arbol;
 
 NodoArbol *creaNodoArbol();
@@ -293,48 +293,49 @@ void imprimirArbol(Arbol *);
 void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
 void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);
 
-
 /**
  * @brief Funciones utilizadas en el laboratorio
- * 
+ *
  */
-//lab 2
+// lab 2
 int resta_errad(int n);
 int is_beautifull_year(int anio);
 int calc_pasos(int dist);
-//lab3
-int sube_escalera( int n );
+// lab3
+int sube_escalera(int n);
 int cantidadHermososEnArreglo(int arreglo[], int);
 int agendador(int arreglo1[], const int dim, const int dias);
-//lab 4
+// lab 4
 void aniadeUno();
 
-//Lab 5
-void copia_arreglo_aString( int origen[], char destino[], const int dim);
-void imprimeCamino( int fila, int col, int a[][col]);
+// Lab 5
+void copiaArregloDeEnterosAString(int origen[], char destino[], const int dim);
+void imprimeCamino(int fila, int col, int a[][col]);
 
-//Lab 7
-typedef struct rectangulo{
-  int lado1;
-  int lado2;
-}Rectangulo;
+// Lab 7
+typedef struct rectangulo
+{
+    int lado1;
+    int lado2;
+} Rectangulo;
 
 void esRectangulo();
 
-//define una estructura para un vector en 3 dimensiones
-typedef struct vector{
-  int x;
-  int y;
-  int z;
-}Vector;
+// define una estructura para un vector en 3 dimensiones
+typedef struct vector
+{
+    int x;
+    int y;
+    int z;
+} Vector;
 
-void inicializaVector( Vector *V, int valorInicial);
-void cargarVector( Vector *V);
+void inicializaVector(Vector *V, int valorInicial);
+void cargarVector(Vector *V);
 int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad);
 
-//lab 8
-int esPrimo( long numero);
-int tipoNumero( long numero);
+// lab 8
+int esPrimo(long numero);
+int tipoNumero(long numero);
 
-//funciones extra
-int esPalidromo( char cadena[]);
+// funciones extra
+int esPalidromo(char cadena[]);

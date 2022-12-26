@@ -19,9 +19,9 @@ int main(){
   digitosInt( digitosPrimer, primerNumero);
   digitosInt( digitosSeg, segundoNumero);
   digitosInt( digitosRes, resultado);
-  copia_arreglo_aString(digitosPrimer, cadenaPrim, 9);
-  copia_arreglo_aString(digitosSeg, cadenaSeg, 9);
-  copia_arreglo_aString(digitosRes, cadenaRes, 9);
+  copiaArregloDeEnterosAString(digitosPrimer, cadenaPrim, 9);
+  copiaArregloDeEnterosAString(digitosSeg, cadenaSeg, 9);
+  copiaArregloDeEnterosAString(digitosRes, cadenaRes, 9);
 
 
 
@@ -60,7 +60,7 @@ void digitosInt( const int *arreglo[], int valor){
   }
 } */
 
-void copia_arreglo_aString( int origen[], char destino[], const int dim){
+void copiaArregloDeEnterosAString( int origen[], char destino[], const int dim){
   int i, cont = 0;
   char digit;
   for( i= 0; i<dim; i++){

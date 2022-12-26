@@ -13,7 +13,7 @@ void digitosInt( const int *arreglo[], int valor){
 }
 
 
-void copia_arreglo_aString( int origen[], char destino[], const int dim){
+void copiaArregloDeEnterosAString( int origen[], char destino[], const int dim){
   int i, cont = 0;
   char digit;
   for( i= 0; i<dim; i++){
