@@ -12,19 +12,19 @@
 int mayor(int arreglo[], const int longitud)
 {
 
-  int mayor, // valor mayor almacenado
-      i;     // iterador
-  for (i = 0; i < longitud; i++)
-  {
+    int mayor, // valor mayor almacenado
+        i;     // iterador
+    for (i = 0; i < longitud; i++)
+    {
 
-    if (i == 0)
-      mayor = arreglo[i]; // asigna el primer elemento siempre como elemento mayor en principio
+        if (i == 0)
+            mayor = arreglo[i]; // asigna el primer elemento siempre como elemento mayor en principio
 
-    if (arreglo[i] > mayor)
-      mayor = arreglo[i];
-  }
+        if (arreglo[i] > mayor)
+            mayor = arreglo[i];
+    }
 
-  return mayor;
+    return mayor;
 }
 
 /**
@@ -37,19 +37,19 @@ int mayor(int arreglo[], const int longitud)
 int menor(int arreglo[], const int longitud)
 {
 
-  int menor, // valor menor del array
-  i;     // iterador
-  for (i = 0; i < longitud; i++)
-  {
+    int menor, // valor menor del array
+        i;     // iterador
+    for (i = 0; i < longitud; i++)
+    {
 
-    if (i == 0)
-      menor = arreglo[i]; // asigna el primer elemento como menor
+        if (i == 0)
+            menor = arreglo[i]; // asigna el primer elemento como menor
 
-    if (arreglo[i] < menor) // si encueltra un elemento que sea menor
-      menor = arreglo[i];   // asigna ese valor a la variable menor
-  }
+        if (arreglo[i] < menor) // si encueltra un elemento que sea menor
+            menor = arreglo[i]; // asigna ese valor a la variable menor
+    }
 
-  return menor;
+    return menor;
 }
 
 /**
@@ -61,11 +61,11 @@ int menor(int arreglo[], const int longitud)
  */
 void copia_arreglo(int origen[], int destino[], const int dim)
 {
-  int i; // iterador
-  for (i = 0; i < dim; i++)
-  {
-    destino[i] = origen[i];
-  }
+    int i; // iterador
+    for (i = 0; i < dim; i++)
+    {
+        destino[i] = origen[i];
+    }
 }
 
 /**
@@ -76,11 +76,12 @@ void copia_arreglo(int origen[], int destino[], const int dim)
  */
 void imprimeArreglo(int arreglo[], const int longitud)
 {
-  int i;
-  for (i = 0; i < longitud; i++)
-  {
-    printf(" %d\t", arreglo[i]);
-  }
+    int i;
+    for (i = 0; i < longitud; i++)
+    {
+        printf(" %d\t", arreglo[i]);
+    }
+    printf("\n");
 }
 
 /**
@@ -91,11 +92,11 @@ void imprimeArreglo(int arreglo[], const int longitud)
  */
 void iniciaArreglo(int arreglo[], const int lingitud)
 {
-  int i;
-  for (i = 0; i < lingitud; i++)
-  {
-    arreglo[i] = 0;
-  }
+    int i;
+    for (i = 0; i < lingitud; i++)
+    {
+        arreglo[i] = 0;
+    }
 }
 
 /**
@@ -106,13 +107,13 @@ void iniciaArreglo(int arreglo[], const int lingitud)
  */
 void cargaVector(int arreglo[], const int lenght)
 {
-  int iterador, valor;
+    int iterador, valor;
 
-  for (iterador = 0; iterador < lenght; iterador++)
-  {
-    scanf("%d", &valor);
-    arreglo[iterador] = valor;
-  }
+    for (iterador = 0; iterador < lenght; iterador++)
+    {
+        scanf("%d", &valor);
+        arreglo[iterador] = valor;
+    }
 }
 
 /**
@@ -125,17 +126,17 @@ void cargaVector(int arreglo[], const int lenght)
 int posMenor(const int arreglo[], const int longitud)
 {
 
-  int menor, i;
-  for (i = 0; i < longitud; i++)
-  {
+    int menor, i;
+    for (i = 0; i < longitud; i++)
+    {
 
-    if (i == 0)
-      menor = i;
+        if (i == 0)
+            menor = i;
 
-    if (arreglo[i] < arreglo[menor])
-      menor = i;
-  }
-  return menor;
+        if (arreglo[i] < arreglo[menor])
+            menor = i;
+    }
+    return menor;
 }
 
 /**
@@ -148,17 +149,17 @@ int posMenor(const int arreglo[], const int longitud)
 int posMayor(const int arreglo[], const int longitud)
 {
 
-  int mayor, i;
-  for (i = 0; i < longitud; i++)
-  {
+    int mayor, i;
+    for (i = 0; i < longitud; i++)
+    {
 
-    if (i == 0)
-      mayor = i;
+        if (i == 0)
+            mayor = i;
 
-    if (arreglo[i] > arreglo[mayor])
-      mayor = i;
-  }
-  return mayor;
+        if (arreglo[i] > arreglo[mayor])
+            mayor = i;
+    }
+    return mayor;
 }
 
 /**
@@ -172,22 +173,22 @@ int posMayor(const int arreglo[], const int longitud)
  */
 int esMonotona(int array[], int dim)
 {
-  int i;           // iterador
-  int bandera = 0; // su valor determina si es o no monotona
-  int primerValor; // primer valor del arreglo
-  for (i = 0; i < dim; i++)
-  {
-    if (i == 0)
-      primerValor = array[i];
-
-    if (array[i] != primerValor)
+    int i;           // iterador
+    int bandera = 0; // su valor determina si es o no monotona
+    int primerValor; // primer valor del arreglo
+    for (i = 0; i < dim; i++)
     {
-      bandera = -1;
-      break;
-    }
-  }
+        if (i == 0)
+            primerValor = array[i];
 
-  return bandera;
+        if (array[i] != primerValor)
+        {
+            bandera = -1;
+            break;
+        }
+    }
+
+    return bandera;
 }
 
 /* FUNCIONES CON ARREGLOS MULTIDIMINSIONALES (MATRICES) */
@@ -201,12 +202,12 @@ int esMonotona(int array[], int dim)
  */
 void iniciaMatriz(const int fila, const int colum, int matriz[][colum])
 {
-  int i, j;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < colum; j++)
-      matriz[i][j] = 0;
-  }
+    int i, j;
+    for (i = 0; i < fila; i++)
+    {
+        for (j = 0; j < colum; j++)
+            matriz[i][j] = 0;
+    }
 }
 
 /**
@@ -218,15 +219,15 @@ void iniciaMatriz(const int fila, const int colum, int matriz[][colum])
  */
 void cargaMatriz(const int fila, const int colum, int matriz[][colum])
 {
-  int i, j, aux;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < colum; j++)
+    int i, j, aux;
+    for (i = 0; i < fila; i++)
     {
-      scanf("%d", &aux);
-      matriz[i][j] = aux;
+        for (j = 0; j < colum; j++)
+        {
+            scanf("%d", &aux);
+            matriz[i][j] = aux;
+        }
     }
-  }
 }
 
 /**
@@ -238,22 +239,22 @@ void cargaMatriz(const int fila, const int colum, int matriz[][colum])
  */
 void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum])
 {
-  int i, j, aux;
-  /* solicita que  si ingrese la primera fila del arreglo */
-  for (j = 0; j < colum; j++)
-  {
-    scanf("%d", &aux);
-    matriz[0][j] = aux;
-  }
-
-  /* copia los valores de la primera fila en el resto de la matriz */
-  for (i = 1; i < fila; i++)
-  {
+    int i, j, aux;
+    /* solicita que  si ingrese la primera fila del arreglo */
     for (j = 0; j < colum; j++)
     {
-      matriz[i][j] = matriz[0][j];
+        scanf("%d", &aux);
+        matriz[0][j] = aux;
     }
-  }
+
+    /* copia los valores de la primera fila en el resto de la matriz */
+    for (i = 1; i < fila; i++)
+    {
+        for (j = 0; j < colum; j++)
+        {
+            matriz[i][j] = matriz[0][j];
+        }
+    }
 }
 
 /**
@@ -266,19 +267,19 @@ void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colu
  */
 int verificaCeros(int fila, int col, int matriz[][col])
 {
-  int i, j;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < col; j++)
+    int i, j;
+    for (i = 0; i < fila; i++)
     {
-      if (matriz[i][j] == 0)
-      {
-        return -1;
-      }
+        for (j = 0; j < col; j++)
+        {
+            if (matriz[i][j] == 0)
+            {
+                return -1;
+            }
+        }
     }
-  }
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -294,28 +295,28 @@ int verificaCeros(int fila, int col, int matriz[][col])
 int esHermosa(int fila, int columna, int matriz[][columna])
 {
 
-  int isBeauty = 0; // presuponemos que es hermmosa
-  if (fila != columna)
-  {
-    printf("No es Cuadrada\n");
-    return 1; // para se hermosa debe ser cuadrada
-  }
-  int i;
-  int sumadeFilas[fila];
-  int sumadeColumnas[columna];
+    int isBeauty = 0; // presuponemos que es hermmosa
+    if (fila != columna)
+    {
+        printf("No es Cuadrada\n");
+        return 1; // para se hermosa debe ser cuadrada
+    }
+    int i;
+    int sumadeFilas[fila];
+    int sumadeColumnas[columna];
 
-  sumaDeColumnas(fila, columna, matriz, sumadeColumnas);
-  sumaDeFilas(fila, columna, matriz, sumadeFilas);
+    sumaDeColumnas(fila, columna, matriz, sumadeColumnas);
+    sumaDeFilas(fila, columna, matriz, sumadeFilas);
 
-  if (sumadeColumnas[0] != sumadeFilas[0] || esMonotona(sumadeColumnas, fila) != 0 || esMonotona(sumadeColumnas, columna) != 0)
-    return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
+    if (sumadeColumnas[0] != sumadeFilas[0] || esMonotona(sumadeColumnas, fila) != 0 || esMonotona(sumadeColumnas, columna) != 0)
+        return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
 
-  if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz))
-  {
-    return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
-  }
+    if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz))
+    {
+        return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
+    }
 
-  return isBeauty;
+    return isBeauty;
 }
 
 /* Funciones de busqueda */
@@ -332,20 +333,20 @@ int esHermosa(int fila, int columna, int matriz[][columna])
  */
 int busqueda_lineal(int arreglo[], const int longitud, int valorABuscar)
 {
-  int i, bandera = 0;
-  for (i = 0; i < longitud; i++)
-  {
-    if (arreglo[i] == valorABuscar)
+    int i, bandera = 0;
+    for (i = 0; i < longitud; i++)
     {
-      bandera = 1;
-      break;
+        if (arreglo[i] == valorABuscar)
+        {
+            bandera = 1;
+            break;
+        }
     }
-  }
 
-  if (bandera == 0)
-    i = -1;
+    if (bandera == 0)
+        i = -1;
 
-  return i;
+    return i;
 }
 
 /**
@@ -361,27 +362,27 @@ int busqueda_lineal(int arreglo[], const int longitud, int valorABuscar)
  */
 int busquedaBinaria(int arreglo[], int valBuscado, int inicio, int fin)
 {
-  int central;
-  while (inicio <= fin)
-  {
-
-    central = (inicio + fin) / 2;
-
-    if (valBuscado == arreglo[central])
+    int central;
+    while (inicio <= fin)
     {
-      return central;
-    }
-    else if (valBuscado < arreglo[central])
-    {
-      fin = central - 1;
-    }
-    else
-    {
-      inicio = central + 1;
-    }
-  }
 
-  return -1;
+        central = (inicio + fin) / 2;
+
+        if (valBuscado == arreglo[central])
+        {
+            return central;
+        }
+        else if (valBuscado < arreglo[central])
+        {
+            fin = central - 1;
+        }
+        else
+        {
+            inicio = central + 1;
+        }
+    }
+
+    return -1;
 }
 
 /**
@@ -400,28 +401,28 @@ int busquedaBinaria(int arreglo[], int valBuscado, int inicio, int fin)
 
 int busquedaBinariaRecursiva(int arreglo[], int busqueda, int izquierda, int derecha)
 {
-  if (izquierda > derecha)
-    return -1;
+    if (izquierda > derecha)
+        return -1;
 
-  int indiceDeLaMitad = ((izquierda + derecha) / 2);
+    int indiceDeLaMitad = ((izquierda + derecha) / 2);
 
-  int valorQueEstaEnElMedio = arreglo[indiceDeLaMitad];
-  if (busqueda == valorQueEstaEnElMedio)
-  {
-    return indiceDeLaMitad;
-  }
+    int valorQueEstaEnElMedio = arreglo[indiceDeLaMitad];
+    if (busqueda == valorQueEstaEnElMedio)
+    {
+        return indiceDeLaMitad;
+    }
 
-  if (busqueda < valorQueEstaEnElMedio)
-  {
-    // Entonces está hacia la izquierda
-    derecha = indiceDeLaMitad - 1;
-  }
-  else
-  {
-    // Está hacia la derecha
-    izquierda = indiceDeLaMitad + 1;
-  }
-  return busquedaBinariaRecursiva(arreglo, busqueda, izquierda, derecha);
+    if (busqueda < valorQueEstaEnElMedio)
+    {
+        // Entonces está hacia la izquierda
+        derecha = indiceDeLaMitad - 1;
+    }
+    else
+    {
+        // Está hacia la derecha
+        izquierda = indiceDeLaMitad + 1;
+    }
+    return busquedaBinariaRecursiva(arreglo, busqueda, izquierda, derecha);
 }
 
 /**
@@ -434,16 +435,16 @@ int busquedaBinariaRecursiva(int arreglo[], int busqueda, int izquierda, int der
  */
 void sumaDeColumnas(int fila, int col, int matriz[][col], int sumaCol[])
 {
-  int i, j, acum = 0;
-  for (i = 0; i < col; i++)
-  {
-    for (j = 0; j < fila; j++)
+    int i, j, acum = 0;
+    for (i = 0; i < col; i++)
     {
-      acum += matriz[j][i];
+        for (j = 0; j < fila; j++)
+        {
+            acum += matriz[j][i];
+        }
+        sumaCol[i] = acum;
+        acum = 0;
     }
-    sumaCol[i] = acum;
-    acum = 0;
-  }
 }
 
 /**
@@ -456,16 +457,16 @@ void sumaDeColumnas(int fila, int col, int matriz[][col], int sumaCol[])
  */
 void sumaDeFilas(int fila, int col, int matriz[][col], int sumaFilas[])
 {
-  int i, j, acum = 0;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < col; j++)
+    int i, j, acum = 0;
+    for (i = 0; i < fila; i++)
     {
-      acum += matriz[i][j];
+        for (j = 0; j < col; j++)
+        {
+            acum += matriz[i][j];
+        }
+        sumaFilas[i] = acum;
+        acum = 0;
     }
-    sumaFilas[i] = acum;
-    acum = 0;
-  }
 }
 
 /**
@@ -478,19 +479,19 @@ void sumaDeFilas(int fila, int col, int matriz[][col], int sumaFilas[])
  */
 int sumaDiagonalPrincipal(int fila, int columna, int matriz[][columna])
 {
-  int i, j, acum = 0;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < columna; j++)
+    int i, j, acum = 0;
+    for (i = 0; i < fila; i++)
     {
-      if (i == j)
-      {
-        acum += matriz[i][j];
-        break;
-      }
+        for (j = 0; j < columna; j++)
+        {
+            if (i == j)
+            {
+                acum += matriz[i][j];
+                break;
+            }
+        }
     }
-  }
-  return acum;
+    return acum;
 }
 
 /**
@@ -503,24 +504,24 @@ int sumaDiagonalPrincipal(int fila, int columna, int matriz[][columna])
  */
 int sumaDiagonalSecundaria(int fila, int columna, int matriz[][columna])
 {
-  /* trabajamos con matrices cuadradas, lo que implica que fila == comulna */
-  if (fila != columna)
-    return 'x';
+    /* trabajamos con matrices cuadradas, lo que implica que fila == comulna */
+    if (fila != columna)
+        return 'x';
 
-  int i, j, acum = 0;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < columna; j++)
+    int i, j, acum = 0;
+    for (i = 0; i < fila; i++)
     {
-      if (i + j == fila - 1)
-      {
-        acum += matriz[i][j];
-        break;
-      }
+        for (j = 0; j < columna; j++)
+        {
+            if (i + j == fila - 1)
+            {
+                acum += matriz[i][j];
+                break;
+            }
+        }
     }
-  }
-  printf("\n");
-  return acum;
+    printf("\n");
+    return acum;
 }
 
 /**
@@ -532,20 +533,20 @@ int sumaDiagonalSecundaria(int fila, int columna, int matriz[][columna])
  */
 void imprimeMatrizFormat(int filas, int columnas, int Matriz[][columnas])
 {
-  int i;
-  int j;
+    int i;
+    int j;
 
-  /* printf("\n\nEste es el tablero:\n\n "); */
-  for (i = 0; i < filas; i++)
-  {
-    for (j = 0; j < columnas; j++)
+    /* printf("\n\nEste es el tablero:\n\n "); */
+    for (i = 0; i < filas; i++)
     {
-      printf(" %d\t", Matriz[i][j]);
+        for (j = 0; j < columnas; j++)
+        {
+            printf(" %d\t", Matriz[i][j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-  }
 
-  printf("\n");
+    printf("\n");
 }
 
 /**
@@ -558,21 +559,21 @@ void imprimeMatrizFormat(int filas, int columnas, int Matriz[][columnas])
 void cargaMatrizDeDigitos(int fila, int columna, int mat[][columna])
 {
 
-  int i, j;
-  int val;
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < columna; j++)
+    int i, j;
+    int val;
+    for (i = 0; i < fila; i++)
     {
-      scanf("%d", &val);
-      while (val < 0 || val > 9)
-      {
-        printf("valor incorrecto reingrese");
-        scanf("%d", &val);
-      }
-      mat[i][j] = val;
+        for (j = 0; j < columna; j++)
+        {
+            scanf("%d", &val);
+            while (val < 0 || val > 9)
+            {
+                printf("valor incorrecto reingrese");
+                scanf("%d", &val);
+            }
+            mat[i][j] = val;
+        }
     }
-  }
 }
 
 /**
@@ -583,15 +584,15 @@ void cargaMatrizDeDigitos(int fila, int columna, int mat[][columna])
  */
 void digitosInt(int arreglo[], int valor)
 {
-  int longitud = 9; /* un int solo puede almacenar numeros de hasta 9 digios */
-  int cont = 0, digito;
-  while (valor != 0)
-  {
-    digito = valor % 10;
-    arreglo[cont] = digito;
-    valor = valor / 10;
-    cont++;
-  }
+    int longitud = 9; /* un int solo puede almacenar numeros de hasta 9 digios */
+    int cont = 0, digito;
+    while (valor != 0)
+    {
+        digito = valor % 10;
+        arreglo[cont] = digito;
+        valor = valor / 10;
+        cont++;
+    }
 }
 
 /* Funciones de caracteres y cadenas */
@@ -604,7 +605,7 @@ void digitosInt(int arreglo[], int valor)
  */
 int charToInt(char caracter)
 {
-  return caracter - '0';
+    return caracter - '0';
 }
 
 /**
@@ -615,7 +616,7 @@ int charToInt(char caracter)
  */
 char enteroACaracter(int numero)
 {
-  return numero + '0';
+    return numero + '0';
 }
 
 /**
@@ -625,16 +626,16 @@ char enteroACaracter(int numero)
  */
 void inverso(const char *const ptrS)
 {
-  /* si es el final de la cadena */
-  if (ptrS[0] == '\0')
-  { /* caso base */
-    return;
-  } /* fin de if */
-  else
-  {                    /* si no es el final de la cadena */
-    inverso(&ptrS[1]); /* paso recursivo */
-    putchar(ptrS[0]);  /* utiliza putchar para desplegar los caracteres */
-  }                    /* end else */
+    /* si es el final de la cadena */
+    if (ptrS[0] == '\0')
+    { /* caso base */
+        return;
+    } /* fin de if */
+    else
+    {                      /* si no es el final de la cadena */
+        inverso(&ptrS[1]); /* paso recursivo */
+        putchar(ptrS[0]);  /* utiliza putchar para desplegar los caracteres */
+    }                      /* end else */
 } /* fin de la función inverso */
 
 /**
@@ -644,12 +645,12 @@ void inverso(const char *const ptrS)
  */
 void leeConEspacios(char cadena[])
 {
-  char c;
-  int i = 0;
-  while ((c = getchar()) != '\n')
-  {
-    cadena[i++] = c;
-  }
+    char c;
+    int i = 0;
+    while ((c = getchar()) != '\n')
+    {
+        cadena[i++] = c;
+    }
 }
 
 /**
@@ -663,15 +664,16 @@ void leeConEspacios(char cadena[])
 int separaParabrasEnArray(char *array[], char enunciado[], char separador[])
 {
 
-  int i = 0;
-  char *ptrToken = strtok(enunciado, separador);
+    int i = 0;
+    char *ptrToken = strtok(enunciado, separador);
 
-  while (ptrToken != NULL)
-  {
-    array[i++] = ptrToken;
-    ptrToken = strtok(NULL, separador);
-  }
-  return i;
+    while (ptrToken != NULL)
+    {
+        array[i] = ptrToken;
+        ptrToken = strtok(NULL, separador);
+        i++;
+    }
+    return i;
 }
 
 /**
@@ -682,36 +684,36 @@ int separaParabrasEnArray(char *array[], char enunciado[], char separador[])
  */
 char getLetra(int val)
 {
-  switch (val)
-  {
-  case 1:
-    return 'a';
-    break;
-  case 2:
-    return 'b';
-    break;
-  case 3:
-    return 'c';
-    break;
-  case 4:
-    return 'd';
-    break;
-  case 5:
-    return 'e';
-    break;
-  case 6:
-    return 'f';
-    break;
-  case 7:
-    return 'g';
-    break;
-  case 8:
-    return 'h';
-    break;
-  default:
-    return 'x';
-    break;
-  }
+    switch (val)
+    {
+    case 1:
+        return 'a';
+        break;
+    case 2:
+        return 'b';
+        break;
+    case 3:
+        return 'c';
+        break;
+    case 4:
+        return 'd';
+        break;
+    case 5:
+        return 'e';
+        break;
+    case 6:
+        return 'f';
+        break;
+    case 7:
+        return 'g';
+        break;
+    case 8:
+        return 'h';
+        break;
+    default:
+        return 'x';
+        break;
+    }
 }
 
 /**
@@ -721,45 +723,45 @@ char getLetra(int val)
  */
 void vocales(char exp[])
 {
-  int cantidadAparicion[5] = {0}; /* posiciones 0 = a , 1 = e,... 4 = u */
-  char vocalesstr[] = "aeiou";
-  int longitud, i;
-  longitud = strlen(exp);
-  for (i = 0; i < longitud; i++)
-  {
-    if (exp[i] == 'a' || exp[i] == 'A')
+    int cantidadAparicion[5] = {0}; /* posiciones 0 = a , 1 = e,... 4 = u */
+    char vocalesstr[] = "aeiou";
+    int longitud, i;
+    longitud = strlen(exp);
+    for (i = 0; i < longitud; i++)
     {
-      cantidadAparicion[0]++;
+        if (exp[i] == 'a' || exp[i] == 'A')
+        {
+            cantidadAparicion[0]++;
+        }
+        if (exp[i] == 'e' || exp[i] == 'E')
+        {
+            cantidadAparicion[1]++;
+        }
+        if (exp[i] == 'i' || exp[i] == 'I')
+        {
+            cantidadAparicion[2]++;
+        }
+        if (exp[i] == 'o' || exp[i] == 'O')
+        {
+            cantidadAparicion[3]++;
+        }
+        if (exp[i] == 'u' || exp[i] == 'U')
+        {
+            cantidadAparicion[4]++;
+        }
     }
-    if (exp[i] == 'e' || exp[i] == 'E')
-    {
-      cantidadAparicion[1]++;
-    }
-    if (exp[i] == 'i' || exp[i] == 'I')
-    {
-      cantidadAparicion[2]++;
-    }
-    if (exp[i] == 'o' || exp[i] == 'O')
-    {
-      cantidadAparicion[3]++;
-    }
-    if (exp[i] == 'u' || exp[i] == 'U')
-    {
-      cantidadAparicion[4]++;
-    }
-  }
 
-  for (i = 0; i < 5; i++)
-  {
-    if (cantidadAparicion[i] != 0)
+    for (i = 0; i < 5; i++)
     {
-      printf("la vocal %c aparece %d veces \n su pocentaje de aparicion es %d prociento\n", vocalesstr[i], cantidadAparicion[i], 100 * (cantidadAparicion[i] / longitud));
+        if (cantidadAparicion[i] != 0)
+        {
+            printf("la vocal %c aparece %d veces \n su pocentaje de aparicion es %d prociento\n", vocalesstr[i], cantidadAparicion[i], 100 * (cantidadAparicion[i] / longitud));
+        }
+        else
+        {
+            printf("La vocal %c no existe o no tiene repeticion\n", vocalesstr[i]);
+        }
     }
-    else
-    {
-      printf("La vocal %c no existe o no tiene repeticion\n", vocalesstr[i]);
-    }
-  }
 }
 
 /**
@@ -770,15 +772,15 @@ void vocales(char exp[])
  */
 void primeraAparicion(char exp[], char p)
 {
-  int i;
-  for (i = 0; i < strlen(exp); i++)
-  {
-    if (exp[i] == p)
+    int i;
+    for (i = 0; i < strlen(exp); i++)
     {
-      printf("%c aparece en la posicion %d\n", p, i);
-      break;
+        if (exp[i] == p)
+        {
+            printf("%c aparece en la posicion %d\n", p, i);
+            break;
+        }
     }
-  }
 }
 
 /* Funciones de Ordenamiento */
@@ -791,22 +793,22 @@ void primeraAparicion(char exp[], char p)
  */
 void ordIntecambio(int arreglo[], int longitud)
 {
-  int i,   // iterador
-      j,   // iterador
-      aux; // contenedor temporal del valor
+    int i,   // iterador
+        j,   // iterador
+        aux; // contenedor temporal del valor
 
-  for (i = 0; i < longitud - 1; i++) // inicia desde la primera posicion del arreglo hasta la posicion longitud -1
-  {
-    for (j = i + 1; j < longitud; j++) // inicia desde la segunda posicion de arreglo hasta la ultima posicion
+    for (i = 0; i < longitud - 1; i++) // inicia desde la primera posicion del arreglo hasta la posicion longitud -1
     {
-      if (arreglo[i] > arreglo[j]) // si el arreglo de la segunda pisicon i > al de posicion j los intercambia
-      {
-        aux = arreglo[i];
-        arreglo[i] = arreglo[j];
-        arreglo[j] = aux;
-      }
+        for (j = i + 1; j < longitud; j++) // inicia desde la segunda posicion de arreglo hasta la ultima posicion
+        {
+            if (arreglo[i] > arreglo[j]) // si el arreglo de la segunda pisicon i > al de posicion j los intercambia
+            {
+                aux = arreglo[i];
+                arreglo[i] = arreglo[j];
+                arreglo[j] = aux;
+            }
+        }
     }
-  }
 }
 
 /**
@@ -817,28 +819,28 @@ void ordIntecambio(int arreglo[], int longitud)
  */
 void ordSeleccion(int arreglo[], int longitud) // ejemplo joyanes
 {
-  printf("seleccion\n");
-  int indiceMenor, // pos menor
-      i,           // iterador
-      j;           // iterador
-  double aux;      // contenedor temporal
-  for (i = 0; i < longitud - 1; i++)
-  {
-    indiceMenor = i; // inicial el menor elemento en el principio de cada iteracion
-
-    for (j = i + 1; j < longitud; j++) // empieza a buscar una posicion despues de la posicion de i
+    printf("seleccion\n");
+    int indiceMenor, // pos menor
+        i,           // iterador
+        j;           // iterador
+    double aux;      // contenedor temporal
+    for (i = 0; i < longitud - 1; i++)
     {
-      if (arreglo[j] < arreglo[indiceMenor])
-        indiceMenor = j; /* situa el elemento menor */
-    }
+        indiceMenor = i; // inicial el menor elemento en el principio de cada iteracion
 
-    if (i != indiceMenor)
-    { /* si existia un elemento menor lo intercambia por la posicion actual del puntero */
-      aux = arreglo[i];
-      arreglo[i] = arreglo[indiceMenor];
-      arreglo[indiceMenor] = aux;
+        for (j = i + 1; j < longitud; j++) // empieza a buscar una posicion despues de la posicion de i
+        {
+            if (arreglo[j] < arreglo[indiceMenor])
+                indiceMenor = j; /* situa el elemento menor */
+        }
+
+        if (i != indiceMenor)
+        { /* si existia un elemento menor lo intercambia por la posicion actual del puntero */
+            aux = arreglo[i];
+            arreglo[i] = arreglo[indiceMenor];
+            arreglo[indiceMenor] = aux;
+        }
     }
-  }
 }
 
 /**
@@ -849,19 +851,19 @@ void ordSeleccion(int arreglo[], int longitud) // ejemplo joyanes
  */
 void ordSeleccionRecusiva(int arreglo[], int longitud)
 {
-  int aux,           // contenedor temporal
-      posicionMenor; // posicion del elemento menor
-  if (longitud > 1)
-  {
-    posicionMenor = posMenor(arreglo, longitud); // determina la posicion del menor elemento del arreglo
-    /* intercambia el arreglo de la posicion inicial con el menor  */
-    aux = arreglo[0];
-    arreglo[0] = arreglo[posicionMenor];
-    arreglo[posicionMenor] = aux;
-    /*  */
+    int aux,           // contenedor temporal
+        posicionMenor; // posicion del elemento menor
+    if (longitud > 1)
+    {
+        posicionMenor = posMenor(arreglo, longitud); // determina la posicion del menor elemento del arreglo
+        /* intercambia el arreglo de la posicion inicial con el menor  */
+        aux = arreglo[0];
+        arreglo[0] = arreglo[posicionMenor];
+        arreglo[posicionMenor] = aux;
+        /*  */
 
-    ordSeleccionRecusiva(&arreglo[1], longitud - 1); // recursion con el array a partir de la posicion dos
-  }
+        ordSeleccionRecusiva(&arreglo[1], longitud - 1); // recursion con el array a partir de la posicion dos
+    }
 }
 
 /**
@@ -872,20 +874,20 @@ void ordSeleccionRecusiva(int arreglo[], int longitud)
  */
 void burbuja_asc(int arreglo[], const int longitud)
 {
-  int pasadas, i, almacenador;
+    int pasadas, i, almacenador;
 
-  for (pasadas = 0; pasadas < longitud; pasadas++)
-  {
-    for (i = 0; i < longitud - 1; i++)
+    for (pasadas = 0; pasadas < longitud; pasadas++)
     {
-      if (arreglo[i + 1] < arreglo[i])
-      {
-        almacenador = arreglo[i];
-        arreglo[i] = arreglo[i + 1];
-        arreglo[i + 1] = almacenador;
-      }
+        for (i = 0; i < longitud - 1; i++)
+        {
+            if (arreglo[i + 1] < arreglo[i])
+            {
+                almacenador = arreglo[i];
+                arreglo[i] = arreglo[i + 1];
+                arreglo[i + 1] = almacenador;
+            }
+        }
     }
-  }
 }
 
 /**
@@ -896,20 +898,20 @@ void burbuja_asc(int arreglo[], const int longitud)
  */
 void burbuja_des(int arreglo[], const int longitud)
 {
-  int pasadas, i, almacenador;
+    int pasadas, i, almacenador;
 
-  for (pasadas = 0; pasadas < longitud; pasadas++)
-  {
-    for (i = 0; i < longitud - 1; i++)
+    for (pasadas = 0; pasadas < longitud; pasadas++)
     {
-      if (arreglo[i + 1] > arreglo[i])
-      {
-        almacenador = arreglo[i];
-        arreglo[i] = arreglo[i + 1];
-        arreglo[i + 1] = almacenador;
-      }
+        for (i = 0; i < longitud - 1; i++)
+        {
+            if (arreglo[i + 1] > arreglo[i])
+            {
+                almacenador = arreglo[i];
+                arreglo[i] = arreglo[i + 1];
+                arreglo[i + 1] = almacenador;
+            }
+        }
     }
-  }
 }
 
 /**
@@ -921,85 +923,91 @@ void burbuja_des(int arreglo[], const int longitud)
  */
 void quickSort(double array[], int inicio, int fin)
 {
-  int i,       // iterador
-      j,       // iterador
-      central; // indicador del centro del array
-  double pivote;
-  central = (inicio + fin) / 2; // ubica el centro del array
-  pivote = array[central];      // ubica en el valor pivote el valor del elemento central del array
-  double temporal;
-  do
-  {
-    while (array[i] < pivote)
-      i++; // ubica el primer elemento menor que el pivote
-    while (array[j] > pivote)
-      j++; // ubica el primer elemento mayor que el pivote
+    int i,       // iterador
+        j,       // iterador
+        central; // indicador del centro del array
+    double pivote;
+    central = (inicio + fin) / 2; // ubica el centro del array
+    pivote = array[central];      // ubica en el valor pivote el valor del elemento central del array
+    double temporal;
+    do
+    {
+        while (array[i] < pivote)
+            i++; // ubica el primer elemento menor que el pivote
+        while (array[j] > pivote)
+            j++; // ubica el primer elemento mayor que el pivote
 
-    if (i <= j)
-    { // si la posicion del primer elemento mayo y menor, el menr es menor o igual al mayor
+        if (i <= j)
+        { // si la posicion del primer elemento mayo y menor, el menr es menor o igual al mayor
 
-      // intercambia los valores
-      temporal = array[i];
-      array[i] = array[j];
-      array[j] = temporal;
-      i++; // incrementa la posicion del elemento menor
-      j--; // decrementa la posicion del elemento mayor
+            // intercambia los valores
+            temporal = array[i];
+            array[i] = array[j];
+            array[j] = temporal;
+            i++; // incrementa la posicion del elemento menor
+            j--; // decrementa la posicion del elemento mayor
+        }
+
+    } while (i <= j);
+
+    if (inicio <= j)
+    {                                // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
+        quickSort(array, inicio, j); // recursadesde el inicio hasta la posicion
     }
 
-  } while (i <= j);
-
-  if (inicio <= j)
-  {                              // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort(array, inicio, j); // recursadesde el inicio hasta la posicion
-  }
-
-  if (i < fin)
-  {                           // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort(array, i, fin); // recursa desde la posicion hasta el fin
-  }
+    if (i < fin)
+    {                             // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
+        quickSort(array, i, fin); // recursa desde la posicion hasta el fin
+    }
 }
 
 /**
  * @brief  Ingrese la fecha en formato dd/mm/aaaa
- * 
- * @param cadena 
+ *
+ * @param cadena
  */
 void leeFechaFormat(char cadena[])
 {
-  int dias, mes, anio;
-  printf("\n Ingrese la fecha en formato dd/mm/aaaa\n");
+    int dias, mes, anio;
+    printf("\n Ingrese la fecha en formato dd/mm/aaaa\n");
 
-  printf("Dias: "); 
-  scanf("%d", &dias);//lee los dias de la fecha
-  while ( dias > 30 ||  dias < 1){
-    //mientras este en un rango no valido
-    printf("\nFecha incorrecta, favor reinsertar.\n");
-    printf("Dias: "); 
-    scanf("%d", &dias); //lee los dias de la fecha
-  }
-  
-  printf("Mes: ");
-  scanf("%d", &mes);
-  while ( mes > 12||  mes < 1){
-    //mientras este en un rango no valido
-    printf("\nFecha incorrecta, favor reinsertar.\n");
-    scanf("%d", &mes);
+    printf("Dias: ");
+    scanf("%d", &dias); // lee los dias de la fecha
+    while (dias > 30 || dias < 1)
+    {
+        // mientras este en un rango no valido
+        printf("\nFecha incorrecta, favor reinsertar.\n");
+        printf("Dias: ");
+        scanf("%d", &dias); // lee los dias de la fecha
+    }
+
     printf("Mes: ");
-  }
+    scanf("%d", &mes);
+    while (mes > 12 || mes < 1)
+    {
+        // mientras este en un rango no valido
+        printf("\nFecha incorrecta, favor reinsertar.\n");
+        scanf("%d", &mes);
+        printf("Mes: ");
+    }
 
-  printf("Año: ");
-  scanf("%d", &anio);
-  while ( anio > 2022 ||  anio < 1900){
-    //mientras este en un rango no valido
-    printf("\nFecha incorrecta, favor reinsertar.\n");
     printf("Año: ");
     scanf("%d", &anio);
-  }
+    while (anio > 2022 || anio < 1900)
+    {
+        // mientras este en un rango no valido
+        printf("\nFecha incorrecta, favor reinsertar.\n");
+        printf("Año: ");
+        scanf("%d", &anio);
+    }
 
-  sprintf(cadena,"%d/%d/%d\n", dias, mes, anio);
-
+    sprintf(cadena, "%d/%d/%d\n", dias, mes, anio);
 }
 
+void enteroAString(int valor, char *cadena)
+{
+    sprintf(cadena, "%d", valor);
+}
 
 /* Funciones de Pruebas y generacion aleatoria */
 
@@ -1014,12 +1022,12 @@ void leeFechaFormat(char cadena[])
  */
 void arrayAleatorio(int arreglo[], int longitud, int valorLimite)
 {
-  int i, j;
-  srand(time(NULL));
-  for (i = 0; i < longitud; i++)
-  {
-    arreglo[i] = rand() % valorLimite;
-  }
+    int i, j;
+    srand(time(NULL));
+    for (i = 0; i < longitud; i++)
+    {
+        arreglo[i] = rand() % valorLimite;
+    }
 }
 
 /**
@@ -1032,16 +1040,16 @@ void arrayAleatorio(int arreglo[], int longitud, int valorLimite)
  */
 void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite)
 { /*Inicializa una matriz con valores aleatorios del 0 a valor especificado */
-  /* incluir stdlib para usar rand() y time() */
-  int i, j;
-  srand(time(NULL));
-  for (i = 0; i < fila; i++)
-  {
-    for (j = 0; j < columna; j++)
+    /* incluir stdlib para usar rand() y time() */
+    int i, j;
+    srand(time(NULL));
+    for (i = 0; i < fila; i++)
     {
-      arreglo[i][j] = rand() % valLimite;
+        for (j = 0; j < columna; j++)
+        {
+            arreglo[i][j] = rand() % valLimite;
+        }
     }
-  }
 }
 
 /**
@@ -1053,10 +1061,10 @@ void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimit
 int enteroAleatorio(int limite)
 { // devuelve un numero entero positivo, negativo o cero aleatorio
 
-  int valor1 = (rand() % limite);
-  int valor2 = (rand() % limite);
+    int valor1 = (rand() % limite);
+    int valor2 = (rand() % limite);
 
-  return valor1 - valor2;
+    return valor1 - valor2;
 }
 
 /**
@@ -1070,8 +1078,8 @@ int enteroAleatorio(int limite)
 int enteroAleatorioEntre(int limiteInf, int limiteSup)
 { // devuelve un numero aleatorio entre el limite inferior y el superior
 
-  int valor = limiteInf + (rand() % (limiteSup - limiteInf));
-  return valor;
+    int valor = limiteInf + (rand() % (limiteSup - limiteInf));
+    return valor;
 }
 
 /**
@@ -1081,12 +1089,12 @@ int enteroAleatorioEntre(int limiteInf, int limiteSup)
  */
 float flotanteAleatorio()
 { // devuelve un numero flotante aleatorio
-  // INT32_MAX es el limite maximo de los int de 32 bits
-  int numerador = enteroAleatorio(INT_MAX);                   // OPTIENE el numerador de forma aleatoria
-  int denominador = 1 + enteroAleatorioEntre(1, INT_MAX - 1); // OPTIENE el denominador de forma aleatoria el valor no puede ser cero
-  float flotante = numerador / denominador;
+    // INT32_MAX es el limite maximo de los int de 32 bits
+    int numerador = enteroAleatorio(INT_MAX);                   // OPTIENE el numerador de forma aleatoria
+    int denominador = 1 + enteroAleatorioEntre(1, INT_MAX - 1); // OPTIENE el denominador de forma aleatoria el valor no puede ser cero
+    float flotante = numerador / denominador;
 
-  return flotante;
+    return flotante;
 }
 
 /**
@@ -1095,9 +1103,9 @@ float flotanteAleatorio()
  * @return char
  */
 char caracterAleatorio()
-{                                                          // devuelve un caracter aleatorio
-  char caracter = enteroAleatorioEntre(0, CHAR_MAX) + '0'; // asigna el valor aleatorio la variable
-  return caracter;
+{                                                            // devuelve un caracter aleatorio
+    char caracter = enteroAleatorioEntre(0, CHAR_MAX) + '0'; // asigna el valor aleatorio la variable
+    return caracter;
 }
 
 /**
@@ -1106,27 +1114,27 @@ char caracterAleatorio()
  * @param cadena
  * @param longitud
  */
-void cadenaAleatoria(char cadena[], int longitud)
+void cadenaAleatoria(char *cadena, int longitud)
 {
-  int i;
-  for (i = 0; i < longitud - 1; i++)
-  {
-    cadena[i] = caracterAleatorio(); // asigna caracteres de forma aleatoria a la cadena
-  }
-  cadena[longitud - 1] = '\n'; // asigna caracter de escape al ultimo caracter de la cadena
+    int i;
+    for (i = 0; i < longitud - 1; i++)
+    {
+        cadena[i] = caracterAleatorio(); // asigna caracteres de forma aleatoria a la cadena
+    }
+    cadena[longitud - 1] = '\n'; // asigna caracter de escape al ultimo caracter de la cadena
 }
 
 /**
- * @brief devuelve el apuntador a una cadena de longitud aleatoria
+ * @brief devuelve el apuntador a una cadena de longitud aleatoria (siempre liberar la memoria despues de usar el dato, ex: free(char*))
  *
  * @return char*
  */
 char *cadenaAleatoriaLongAleatoria()
 { // devuelve el apuntador a una cadena de longitud aleatoria
-  int longitud = enteroAleatorioEntre(1, 500);
-  char Cadena[longitud];
-  cadenaAleatoria(Cadena, longitud);
-  return Cadena;
+    int longitud = enteroAleatorioEntre(40, 500);
+    char *Cadena = (char *)malloc(longitud);
+    cadenaAleatoria(Cadena, longitud);
+    return Cadena;
 }
 
 /* Registros y Estructuras */
@@ -1141,16 +1149,16 @@ char *cadenaAleatoriaLongAleatoria()
 Registro creaRegistro()
 { // crea un registro nuevo, lee sus valor y devuelve una copia
 
-  printf("\n** Crea un Registro **\n");
-  Registro *ptrNuevoRegistro = malloc(sizeof(Registro)); // libera espacio en memoria para el nuevo registro
-  printf("Ingresa el valor a ser insertado en el Registro: ");
-  scanf("%d", &ptrNuevoRegistro->valor);
-  /*   printf("Ingrese El nombre del Propietario de la Cuenta: ");
-  scanf("%s", ptrNuevoRegistro->nombre);
-  printf("ingrese EL estado de la cuenta: ");
-  scanf("%lf", &ptrNuevoRegistro->estadoDeCuenta); */
+    printf("\n** Crea un Registro **\n");
+    Registro *ptrNuevoRegistro = malloc(sizeof(Registro)); // libera espacio en memoria para el nuevo registro
+    printf("Ingresa el valor a ser insertado en el Registro: ");
+    scanf("%d", &ptrNuevoRegistro->valor);
+    /*   printf("Ingrese El nombre del Propietario de la Cuenta: ");
+    scanf("%s", ptrNuevoRegistro->nombre);
+    printf("ingrese EL estado de la cuenta: ");
+    scanf("%lf", &ptrNuevoRegistro->estadoDeCuenta); */
 
-  return *ptrNuevoRegistro; // retorna una copia del registro creado
+    return *ptrNuevoRegistro; // retorna una copia del registro creado
 }
 
 /**
@@ -1160,12 +1168,12 @@ Registro creaRegistro()
  */
 void borraRegistro(Registro *ptrRegistro)
 {
-  free(ptrRegistro); // libera espacio en memoria para el nuevo registro
+    free(ptrRegistro); // libera espacio en memoria para el nuevo registro
 }
 
 void imprimeRegistro(Registro *ptrRegistro)
 {
-  printf("%d", ptrRegistro->valor);
+    printf("%d", ptrRegistro->valor);
 }
 
 /**
@@ -1175,7 +1183,7 @@ void imprimeRegistro(Registro *ptrRegistro)
  */
 void imprimeCopiaRegistro(Registro ptrRegistro)
 {
-  printf("%d", ptrRegistro.valor);
+    printf("%d", ptrRegistro.valor);
 }
 
 /* Listas Enlazadas */
@@ -1197,19 +1205,19 @@ void imprimeCopiaRegistro(Registro ptrRegistro)
 
 Nodo *creaNodo(Registro dato)
 {
-  Nodo *nuevoNodo = malloc(sizeof(Nodo));
-  if (nuevoNodo != NULL)
-  {
-    nuevoNodo->dato = dato;
-    nuevoNodo->sig = NULL;
-    nuevoNodo->ante = NULL;
-    return nuevoNodo;
-  }
-  else
-  {
-    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
-    return NULL;
-  }
+    Nodo *nuevoNodo = malloc(sizeof(Nodo));
+    if (nuevoNodo != NULL)
+    {
+        nuevoNodo->dato = dato;
+        nuevoNodo->sig = NULL;
+        nuevoNodo->ante = NULL;
+        return nuevoNodo;
+    }
+    else
+    {
+        printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+        return NULL;
+    }
 }
 
 /**
@@ -1222,14 +1230,14 @@ Nodo *creaNodo(Registro dato)
  */
 int listaEstaVacia(Lista ListaVal)
 {
-  if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
-  { // si la cabeza y la cola son iguales a NULL
-    return -1;
-  }
-  else
-  {
-    return 0;
-  }
+    if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
+    { // si la cabeza y la cola son iguales a NULL
+        return -1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 /**
@@ -1244,23 +1252,23 @@ int listaEstaVacia(Lista ListaVal)
  */
 void insertarDatoEnCabeza(Registro dato, Lista *listaDestino)
 {
-  Nodo *ptrNuevoNodo = creaNodo(dato); // crea el nodo con el dato
+    Nodo *ptrNuevoNodo = creaNodo(dato); // crea el nodo con el dato
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
 
-    if (listaEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        if (listaEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                              // si la lista no esta vacia
+            ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+            listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+            listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                            // si la lista no esta vacia
-      ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
-      listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
-      listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -1274,24 +1282,24 @@ void insertarDatoEnCabeza(Registro dato, Lista *listaDestino)
  */
 void insertarDatoEnCola(Registro dato, Lista *listaDestino)
 {
-  /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
-  Nodo *ptrNuevoNodo = creaNodo(dato);
+    /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+    Nodo *ptrNuevoNodo = creaNodo(dato);
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
 
-    if (listaEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        if (listaEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                            // si la lista no esta vacia
+            ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
+            listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
+            listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                          // si la lista no esta vacia
-      ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
-      listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
-      listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -1301,9 +1309,9 @@ void insertarDatoEnCola(Registro dato, Lista *listaDestino)
  */
 void insertarEnCabeza(Lista *ACargar)
 {
-  int valor;
-  Registro RegistroAInsertar = creaRegistro();
-  insertarDatoEnCabeza(RegistroAInsertar, ACargar);
+    int valor;
+    Registro RegistroAInsertar = creaRegistro();
+    insertarDatoEnCabeza(RegistroAInsertar, ACargar);
 }
 
 /**
@@ -1313,9 +1321,9 @@ void insertarEnCabeza(Lista *ACargar)
  */
 void insertarEnCola(Lista *ACargar)
 {
-  int valor;
-  Registro RegistroAInsertar = creaRegistro();
-  insertarDatoEnCola(RegistroAInsertar, ACargar);
+    int valor;
+    Registro RegistroAInsertar = creaRegistro();
+    insertarDatoEnCola(RegistroAInsertar, ACargar);
 }
 
 /**
@@ -1329,27 +1337,27 @@ void insertarEnCola(Lista *ACargar)
 Registro extraerCabeza(Lista *listaObjetivo)
 {
 
-  Registro Dato = {0}; // contenedor Auxiliar
-  if (listaEstaVacia(*listaObjetivo) != -1)
-  {
+    Registro Dato = {0}; // contenedor Auxiliar
+    if (listaEstaVacia(*listaObjetivo) != -1)
+    {
 
-    Nodo *ptrNodoObjetivo;
+        Nodo *ptrNodoObjetivo;
 
-    ptrNodoObjetivo = listaObjetivo->cabeza;
+        ptrNodoObjetivo = listaObjetivo->cabeza;
 
-    Dato = ptrNodoObjetivo->dato;
-    listaObjetivo->cabeza = ptrNodoObjetivo->sig;
-    listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
-    listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
-    if (listaObjetivo->cantidadElem == 0)
-      listaObjetivo->cola = NULL;
+        Dato = ptrNodoObjetivo->dato;
+        listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+        listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+        listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
+        if (listaObjetivo->cantidadElem == 0)
+            listaObjetivo->cola = NULL;
 
-    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  }
-  else
-    printf("\nLa lista esta vacia\n");
+        free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    }
+    else
+        printf("\nLa lista esta vacia\n");
 
-  return Dato; // retorna una copia del registro extraido
+    return Dato; // retorna una copia del registro extraido
 }
 
 /**
@@ -1362,21 +1370,21 @@ Registro extraerCabeza(Lista *listaObjetivo)
  */
 Registro extraerCola(Lista *listaObjetivo)
 {
-  Nodo *ptrNodoObjetivo;
-  Registro Dato;                         // contenedor Auxiliar
-  ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
+    Nodo *ptrNodoObjetivo;
+    Registro Dato;                         // contenedor Auxiliar
+    ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
 
-  Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
-  listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
+    Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
+    listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
 
-  listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
-  if (listaObjetivo->cantidadElem == 0)
-    listaObjetivo->cabeza = NULL;
-  else
-    listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
+    listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
+    if (listaObjetivo->cantidadElem == 0)
+        listaObjetivo->cabeza = NULL;
+    else
+        listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
 
-  free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  return Dato;
+    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    return Dato;
 }
 
 /**
@@ -1388,15 +1396,15 @@ Registro extraerCola(Lista *listaObjetivo)
  */
 void imprimeDesdeLaCabeza(const Lista *listaObjetivo)
 {
-  printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  Nodo *ptrNodoObjetivo = listaObjetivo->cabeza;
-  while (ptrNodoObjetivo != NULL)
-  {
-    imprimeRegistro(&ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->sig;
-  }
-  printf("NULL\n");
+    printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    Nodo *ptrNodoObjetivo = listaObjetivo->cabeza;
+    while (ptrNodoObjetivo != NULL)
+    {
+        imprimeRegistro(&ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->sig;
+    }
+    printf("NULL\n");
 }
 
 /**
@@ -1410,15 +1418,15 @@ void imprimeDesdeLaCabeza(const Lista *listaObjetivo)
 void imprimeDesdeLaCola(const Lista *listaObjetivo)
 {
 
-  printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  Nodo *ptrNodoObjetivo = listaObjetivo->cola;
-  while (ptrNodoObjetivo != NULL)
-  {
-    imprimeRegistro(&ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->ante;
-  }
-  printf("NULL\n");
+    printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    Nodo *ptrNodoObjetivo = listaObjetivo->cola;
+    while (ptrNodoObjetivo != NULL)
+    {
+        imprimeRegistro(&ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->ante;
+    }
+    printf("NULL\n");
 }
 
 /**
@@ -1441,18 +1449,18 @@ void imprimeDesdeLaCola(const Lista *listaObjetivo)
  */
 Nodo *dirMayor(int Dato, Lista *listaDestino)
 {
-  Nodo *ptrNodoEvaluado = listaDestino->cabeza;
-  while (ptrNodoEvaluado != NULL)
-  {
-    if (ptrNodoEvaluado->dato.valor > Dato)
-    { // compara el valor
-      return ptrNodoEvaluado;
+    Nodo *ptrNodoEvaluado = listaDestino->cabeza;
+    while (ptrNodoEvaluado != NULL)
+    {
+        if (ptrNodoEvaluado->dato.valor > Dato)
+        { // compara el valor
+            return ptrNodoEvaluado;
+        }
+        else
+            ptrNodoEvaluado = ptrNodoEvaluado->sig;
     }
-    else
-      ptrNodoEvaluado = ptrNodoEvaluado->sig;
-  }
 
-  return NULL;
+    return NULL;
 }
 
 /**
@@ -1466,12 +1474,12 @@ Nodo *dirMayor(int Dato, Lista *listaDestino)
 void insertaDatoAntesDe(Nodo *nodoMayor, Registro dato)
 {
 
-  Nodo *ptrNuevoNodo = creaNodo(dato);
+    Nodo *ptrNuevoNodo = creaNodo(dato);
 
-  ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
-  ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
-  nodoMayor->ante->sig = ptrNuevoNodo;
-  nodoMayor->ante = ptrNuevoNodo;
+    ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
+    ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
+    nodoMayor->ante->sig = ptrNuevoNodo;
+    nodoMayor->ante = ptrNuevoNodo;
 }
 
 /**
@@ -1485,10 +1493,10 @@ void insertaDatoAntesDe(Nodo *nodoMayor, Registro dato)
 void insertaNodoAntesDe(Nodo *nodoMayor, Nodo *ptrNuevoNodo)
 {
 
-  ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
-  ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
-  nodoMayor->ante->sig = ptrNuevoNodo;
-  nodoMayor->ante = ptrNuevoNodo;
+    ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
+    ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
+    nodoMayor->ante->sig = ptrNuevoNodo;
+    nodoMayor->ante = ptrNuevoNodo;
 }
 
 /**
@@ -1502,36 +1510,36 @@ void insertaNodoAntesDe(Nodo *nodoMayor, Nodo *ptrNuevoNodo)
 void insertaEnOrden(Registro dato, Lista *listaDestino)
 {
 
-  Nodo *ptrNuevoNodo = creaNodo(dato);
+    Nodo *ptrNuevoNodo = creaNodo(dato);
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
-
-    if (listaEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
-    }
-    else
+    if (ptrNuevoNodo != NULL)
     {
-      Nodo *ptrNodoMayor = dirMayor(dato.valor, listaDestino);
-      if (ptrNodoMayor == listaDestino->cabeza)
-      {
-        insertarDatoEnCabeza(dato, listaDestino);
-      }
-      else
-      {
-        if (ptrNodoMayor != NULL)
-        {
-          insertaNodoAntesDe(ptrNodoMayor, ptrNuevoNodo);
+        listaDestino->cantidadElem++;
+
+        if (listaEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
         else
         {
-          insertarDatoEnCola(dato, listaDestino);
+            Nodo *ptrNodoMayor = dirMayor(dato.valor, listaDestino);
+            if (ptrNodoMayor == listaDestino->cabeza)
+            {
+                insertarDatoEnCabeza(dato, listaDestino);
+            }
+            else
+            {
+                if (ptrNodoMayor != NULL)
+                {
+                    insertaNodoAntesDe(ptrNodoMayor, ptrNuevoNodo);
+                }
+                else
+                {
+                    insertarDatoEnCola(dato, listaDestino);
+                }
+            }
         }
-      }
     }
-  }
 }
 
 /**
@@ -1542,18 +1550,18 @@ void insertaEnOrden(Registro dato, Lista *listaDestino)
 void despliegaMenuListas()
 {
 
-  printf("Que desea Hacer?\n");
-  printf("Opciones:\n");
-  printf("1 - Insertar en la Cabeza de la lista Lista\n");
-  printf("2 - Insertar en la Cola de la Lista\n");
-  printf("3 - Extraer de la cabeza la Lista\n");
-  printf("4 - Extraer de la cola la Lista\n");
-  printf("5 - Imprimir la Lista\n");
-  printf("6 - Salir\n");
-  printf("Su Opcion = ");
+    printf("Que desea Hacer?\n");
+    printf("Opciones:\n");
+    printf("1 - Insertar en la Cabeza de la lista Lista\n");
+    printf("2 - Insertar en la Cola de la Lista\n");
+    printf("3 - Extraer de la cabeza la Lista\n");
+    printf("4 - Extraer de la cola la Lista\n");
+    printf("5 - Imprimir la Lista\n");
+    printf("6 - Salir\n");
+    printf("Su Opcion = ");
 }
 
-//Listas enlazadas de Enteros
+// Listas enlazadas de Enteros
 /**
  * @brief Crea un nodo de una lista y devuelve su direccion en memoria
  *
@@ -1565,19 +1573,19 @@ void despliegaMenuListas()
 
 NodoInt *creaNodoInt(int dato)
 {
-  NodoInt *nuevoNodo = malloc(sizeof(NodoInt));//liberamos espacio en memoria del tamanio de un nodo int
-  if (nuevoNodo != NULL)
-  {
-    nuevoNodo->dato = dato;
-    nuevoNodo->sig = NULL;
-    nuevoNodo->ante = NULL;
-    return nuevoNodo;
-  }
-  else
-  {
-    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
-    return NULL;
-  }
+    NodoInt *nuevoNodo = malloc(sizeof(NodoInt)); // liberamos espacio en memoria del tamanio de un nodo int
+    if (nuevoNodo != NULL)
+    {
+        nuevoNodo->dato = dato;
+        nuevoNodo->sig = NULL;
+        nuevoNodo->ante = NULL;
+        return nuevoNodo;
+    }
+    else
+    {
+        printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+        return NULL;
+    }
 }
 
 /**
@@ -1590,14 +1598,14 @@ NodoInt *creaNodoInt(int dato)
  */
 int listaIntEstaVacia(ListaInt ListaVal)
 {
-  if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
-  { // si la cabeza y la cola son iguales a NULL
-    return -1;
-  }
-  else
-  {
-    return 0;
-  }
+    if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
+    { // si la cabeza y la cola son iguales a NULL
+        return -1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 /**
@@ -1612,23 +1620,23 @@ int listaIntEstaVacia(ListaInt ListaVal)
  */
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino)
 {
-  NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea el nodo con el dato
+    NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea el nodo con el dato
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
 
-    if (listaIntEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        if (listaIntEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                              // si la lista no esta vacia
+            ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+            listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+            listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                            // si la lista no esta vacia
-      ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
-      listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
-      listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -1642,24 +1650,24 @@ void insertarIntEnCabeza(int dato, ListaInt *listaDestino)
  */
 void insertarIntEnCola(int dato, ListaInt *listaDestino)
 {
-  /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
-  NodoInt *ptrNuevoNodo = creaNodoInt(dato);
+    /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+    NodoInt *ptrNuevoNodo = creaNodoInt(dato);
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
 
-    if (listaIntEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        if (listaIntEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                            // si la lista no esta vacia
+            ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
+            listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
+            listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                          // si la lista no esta vacia
-      ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
-      listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
-      listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -1669,10 +1677,10 @@ void insertarIntEnCola(int dato, ListaInt *listaDestino)
  */
 void insertarEnCabezaListaInt(ListaInt *ACargar)
 {
-  int valor;
-  printf("Ingrese el Valor entero a ser agregado a la Lista: ");
-  scanf("%d", &valor);
-  insertarIntEnCabeza(valor, ACargar);
+    int valor;
+    printf("Ingrese el Valor entero a ser agregado a la Lista: ");
+    scanf("%d", &valor);
+    insertarIntEnCabeza(valor, ACargar);
 }
 
 /**
@@ -1682,10 +1690,10 @@ void insertarEnCabezaListaInt(ListaInt *ACargar)
  */
 void insertarEnColaListaInt(ListaInt *ACargar)
 {
-  int valor;
-  printf("Ingrese el Valor entero a ser agregado a la Lista: ");
-  scanf("%d", &valor);
-  insertarIntEnCola(valor, ACargar);
+    int valor;
+    printf("Ingrese el Valor entero a ser agregado a la Lista: ");
+    scanf("%d", &valor);
+    insertarIntEnCola(valor, ACargar);
 }
 
 /**
@@ -1699,27 +1707,27 @@ void insertarEnColaListaInt(ListaInt *ACargar)
 int extraerCabezaListaInt(ListaInt *listaObjetivo)
 {
 
-  int contenedor = 0; // contenedor Auxiliar
-  if (listaIntEstaVacia(*listaObjetivo) != -1)
-  {
+    int contenedor = 0; // contenedor Auxiliar
+    if (listaIntEstaVacia(*listaObjetivo) != -1)
+    {
 
-    NodoInt *ptrNodoObjetivo;
+        NodoInt *ptrNodoObjetivo;
 
-    ptrNodoObjetivo = listaObjetivo->cabeza;
+        ptrNodoObjetivo = listaObjetivo->cabeza;
 
-    contenedor = ptrNodoObjetivo->dato;
-    listaObjetivo->cabeza = ptrNodoObjetivo->sig;
-    listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
-    listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
-    if (listaObjetivo->cantidadElem == 0)
-      listaObjetivo->cola = NULL;
+        contenedor = ptrNodoObjetivo->dato;
+        listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+        listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+        listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
+        if (listaObjetivo->cantidadElem == 0)
+            listaObjetivo->cola = NULL;
 
-    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  }
-  else
-    printf("\nLa lista esta vacia\n");
+        free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    }
+    else
+        printf("\nLa lista esta vacia\n");
 
-  return contenedor; // retorna una copia del registro extraido
+    return contenedor; // retorna una copia del registro extraido
 }
 
 /**
@@ -1732,21 +1740,21 @@ int extraerCabezaListaInt(ListaInt *listaObjetivo)
  */
 int extraerColaListaInt(ListaInt *listaObjetivo)
 {
-  NodoInt *ptrNodoObjetivo;
-  int Dato = 0;                         // contenedor Auxiliar
-  ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
+    NodoInt *ptrNodoObjetivo;
+    int Dato = 0;                          // contenedor Auxiliar
+    ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
 
-  Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
-  listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
+    Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
+    listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
 
-  listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
-  if (listaObjetivo->cantidadElem == 0)
-    listaObjetivo->cabeza = NULL;
-  else
-    listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
+    listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
+    if (listaObjetivo->cantidadElem == 0)
+        listaObjetivo->cabeza = NULL;
+    else
+        listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
 
-  free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  return Dato;
+    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    return Dato;
 }
 
 /**
@@ -1758,15 +1766,15 @@ int extraerColaListaInt(ListaInt *listaObjetivo)
  */
 void imprimeDesdeLaCabezaListaInt(const ListaInt *listaObjetivo)
 {
-  printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  NodoInt *ptrNodoObjetivo = listaObjetivo->cabeza;
-  while (ptrNodoObjetivo != NULL)
-  {
-    printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->sig;
-  }
-  printf("NULL\n");
+    printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    NodoInt *ptrNodoObjetivo = listaObjetivo->cabeza;
+    while (ptrNodoObjetivo != NULL)
+    {
+        printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->sig;
+    }
+    printf("NULL\n");
 }
 
 /**
@@ -1780,17 +1788,16 @@ void imprimeDesdeLaCabezaListaInt(const ListaInt *listaObjetivo)
 void imprimeDesdeLaColaListaInt(const ListaInt *listaObjetivo)
 {
 
-  printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  NodoInt *ptrNodoObjetivo = listaObjetivo->cola;
-  while (ptrNodoObjetivo != NULL)
-  {
-    printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->ante;
-  }
-  printf("NULL\n");
+    printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    NodoInt *ptrNodoObjetivo = listaObjetivo->cola;
+    while (ptrNodoObjetivo != NULL)
+    {
+        printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->ante;
+    }
+    printf("NULL\n");
 }
-
 
 /**
  * @brief Retorna la direccion del primer nodo que contenga un dato mayor al valor recibido como parametro
@@ -1803,18 +1810,18 @@ void imprimeDesdeLaColaListaInt(const ListaInt *listaObjetivo)
  */
 NodoInt *dirMayorEnListaInt(int Dato, ListaInt *listaDestino)
 {
-  printf("Hola");
-  NodoInt *ptrNodoEvaluado = listaDestino->cabeza;
-  while (ptrNodoEvaluado != NULL)
-  {
-    if (ptrNodoEvaluado->dato > Dato)
-    { // compara el valor
-      return ptrNodoEvaluado;
+    printf("Hola");
+    NodoInt *ptrNodoEvaluado = listaDestino->cabeza;
+    while (ptrNodoEvaluado != NULL)
+    {
+        if (ptrNodoEvaluado->dato > Dato)
+        { // compara el valor
+            return ptrNodoEvaluado;
+        }
+        else
+            ptrNodoEvaluado = ptrNodoEvaluado->sig;
     }
-    else
-      ptrNodoEvaluado = ptrNodoEvaluado->sig;
-  }
-  return NULL;
+    return NULL;
 }
 
 /**
@@ -1828,12 +1835,12 @@ NodoInt *dirMayorEnListaInt(int Dato, ListaInt *listaDestino)
 void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato)
 {
 
-  NodoInt *ptrNuevoNodo = creaNodoInt(dato);
+    NodoInt *ptrNuevoNodo = creaNodoInt(dato);
 
-  ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
-  ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
-  nodoMayor->ante->sig = ptrNuevoNodo;
-  nodoMayor->ante = ptrNuevoNodo;
+    ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
+    ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
+    nodoMayor->ante->sig = ptrNuevoNodo;
+    nodoMayor->ante = ptrNuevoNodo;
 }
 
 /**
@@ -1846,11 +1853,11 @@ void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato)
  */
 void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo)
 {
-  printf("Aqui estoy");
-  ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
-  ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
-  nodoMayor->ante->sig = ptrNuevoNodo;
-  nodoMayor->ante = ptrNuevoNodo;
+    printf("Aqui estoy");
+    ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
+    ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
+    nodoMayor->ante->sig = ptrNuevoNodo;
+    nodoMayor->ante = ptrNuevoNodo;
 }
 
 /**
@@ -1864,35 +1871,35 @@ void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo)
 void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino)
 {
 
-  NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea un nuevo nodoInt
-  if (ptrNuevoNodo != NULL) //se creo el nuevo nodo
-  {
-    listaDestino->cantidadElem++;//aumenta la cantidad de elementos en la lista
-    if (listaIntEstaVacia(*listaDestino) == -1)// si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-    { 
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
-    }
-    else
+    NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea un nuevo nodoInt
+    if (ptrNuevoNodo != NULL)                  // se creo el nuevo nodo
     {
-      NodoInt *ptrNodoMayor = dirMayorEnListaInt(dato, listaDestino); //Ubica el nodo con valor mayor al valor a ser insertado
-      if (ptrNodoMayor == listaDestino->cabeza)
-      {
-        insertarIntEnCabeza(dato, listaDestino);
-      }
-      else
-      {
-        if (ptrNodoMayor != NULL)
+        listaDestino->cantidadElem++;               // aumenta la cantidad de elementos en la lista
+        if (listaIntEstaVacia(*listaDestino) == -1) // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
         {
-          printf("\nPrimer Valor mayor al valor actual ");
-          insertaNodoAntesDeEnListaInt(ptrNodoMayor, ptrNuevoNodo);
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
         else
         {
-          insertarIntEnCola(dato, listaDestino);
+            NodoInt *ptrNodoMayor = dirMayorEnListaInt(dato, listaDestino); // Ubica el nodo con valor mayor al valor a ser insertado
+            if (ptrNodoMayor == listaDestino->cabeza)
+            {
+                insertarIntEnCabeza(dato, listaDestino);
+            }
+            else
+            {
+                if (ptrNodoMayor != NULL)
+                {
+                    printf("\nPrimer Valor mayor al valor actual ");
+                    insertaNodoAntesDeEnListaInt(ptrNodoMayor, ptrNuevoNodo);
+                }
+                else
+                {
+                    insertarIntEnCola(dato, listaDestino);
+                }
+            }
         }
-      }
     }
-  }
 }
 
 /**
@@ -1903,18 +1910,18 @@ void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino)
 void despliegaMenuListasInt()
 {
 
-  printf("Que desea Hacer?\n");
-  printf("Opciones:\n");
-  printf("1 - Insertar en la Cabeza de la lista Lista\n");
-  printf("2 - Insertar en la Cola de la Lista\n");
-  printf("3 - Extraer de la cabeza la Lista\n");
-  printf("4 - Extraer de la cola la Lista\n");
-  printf("5 - Imprimir la Lista\n");
-  printf("6 - Salir\n");
-  printf("Su Opcion = ");
+    printf("Que desea Hacer?\n");
+    printf("Opciones:\n");
+    printf("1 - Insertar en la Cabeza de la lista Lista\n");
+    printf("2 - Insertar en la Cola de la Lista\n");
+    printf("3 - Extraer de la cabeza la Lista\n");
+    printf("4 - Extraer de la cola la Lista\n");
+    printf("5 - Imprimir la Lista\n");
+    printf("6 - Salir\n");
+    printf("Su Opcion = ");
 }
 
-//Listas enlazadas de Caracteres 
+// Listas enlazadas de Caracteres
 /**
  * @brief Crea un nodo de una lista y devuelve su direccion en memoria
  *
@@ -1926,19 +1933,19 @@ void despliegaMenuListasInt()
 
 NodoChar *creaNodoChar(char dato)
 {
-  NodoChar *nuevoNodo = malloc(sizeof(NodoChar)); // liberamos espacio en memoria del espacio de un nodo de char
-  if (nuevoNodo != NULL)
-  {
-    nuevoNodo->dato = dato;
-    nuevoNodo->sig = NULL;
-    nuevoNodo->ante = NULL;
-    return nuevoNodo;
-  }
-  else
-  {
-    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
-    return NULL;
-  }
+    NodoChar *nuevoNodo = malloc(sizeof(NodoChar)); // liberamos espacio en memoria del espacio de un nodo de char
+    if (nuevoNodo != NULL)
+    {
+        nuevoNodo->dato = dato;
+        nuevoNodo->sig = NULL;
+        nuevoNodo->ante = NULL;
+        return nuevoNodo;
+    }
+    else
+    {
+        printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+        return NULL;
+    }
 }
 
 /**
@@ -1951,14 +1958,14 @@ NodoChar *creaNodoChar(char dato)
  */
 int listaCharEstaVacia(ListaChar ListaVal)
 {
-  if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
-  { // si la cabeza y la cola son iguales a NULL
-    return -1;
-  }
-  else
-  {
-    return 0;
-  }
+    if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
+    { // si la cabeza y la cola son iguales a NULL
+        return -1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 /**
@@ -1973,22 +1980,22 @@ int listaCharEstaVacia(ListaChar ListaVal)
  */
 void insertarCharEnCabeza(char dato, ListaChar *listaDestino)
 {
-  NodoChar *ptrNuevoNodo = creaNodoChar(dato); // crea el nodo con el dato
+    NodoChar *ptrNuevoNodo = creaNodoChar(dato); // crea el nodo con el dato
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
-    if (listaCharEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
+        if (listaCharEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                              // si la lista no esta vacia
+            ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+            listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+            listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                            // si la lista no esta vacia
-      ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
-      listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
-      listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -2002,24 +2009,24 @@ void insertarCharEnCabeza(char dato, ListaChar *listaDestino)
  */
 void insertarCharEnCola(char dato, ListaChar *listaDestino)
 {
-  /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
-  NodoChar *ptrNuevoNodo = creaNodoChar(dato);
+    /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+    NodoChar *ptrNuevoNodo = creaNodoChar(dato);
 
-  if (ptrNuevoNodo != NULL)
-  {
-    listaDestino->cantidadElem++;
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
 
-    if (listaCharEstaVacia(*listaDestino) == -1)
-    { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
-      listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        if (listaCharEstaVacia(*listaDestino) == -1)
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                            // si la lista no esta vacia
+            ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
+            listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
+            listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
     }
-    else
-    {                                          // si la lista no esta vacia
-      ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
-      listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
-      listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
-    }
-  }
 }
 
 /**
@@ -2029,12 +2036,11 @@ void insertarCharEnCola(char dato, ListaChar *listaDestino)
  */
 void insertarEnCabezaListaChar(ListaChar *ACargar)
 {
-  char valor = ' ';
-  printf("\nIngrese un caracter: ");
-  fflush(stdin);
-  valor = getchar();
-  insertarCharEnCabeza(valor, ACargar);
-  
+    char valor = ' ';
+    printf("\nIngrese un caracter: ");
+    fflush(stdin);
+    valor = getchar();
+    insertarCharEnCabeza(valor, ACargar);
 }
 
 /**
@@ -2044,11 +2050,11 @@ void insertarEnCabezaListaChar(ListaChar *ACargar)
  */
 void insertarEnColaListaChar(ListaChar *ACargar)
 {
-  char valor = ' ';
-  printf("\nIngrese un caracter: ");
-  fflush(stdin);
-  valor = getchar();
-  insertarCharEnCola(valor, ACargar);
+    char valor = ' ';
+    printf("\nIngrese un caracter: ");
+    fflush(stdin);
+    valor = getchar();
+    insertarCharEnCola(valor, ACargar);
 }
 
 /**
@@ -2062,27 +2068,27 @@ void insertarEnColaListaChar(ListaChar *ACargar)
 int extraerCabezaListaChar(ListaChar *listaObjetivo)
 {
 
-  char contenedor = '\0'; // contenedor Auxiliar
-  if (listaCharEstaVacia(*listaObjetivo) != -1)
-  {
+    char contenedor = '\0'; // contenedor Auxiliar
+    if (listaCharEstaVacia(*listaObjetivo) != -1)
+    {
 
-    NodoChar *ptrNodoObjetivo;
+        NodoChar *ptrNodoObjetivo;
 
-    ptrNodoObjetivo = listaObjetivo->cabeza;
+        ptrNodoObjetivo = listaObjetivo->cabeza;
 
-    contenedor = ptrNodoObjetivo->dato; //guarda el dato de la cabeza
-    listaObjetivo->cabeza = ptrNodoObjetivo->sig;
-    listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
-    listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
-    if (listaObjetivo->cantidadElem == 0)
-      listaObjetivo->cola = NULL;
+        contenedor = ptrNodoObjetivo->dato; // guarda el dato de la cabeza
+        listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+        listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+        listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
+        if (listaObjetivo->cantidadElem == 0)
+            listaObjetivo->cola = NULL;
 
-    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  }
-  else
-    printf("\nLa lista esta vacia\n");
+        free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    }
+    else
+        printf("\nLa lista esta vacia\n");
 
-  return contenedor; // retorna una copia del registro extraido
+    return contenedor; // retorna una copia del registro extraido
 }
 
 /**
@@ -2095,21 +2101,21 @@ int extraerCabezaListaChar(ListaChar *listaObjetivo)
  */
 int extraerColaListaChar(ListaChar *listaObjetivo)
 {
-  NodoChar *ptrNodoObjetivo;
-  char Dato = '\0';                         // contenedor Auxiliar
-  ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
+    NodoChar *ptrNodoObjetivo;
+    char Dato = '\0';                      // contenedor Auxiliar
+    ptrNodoObjetivo = listaObjetivo->cola; // direccion de memoria del nodo a extraer
 
-  Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
-  listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
+    Dato = ptrNodoObjetivo->dato;                // asigna el dato de la cola al registro contenedor
+    listaObjetivo->cola = ptrNodoObjetivo->ante; // asigna a la cola de la lista la direccion de memoria del nodo anterior a la cola extraida
 
-  listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
-  if (listaObjetivo->cantidadElem == 0)
-    listaObjetivo->cabeza = NULL;
-  else
-    listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
+    listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
+    if (listaObjetivo->cantidadElem == 0)
+        listaObjetivo->cabeza = NULL;
+    else
+        listaObjetivo->cola->sig = NULL; // elimina la direccion de memoria del apuntador siguiente de la cola actual
 
-  free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
-  return Dato;
+    free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    return Dato;
 }
 
 /**
@@ -2121,15 +2127,15 @@ int extraerColaListaChar(ListaChar *listaObjetivo)
  */
 void imprimeDesdeLaCabezaListaChar(const ListaChar *listaObjetivo)
 {
-  printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  NodoChar *ptrNodoObjetivo = listaObjetivo->cabeza;
-  while (ptrNodoObjetivo != NULL)
-  {
-    printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->sig;
-  }
-  printf("NULL\n");
+    printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    NodoChar *ptrNodoObjetivo = listaObjetivo->cabeza;
+    while (ptrNodoObjetivo != NULL)
+    {
+        printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->sig;
+    }
+    printf("NULL\n");
 }
 
 /**
@@ -2143,15 +2149,15 @@ void imprimeDesdeLaCabezaListaChar(const ListaChar *listaObjetivo)
 void imprimeDesdeLaColaListaChar(const ListaChar *listaObjetivo)
 {
 
-  printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-  NodoChar *ptrNodoObjetivo = listaObjetivo->cola;
-  while (ptrNodoObjetivo != NULL)
-  {
-    printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-    printf(" -> ");
-    ptrNodoObjetivo = ptrNodoObjetivo->ante;
-  }
-  printf("NULL\n");
+    printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    NodoChar *ptrNodoObjetivo = listaObjetivo->cola;
+    while (ptrNodoObjetivo != NULL)
+    {
+        printf("(%c)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->ante;
+    }
+    printf("NULL\n");
 }
 
 /* Funciones de colas de prioridad */
@@ -2164,18 +2170,18 @@ void imprimeDesdeLaColaListaChar(const ListaChar *listaObjetivo)
  */
 ColaDePrioridad CreaColaPrioridad(int cantidadDePrioridades)
 {
-  ColaDePrioridad NuevaCola; // Cola A ser retornada
+    ColaDePrioridad NuevaCola; // Cola A ser retornada
 
-  int i;                                      // iterador
-  for (i = 0; i < cantidadDePrioridades; i++) // Inicializa las colas del Array Prioridades a colas Vacias
-  {
-    NuevaCola.Prioridades[i].cabeza = NULL;
-    NuevaCola.Prioridades[i].cola = NULL;
-    NuevaCola.Prioridades[i].cantidadElem = 0;
-  }
+    int i;                                      // iterador
+    for (i = 0; i < cantidadDePrioridades; i++) // Inicializa las colas del Array Prioridades a colas Vacias
+    {
+        NuevaCola.Prioridades[i].cabeza = NULL;
+        NuevaCola.Prioridades[i].cola = NULL;
+        NuevaCola.Prioridades[i].cantidadElem = 0;
+    }
 
-  NuevaCola.CantPrioridades = cantidadDePrioridades; // Indica cuantas prioridades hay en la Cola
-  return NuevaCola;
+    NuevaCola.CantPrioridades = cantidadDePrioridades; // Indica cuantas prioridades hay en la Cola
+    return NuevaCola;
 }
 
 /**
@@ -2186,14 +2192,14 @@ ColaDePrioridad CreaColaPrioridad(int cantidadDePrioridades)
  */
 void insertarEnPrioridad(ColaDePrioridad *ColaPrioridad, RegistroDePrioridad *AInsertar)
 {
-  if (AInsertar->prioridad < ColaPrioridad->CantPrioridades && AInsertar->prioridad >= 0)
-  {
-    insertarDatoEnCola(AInsertar->nodo->dato, &ColaPrioridad->Prioridades[AInsertar->prioridad]);
-  }
-  else
-  {
-    printf("Error! Prioridad fuera de Rango");
-  }
+    if (AInsertar->prioridad < ColaPrioridad->CantPrioridades && AInsertar->prioridad >= 0)
+    {
+        insertarDatoEnCola(AInsertar->nodo->dato, &ColaPrioridad->Prioridades[AInsertar->prioridad]);
+    }
+    else
+    {
+        printf("Error! Prioridad fuera de Rango");
+    }
 }
 
 /**
@@ -2204,15 +2210,15 @@ void insertarEnPrioridad(ColaDePrioridad *ColaPrioridad, RegistroDePrioridad *AI
 void insertarDatosEnColaDePriridad(ColaDePrioridad *colaDePrioridad)
 {
 
-  int P;
+    int P;
 
-  RegistroDePrioridad *DatosDePrioridad = malloc(sizeof(RegistroDePrioridad));
-  DatosDePrioridad->nodo = creaNodo(creaRegistro());
-  printf("Prioridad:");
-  scanf("%d", &P);
-  DatosDePrioridad->prioridad = P - 1;
+    RegistroDePrioridad *DatosDePrioridad = malloc(sizeof(RegistroDePrioridad));
+    DatosDePrioridad->nodo = creaNodo(creaRegistro());
+    printf("Prioridad:");
+    scanf("%d", &P);
+    DatosDePrioridad->prioridad = P - 1;
 
-  insertarEnPrioridad(colaDePrioridad, DatosDePrioridad);
+    insertarEnPrioridad(colaDePrioridad, DatosDePrioridad);
 }
 
 /**
@@ -2222,15 +2228,15 @@ void insertarDatosEnColaDePriridad(ColaDePrioridad *colaDePrioridad)
  */
 void leerColaDePrioridades(ColaDePrioridad *colaDePrioridad)
 {
-  if (ColaPrioridadVacia(*colaDePrioridad) != -1)
-  {
-    Registro aux = DesencolaPrioridad(colaDePrioridad);
-    printf("El Prime Dato era: %d", aux.valor); // aqui deban inr las operaciones requeridas para hacer con el dato de la cola de prioridad
-  }
-  else
-  {
-    printf("Error: La cola de priridad Esta Vacia\n");
-  }
+    if (ColaPrioridadVacia(*colaDePrioridad) != -1)
+    {
+        Registro aux = DesencolaPrioridad(colaDePrioridad);
+        printf("El Prime Dato era: %d", aux.valor); // aqui deban inr las operaciones requeridas para hacer con el dato de la cola de prioridad
+    }
+    else
+    {
+        printf("Error: La cola de priridad Esta Vacia\n");
+    }
 }
 
 /**
@@ -2240,13 +2246,13 @@ void leerColaDePrioridades(ColaDePrioridad *colaDePrioridad)
  */
 void imprimirColaDePrioridad(ColaDePrioridad colaDePrioridad)
 {
-  int i; // iterador
-  printf("\nCola De prioridad de %d Prioridades\n", colaDePrioridad.CantPrioridades);
-  for (i = 0; i < colaDePrioridad.CantPrioridades; i++)
-  {
-    printf("\nPrioridad %d\n", i + 1);
-    imprimeDesdeLaCabeza(&colaDePrioridad.Prioridades[i]);
-  }
+    int i; // iterador
+    printf("\nCola De prioridad de %d Prioridades\n", colaDePrioridad.CantPrioridades);
+    for (i = 0; i < colaDePrioridad.CantPrioridades; i++)
+    {
+        printf("\nPrioridad %d\n", i + 1);
+        imprimeDesdeLaCabeza(&colaDePrioridad.Prioridades[i]);
+    }
 }
 /**
  * @brief Retorna -1 si la lista esta vacia, 0 en caso contrario
@@ -2255,19 +2261,19 @@ void imprimirColaDePrioridad(ColaDePrioridad colaDePrioridad)
  * @return int
  */
 int ColaPrioridadVacia(ColaDePrioridad ListaVal)
-{                   // retorna -1 si la lista esta vacia, 0 en caso contrario
-  int i;            // iterador
-  int bandera = -1; // su valor determina si esta o no vacia: -1 para vacia, 0 para no vacia
-  for (i = 0; i < ListaVal.CantPrioridades; i++)
-  {
-    if (ListaVal.Prioridades[i].cabeza != NULL)
+{                     // retorna -1 si la lista esta vacia, 0 en caso contrario
+    int i;            // iterador
+    int bandera = -1; // su valor determina si esta o no vacia: -1 para vacia, 0 para no vacia
+    for (i = 0; i < ListaVal.CantPrioridades; i++)
     {
-      bandera = 0;
-      break; // basta con que una de las colas no este vacia para que la cola de prioridades no este vacia
+        if (ListaVal.Prioridades[i].cabeza != NULL)
+        {
+            bandera = 0;
+            break; // basta con que una de las colas no este vacia para que la cola de prioridades no este vacia
+        }
     }
-  }
 
-  return bandera;
+    return bandera;
 }
 
 /**
@@ -2278,20 +2284,20 @@ int ColaPrioridadVacia(ColaDePrioridad ListaVal)
  */
 Registro DesencolaPrioridad(ColaDePrioridad *ColaDePrio)
 {
-  // esta funcion no es aplicable a colas de prioridades vacias
+    // esta funcion no es aplicable a colas de prioridades vacias
 
-  int i = 0;
-  Registro dato; // contenedor auxiliar a ser retornado
-  for (i = 0; i < ColaDePrio->CantPrioridades; i++)
-  {
-    if (listaEstaVacia(ColaDePrio->Prioridades[i]))
-      continue;
+    int i = 0;
+    Registro dato; // contenedor auxiliar a ser retornado
+    for (i = 0; i < ColaDePrio->CantPrioridades; i++)
+    {
+        if (listaEstaVacia(ColaDePrio->Prioridades[i]))
+            continue;
 
-    dato = extraerCabeza(&ColaDePrio->Prioridades[i]);
-    break; // extrae solamente el primer elemento de la primera cola no vacia que encuentra
-  }
+        dato = extraerCabeza(&ColaDePrio->Prioridades[i]);
+        break; // extrae solamente el primer elemento de la primera cola no vacia que encuentra
+    }
 
-  return dato;
+    return dato;
 }
 
 /**
@@ -2300,14 +2306,14 @@ Registro DesencolaPrioridad(ColaDePrioridad *ColaDePrio)
  */
 void despliegaMenuColasDePrioridad()
 {
-  printf("\n");
-  printf("Que desea Hacer?\n");
-  printf("Opciones:\n");
-  printf("1 - Insertar en la Cola de prioridades\n");
-  printf("2 - Leer Dato desde la Cola de prioridades\n");
-  printf("3 - Imprimir la Cola de prioridades\n");
-  printf("4 - Salir\n");
-  printf("Su Opcion = ");
+    printf("\n");
+    printf("Que desea Hacer?\n");
+    printf("Opciones:\n");
+    printf("1 - Insertar en la Cola de prioridades\n");
+    printf("2 - Leer Dato desde la Cola de prioridades\n");
+    printf("3 - Imprimir la Cola de prioridades\n");
+    printf("4 - Salir\n");
+    printf("Su Opcion = ");
 }
 
 /**
@@ -2323,26 +2329,26 @@ void despliegaMenuColasDePrioridad()
 Archivo *creaArchivo()
 {
 
-  char nombreArchivo[150] = "";
-  char modo[5] = "";
-  Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
+    char nombreArchivo[150] = "";
+    char modo[5] = "";
+    Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
 
-  printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
-  scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
-  printf("\nIngrese el codigo del Modo de apertura del archivo: ");
-  scanf("%s", modo); // ingresa el formato de apertura del archivo
-  if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, modo)) == NULL)
-  {
-    printf("No se pudo crear el archivo.\nERROR\n"); // retorna null si no se pudo abrir el archivo
-    return NULL;
-  }
-  else
-  {
-    ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
-    ptrNuevoArchivo->registros = 0;         // establece la cantidad de registtros hab en cero
-    optenerCantidadElementos(ptrNuevoArchivo);
-    return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
-  }
+    printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+    scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
+    printf("\nIngrese el codigo del Modo de apertura del archivo: ");
+    scanf("%s", modo); // ingresa el formato de apertura del archivo
+    if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, modo)) == NULL)
+    {
+        printf("No se pudo crear el archivo.\nERROR\n"); // retorna null si no se pudo abrir el archivo
+        return NULL;
+    }
+    else
+    {
+        ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
+        ptrNuevoArchivo->registros = 0;         // establece la cantidad de registtros hab en cero
+        optenerCantidadElementos(ptrNuevoArchivo);
+        return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
+    }
 }
 
 /**
@@ -2353,40 +2359,40 @@ Archivo *creaArchivo()
 Archivo *creaArchivoBin()
 {
 
-  char nombreArchivo[150] = "";
-  char modo[5] = "";
-  Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
+    char nombreArchivo[150] = "";
+    char modo[5] = "";
+    Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
 
-  printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
-  scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
-  printf("\nIngrese el codigo del Modo de apertura del archivo: ");
-  scanf("%s", modo); // ingresa el formato de apertura del archivo
-  if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, modo)) == NULL)
-  {
-    if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, "wb+")) != NULL)
+    printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+    scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
+    printf("\nIngrese el codigo del Modo de apertura del archivo: ");
+    scanf("%s", modo); // ingresa el formato de apertura del archivo
+    if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, modo)) == NULL)
     {
-      ptrNuevoArchivo->cantidadElementos = 0;
-      return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
+        if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, "wb+")) != NULL)
+        {
+            ptrNuevoArchivo->cantidadElementos = 0;
+            return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
+        }
+        else
+        {
+            printf("No se pudo Abir Ni crear el archivo");
+            return NULL;
+        }
     }
     else
     {
-      printf("No se pudo Abir Ni crear el archivo");
-      return NULL;
+        if (strcmp("w", modo) == 0)
+        {
+            fclose(ptrNuevoArchivo->punteroArchivo);
+            ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, "rb+");
+            ptrNuevoArchivo->cantidadElementos = 0;
+            return ptrNuevoArchivo;
+        }
+        else
+            ptrNuevoArchivo->cantidadElementos = 0;
+        return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
     }
-  }
-  else
-  {
-    if (strcmp("w", modo) == 0)
-    {
-      fclose(ptrNuevoArchivo->punteroArchivo);
-      ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, "rb+");
-      ptrNuevoArchivo->cantidadElementos = 0;
-      return ptrNuevoArchivo;
-    }
-    else
-      ptrNuevoArchivo->cantidadElementos = 0;
-    return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
-  }
 }
 
 /**
@@ -2398,9 +2404,9 @@ Archivo *creaArchivoBin()
 void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar)
 {
 
-  fseek(ptrArchivo->punteroArchivo, (aGuardar->id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
-  fwrite(aGuardar, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                  // escribe el contenido del registro nuevo en la direccion especificada
-  rewind(ptrArchivo->punteroArchivo);
+    fseek(ptrArchivo->punteroArchivo, (aGuardar->id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+    fwrite(aGuardar, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                  // escribe el contenido del registro nuevo en la direccion especificada
+    rewind(ptrArchivo->punteroArchivo);
 }
 
 /**
@@ -2411,27 +2417,27 @@ void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar)
 void nuevoRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo nuevoRegistro = {ptrArchivo->cantidadElementos + 1, 1, {0}}, auxRegistro = {0, 0, {0}};
+    RegistroArchivo nuevoRegistro = {ptrArchivo->cantidadElementos + 1, 1, {0}}, auxRegistro = {0, 0, {0}};
 
-  nuevoRegistro.Dato = creaRegistro(); // crea un nuevo registro
-  nuevoRegistro.estaEliminado = 1;
-  printf("id Asignado: %d\n", ptrArchivo->cantidadElementos + 1);
-  fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
-  fread(&auxRegistro, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                            // almacena la lectura del puntero del archivo al registro auxiliar
+    nuevoRegistro.Dato = creaRegistro(); // crea un nuevo registro
+    nuevoRegistro.estaEliminado = 1;
+    printf("id Asignado: %d\n", ptrArchivo->cantidadElementos + 1);
+    fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntador a la posicion del numero de cuenta del nuevo Registro
+    fread(&auxRegistro, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                            // almacena la lectura del puntero del archivo al registro auxiliar
 
-  if (auxRegistro.id != 0)
-  { // si la cuenta del reigistro ya existe, o si existe y no esta esliminado
-    printf("\nERROR: La cuenta %d Ya existe\n", auxRegistro.id);
-  }
-  else
-  { // sino, guarda el nuevo registro en esa direccion
-    printf("Estatus registo: %s \n",
-           (nuevoRegistro.estaEliminado == 0 || nuevoRegistro.estaEliminado == -1) ? "Vacio\n" : "Contiene Datos\n");
-    imprimeRegistro(&nuevoRegistro.Dato);
-    guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistro);
-    ptrArchivo->cantidadElementos++;
-    printf("\nRegistro Agregado Exitosamente!\n\n");
-  }
+    if (auxRegistro.id != 0)
+    { // si la cuenta del reigistro ya existe, o si existe y no esta esliminado
+        printf("\nERROR: La cuenta %d Ya existe\n", auxRegistro.id);
+    }
+    else
+    { // sino, guarda el nuevo registro en esa direccion
+        printf("Estatus registo: %s \n",
+               (nuevoRegistro.estaEliminado == 0 || nuevoRegistro.estaEliminado == -1) ? "Vacio\n" : "Contiene Datos\n");
+        imprimeRegistro(&nuevoRegistro.Dato);
+        guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistro);
+        ptrArchivo->cantidadElementos++;
+        printf("\nRegistro Agregado Exitosamente!\n\n");
+    }
 }
 
 /**
@@ -2442,29 +2448,29 @@ void nuevoRegistro(Archivo *ptrArchivo)
 void eliminaRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo registroAux = {0, 0, {0}};
+    RegistroArchivo registroAux = {0, 0, {0}};
 
-  int id;
-  printf("Introduzca el id a Eliminar: ");
-  scanf("%d", &id);
+    int id;
+    printf("Introduzca el id a Eliminar: ");
+    scanf("%d", &id);
 
-  fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // situa el apuntador a la direccion del registro a eliminar
-  fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro
-  printf("Registro: {id: %d, estuatus: %s, valor: %d, dirMem: %p }\n", registroAux.id, registroAux.estaEliminado == 1 ? "Contiene Datos" : "Esta Vacio", registroAux.Dato.valor, ptrArchivo->punteroArchivo);
+    fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // situa el apuntador a la direccion del registro a eliminar
+    fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro
+    printf("Registro: {id: %d, estuatus: %s, valor: %d, dirMem: %p }\n", registroAux.id, registroAux.estaEliminado == 1 ? "Contiene Datos" : "Esta Vacio", registroAux.Dato.valor, ptrArchivo->punteroArchivo);
 
-  if (registroAux.estaEliminado == -1 || registroAux.id == 0 || registroAux.estaEliminado == 0) // verifica si el archivo ya esta vacio de antemano
-  {
-    printf("El registro %d no existe", id);
-  }
-  else // edita el archivo
-  {
-    registroAux.estaEliminado = -1;
-    guardaRegistroEnArchivo(ptrArchivo, &registroAux); // guarda un registro en blanco en la id especificada
-    // ptrArchivo->cantidadElementos--;
+    if (registroAux.estaEliminado == -1 || registroAux.id == 0 || registroAux.estaEliminado == 0) // verifica si el archivo ya esta vacio de antemano
+    {
+        printf("El registro %d no existe", id);
+    }
+    else // edita el archivo
+    {
+        registroAux.estaEliminado = -1;
+        guardaRegistroEnArchivo(ptrArchivo, &registroAux); // guarda un registro en blanco en la id especificada
+        // ptrArchivo->cantidadElementos--;
 
-    ptrArchivo->registros--;
-    printf("\n\tRegistro Eliminado Exitosamente\n"); // mensaje de exito
-  }
+        ptrArchivo->registros--;
+        printf("\n\tRegistro Eliminado Exitosamente\n"); // mensaje de exito
+    }
 }
 
 /**
@@ -2475,28 +2481,28 @@ void eliminaRegistro(Archivo *ptrArchivo)
 void actualizaRegistro(Archivo *ptrArchivo)
 {
 
-  RegistroArchivo registroAux = {0, 0, {0}};
-  int id;
-  Registro NuevosDatos;
+    RegistroArchivo registroAux = {0, 0, {0}};
+    int id;
+    Registro NuevosDatos;
 
-  printf("\nIntroduzca id del registro a actualizar: "); // este debe ser un identificador para el registro del archivo.
-  scanf("%d", &id);                                      // solicita el numero de cuenta a editar
+    printf("\nIntroduzca id del registro a actualizar: "); // este debe ser un identificador para el registro del archivo.
+    scanf("%d", &id);                                      // solicita el numero de cuenta a editar
 
-  fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntado al registro a editar
-  fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro a editar en el registro auxiliar
+    fseek(ptrArchivo->punteroArchivo, (id - 1) * sizeof(RegistroArchivo), SEEK_SET); // establece el apuntado al registro a editar
+    fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);     // lee el registro a editar en el registro auxiliar
 
-  if (registroAux.estaEliminado == 0)
-  {
-    printf("\nLa cuenta #%d no tiene informacion\n", registroAux.id);
-  }
-  else
-  {
-    printf("\nIntroduzaca los nuevos Valores para el registro de ID Nro %d \n", registroAux.id);
-    NuevosDatos = creaRegistro();
-    registroAux.Dato = NuevosDatos;
-    guardaRegistroEnArchivo(ptrArchivo, &registroAux);
-    printf("\nRegistro #%d actualizado Correctamente", registroAux.id);
-  }
+    if (registroAux.estaEliminado == 0)
+    {
+        printf("\nLa cuenta #%d no tiene informacion\n", registroAux.id);
+    }
+    else
+    {
+        printf("\nIntroduzaca los nuevos Valores para el registro de ID Nro %d \n", registroAux.id);
+        NuevosDatos = creaRegistro();
+        registroAux.Dato = NuevosDatos;
+        guardaRegistroEnArchivo(ptrArchivo, &registroAux);
+        printf("\nRegistro #%d actualizado Correctamente", registroAux.id);
+    }
 }
 
 /**
@@ -2509,34 +2515,34 @@ void actualizaRegistro(Archivo *ptrArchivo)
 void informeTxt(Archivo *ptrArchivo)
 {
 
-  FILE *ptrInforme; // apuntador al archivo Resultado
+    FILE *ptrInforme; // apuntador al archivo Resultado
 
-  RegistroArchivo datos = {0, 1, {0}}; // inicializar aqui el registro,
+    RegistroArchivo datos = {0, 1, {0}}; // inicializar aqui el registro,
 
-  if ((ptrInforme = fopen("Informe.txt", "w")) == NULL)
-    printf("\n\tERROR: No se pudo crear el Archivo\n\n");
-  else
-  {
-    rewind(ptrArchivo->punteroArchivo);                                                             // establece el puntero al principio del archivo
-    fprintf(ptrInforme, "%s\t%s\t%s\t%s\t%s\n", "id.", "entero", "nombre", "flotante", "caracter"); // imprime la cabecera. Esto depende de los campos a imprimir del registro
-    while (!feof(ptrArchivo->punteroArchivo))
+    if ((ptrInforme = fopen("Informe.txt", "w")) == NULL)
+        printf("\n\tERROR: No se pudo crear el Archivo\n\n");
+    else
     {
-      datos.estaEliminado = 0;
-      fread(&datos, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo); // lee los datos en el Registro datos
-      if (datos.estaEliminado == 1)
-      {
+        rewind(ptrArchivo->punteroArchivo);                                                             // establece el puntero al principio del archivo
+        fprintf(ptrInforme, "%s\t%s\t%s\t%s\t%s\n", "id.", "entero", "nombre", "flotante", "caracter"); // imprime la cabecera. Esto depende de los campos a imprimir del registro
+        while (!feof(ptrArchivo->punteroArchivo))
+        {
+            datos.estaEliminado = 0;
+            fread(&datos, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo); // lee los datos en el Registro datos
+            if (datos.estaEliminado == 1)
+            {
 
-        fprintf(ptrInforme, "%d\n", datos.Dato.valor);
-        // imprimir aqui en el formato que pida el ejercicio
-      }
-      else
-      {
-        printf("Registro Vacio\n"); // informa que no se pudo leer nada desde el archivo origen
-      }
+                fprintf(ptrInforme, "%d\n", datos.Dato.valor);
+                // imprimir aqui en el formato que pida el ejercicio
+            }
+            else
+            {
+                printf("Registro Vacio\n"); // informa que no se pudo leer nada desde el archivo origen
+            }
+        }
+        fclose(ptrInforme); // cierra el archivo de informe
+        printf("\n\tInforme Generado exitosamente!\n\n");
     }
-    fclose(ptrInforme); // cierra el archivo de informe
-    printf("\n\tInforme Generado exitosamente!\n\n");
-  }
 }
 
 /**
@@ -2548,13 +2554,13 @@ void informeTxt(Archivo *ptrArchivo)
 void guardaDesdeCabezaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos)
 {
 
-  Nodo *ptrNodoObjetivo = ListaDatos.cabeza;
-  RegistroArchivo nuevoRegistroArc = {0, 0, ptrNodoObjetivo->dato};
-  while (ptrNodoObjetivo != NULL)
-  {
-    guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistroArc);
-    ptrNodoObjetivo = ptrNodoObjetivo->sig;
-  }
+    Nodo *ptrNodoObjetivo = ListaDatos.cabeza;
+    RegistroArchivo nuevoRegistroArc = {0, 0, ptrNodoObjetivo->dato};
+    while (ptrNodoObjetivo != NULL)
+    {
+        guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistroArc);
+        ptrNodoObjetivo = ptrNodoObjetivo->sig;
+    }
 }
 
 /**
@@ -2565,13 +2571,13 @@ void guardaDesdeCabezaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos)
  */
 void guardaDesdeColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos)
 {
-  Nodo *ptrNodoObjetivo = ListaDatos.cola;
-  RegistroArchivo nuevoRegistroArc = {0, 0, ptrNodoObjetivo->dato};
-  while (ptrNodoObjetivo != NULL)
-  {
-    guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistroArc);
-    ptrNodoObjetivo = ptrNodoObjetivo->ante;
-  }
+    Nodo *ptrNodoObjetivo = ListaDatos.cola;
+    RegistroArchivo nuevoRegistroArc = {0, 0, ptrNodoObjetivo->dato};
+    while (ptrNodoObjetivo != NULL)
+    {
+        guardaRegistroEnArchivo(ptrArchivo, &nuevoRegistroArc);
+        ptrNodoObjetivo = ptrNodoObjetivo->ante;
+    }
 }
 
 /**
@@ -2580,53 +2586,53 @@ void guardaDesdeColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos)
  */
 void menuArchivos()
 { // despliega el menu
-  printf("Selecciones su opcion\n1- Informe EN archivo txt.\n2-AcualizarUnRegistro\n3-Agregar Un Registro.\n4- Eliminar un registro \n5-Salir Del Programa.\nOpcion=");
+    printf("Selecciones su opcion\n1- Informe EN archivo txt.\n2-AcualizarUnRegistro\n3-Agregar Un Registro.\n4- Eliminar un registro \n5-Salir Del Programa.\nOpcion=");
 }
 
 void optenerCantidadElementos(Archivo *ptrArchivo)
 {
-  RegistroArchivo registroAux = {0, 0, {0}};
+    RegistroArchivo registroAux = {0, 0, {0}};
 
-  printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
+    printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
 
-  do
-  {
-    registroAux.estaEliminado = 0;
-    fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); //
-    fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                            // almacena la lectura del puntero del archivo al registro auxiliar
-    // printf("Registro id: %d\n Registro estatus %s\n", registroAux.id, registroAux.estaEliminado == 0 ? "Nunca escrito" : "Con datos");
+    do
+    {
+        registroAux.estaEliminado = 0;
+        fseek(ptrArchivo->punteroArchivo, (ptrArchivo->cantidadElementos) * sizeof(RegistroArchivo), SEEK_SET); //
+        fread(&registroAux, sizeof(RegistroArchivo), 1, ptrArchivo->punteroArchivo);                            // almacena la lectura del puntero del archivo al registro auxiliar
+        // printf("Registro id: %d\n Registro estatus %s\n", registroAux.id, registroAux.estaEliminado == 0 ? "Nunca escrito" : "Con datos");
 
-    ptrArchivo->cantidadElementos++;
+        ptrArchivo->cantidadElementos++;
 
-    if (registroAux.estaEliminado == 1)
-      ptrArchivo->registros++; // cuenta la cantidad de registro no eliminados
+        if (registroAux.estaEliminado == 1)
+            ptrArchivo->registros++; // cuenta la cantidad de registro no eliminados
 
-  } while (registroAux.estaEliminado != 0);
+    } while (registroAux.estaEliminado != 0);
 
-  if (ptrArchivo->cantidadElementos != 0)
-    ptrArchivo->cantidadElementos--;
+    if (ptrArchivo->cantidadElementos != 0)
+        ptrArchivo->cantidadElementos--;
 
-  rewind(ptrArchivo->punteroArchivo);
+    rewind(ptrArchivo->punteroArchivo);
 
-  if (ptrArchivo->registros != 0 && ptrArchivo->cantidadElementos != 0)
-    printf("\nEl archivo ya contiene Datos!\n");
-  else
-    printf("\nArchivo en blanco\n");
+    if (ptrArchivo->registros != 0 && ptrArchivo->cantidadElementos != 0)
+        printf("\nEl archivo ya contiene Datos!\n");
+    else
+        printf("\nArchivo en blanco\n");
 
-  printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
+    printf("Cantidad de registros hab: %d\n", ptrArchivo->registros);
 }
 
 void despliegaMenuListasYArchivos()
 {
-  printf("Que desea Hacer?\n");
-  printf("Opciones:\n");
-  printf("1 - Insertar en la Cabeza de la lista Lista\n");
-  printf("2 - Insertar en la Cola de la Lista\n");
-  printf("3 - Extraer de la cabeza la Lista\n");
-  printf("4 - Extraer de la cola la Lista\n");
-  printf("5 - Imprimir la Lista\n");
-  printf("6 - Salir\n");
-  printf("Su Opcion = ");
+    printf("Que desea Hacer?\n");
+    printf("Opciones:\n");
+    printf("1 - Insertar en la Cabeza de la lista Lista\n");
+    printf("2 - Insertar en la Cola de la Lista\n");
+    printf("3 - Extraer de la cabeza la Lista\n");
+    printf("4 - Extraer de la cola la Lista\n");
+    printf("5 - Imprimir la Lista\n");
+    printf("6 - Salir\n");
+    printf("Su Opcion = ");
 }
 
 /**
@@ -2640,12 +2646,12 @@ void despliegaMenuListasYArchivos()
  */
 void despliegaMenuArboles()
 {
-  printf("Que desea Hacer?\n");
-  printf("Opciones:\n");
-  printf("1 - Insertar Nodo En arbol\n");
-  printf("2 - Imprimir Arbol\n");
-  printf("3 - Salir\n");
-  printf("Su Opcion = ");
+    printf("Que desea Hacer?\n");
+    printf("Opciones:\n");
+    printf("1 - Insertar Nodo En arbol\n");
+    printf("2 - Imprimir Arbol\n");
+    printf("3 - Salir\n");
+    printf("Su Opcion = ");
 }
 
 /**
@@ -2656,8 +2662,8 @@ void despliegaMenuArboles()
  */
 void cargaArbol(Arbol *ArbolObjetivo, int valor)
 {
-  NodoArbol *ptrNuevoNodo = creaNodoArbol(valor);
-  insertaNodoEnArbol(&ArbolObjetivo->Raiz, ptrNuevoNodo);
+    NodoArbol *ptrNuevoNodo = creaNodoArbol(valor);
+    insertaNodoEnArbol(&ArbolObjetivo->Raiz, ptrNuevoNodo);
 }
 
 /**
@@ -2668,19 +2674,19 @@ void cargaArbol(Arbol *ArbolObjetivo, int valor)
  */
 NodoArbol *creaNodoArbol(int dato)
 {
-  NodoArbol *nuevoNodo = malloc(sizeof(NodoArbol)); // libera espacio en memora para el nuevo nodo
-  if (nuevoNodo != NULL)
-  {
-    nuevoNodo->dato = dato;
-    nuevoNodo->izq = NULL;
-    nuevoNodo->der = NULL;
-    return nuevoNodo;
-  }
-  else
-  {
-    printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
-    return NULL;
-  }
+    NodoArbol *nuevoNodo = malloc(sizeof(NodoArbol)); // libera espacio en memora para el nuevo nodo
+    if (nuevoNodo != NULL)
+    {
+        nuevoNodo->dato = dato;
+        nuevoNodo->izq = NULL;
+        nuevoNodo->der = NULL;
+        return nuevoNodo;
+    }
+    else
+    {
+        printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+        return NULL;
+    }
 }
 
 /**
@@ -2691,18 +2697,18 @@ NodoArbol *creaNodoArbol(int dato)
  */
 void insertaNodoEnArbol(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
 {
-  if (*SubArbol == NULL) // si el arbol esta vacio
-  {
-    *SubArbol = ptrNuvoNodo;
-  }
-  else // si no esta vacio
-  {
-    if ((*SubArbol)->dato > ptrNuvoNodo->dato)
-      insertaNodoEnArbol(&(*SubArbol)->izq, ptrNuvoNodo);
+    if (*SubArbol == NULL) // si el arbol esta vacio
+    {
+        *SubArbol = ptrNuvoNodo;
+    }
+    else // si no esta vacio
+    {
+        if ((*SubArbol)->dato > ptrNuvoNodo->dato)
+            insertaNodoEnArbol(&(*SubArbol)->izq, ptrNuvoNodo);
 
-    if ((*SubArbol)->dato < ptrNuvoNodo->dato)
-      insertaNodoEnArbol(&(*SubArbol)->der, ptrNuvoNodo);
-  }
+        if ((*SubArbol)->dato < ptrNuvoNodo->dato)
+            insertaNodoEnArbol(&(*SubArbol)->der, ptrNuvoNodo);
+    }
 }
 
 /**
@@ -2712,12 +2718,12 @@ void insertaNodoEnArbol(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
  */
 void inOrden(NodoArbol *ptrNodoArbol)
 {
-  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
-  {
-    inOrden(ptrNodoArbol->izq);
-    printf(" %d -", ptrNodoArbol->dato);
-    inOrden(ptrNodoArbol->der);
-  }
+    if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+    {
+        inOrden(ptrNodoArbol->izq);
+        printf(" %d -", ptrNodoArbol->dato);
+        inOrden(ptrNodoArbol->der);
+    }
 }
 
 /**
@@ -2727,12 +2733,12 @@ void inOrden(NodoArbol *ptrNodoArbol)
  */
 void preOrden(NodoArbol *ptrNodoArbol)
 {
-  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
-  {
-    printf(" %d -", ptrNodoArbol->dato);
-    preOrden(ptrNodoArbol->izq);
-    preOrden(ptrNodoArbol->der);
-  }
+    if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+    {
+        printf(" %d -", ptrNodoArbol->dato);
+        preOrden(ptrNodoArbol->izq);
+        preOrden(ptrNodoArbol->der);
+    }
 }
 
 /**
@@ -2742,12 +2748,12 @@ void preOrden(NodoArbol *ptrNodoArbol)
  */
 void postOrden(NodoArbol *ptrNodoArbol)
 {
-  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
-  {
-    postOrden(ptrNodoArbol->der);
-    printf(" %d -", ptrNodoArbol->dato);
-    postOrden(ptrNodoArbol->izq);
-  }
+    if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+    {
+        postOrden(ptrNodoArbol->der);
+        printf(" %d -", ptrNodoArbol->dato);
+        postOrden(ptrNodoArbol->izq);
+    }
 }
 
 /**
@@ -2757,35 +2763,35 @@ void postOrden(NodoArbol *ptrNodoArbol)
  */
 void imprimirArbol(Arbol *aImprimir)
 {
-  int opcion;
-  if (aImprimir->Raiz == NULL)
-  {
-    printf("Arbol Vacio!\n");
-  }
-  else
-  {
-    printf("Como desea Visualizar el Arbol\n");
-    printf("Ingrese su Opcion\n");
-    printf("1- InOrden\n");
-    printf("2- preOrden\n");
-    printf("3- posOrden\n");
-    scanf("%d", &opcion);
-    switch (opcion)
+    int opcion;
+    if (aImprimir->Raiz == NULL)
     {
-    case 1:
-      inOrden(aImprimir->Raiz);
-      break;
-    case 2:
-      preOrden(aImprimir->Raiz);
-      break;
-    case 3:
-      postOrden(aImprimir->Raiz);
-      break;
-    default:
-      printf("Opcion Invalida");
-      break;
+        printf("Arbol Vacio!\n");
     }
-  }
+    else
+    {
+        printf("Como desea Visualizar el Arbol\n");
+        printf("Ingrese su Opcion\n");
+        printf("1- InOrden\n");
+        printf("2- preOrden\n");
+        printf("3- posOrden\n");
+        scanf("%d", &opcion);
+        switch (opcion)
+        {
+        case 1:
+            inOrden(aImprimir->Raiz);
+            break;
+        case 2:
+            preOrden(aImprimir->Raiz);
+            break;
+        case 3:
+            postOrden(aImprimir->Raiz);
+            break;
+        default:
+            printf("Opcion Invalida");
+            break;
+        }
+    }
 }
 
 /**
@@ -2796,18 +2802,18 @@ void imprimirArbol(Arbol *aImprimir)
  */
 void insertaNodoEnArbolConRep(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
 {
-  if (*SubArbol == NULL) // si el arbol esta vacio
-  {
-    *SubArbol = ptrNuvoNodo;
-  }
-  else // si no esta vacio
-  {
-    if ((*SubArbol)->dato > ptrNuvoNodo->dato)
-      insertaNodoEnArbolConRep(&(*SubArbol)->izq, ptrNuvoNodo);
+    if (*SubArbol == NULL) // si el arbol esta vacio
+    {
+        *SubArbol = ptrNuvoNodo;
+    }
+    else // si no esta vacio
+    {
+        if ((*SubArbol)->dato > ptrNuvoNodo->dato)
+            insertaNodoEnArbolConRep(&(*SubArbol)->izq, ptrNuvoNodo);
 
-    if ((*SubArbol)->dato <= ptrNuvoNodo->dato)
-      insertaNodoEnArbolConRep(&(*SubArbol)->der, ptrNuvoNodo);
-  }
+        if ((*SubArbol)->dato <= ptrNuvoNodo->dato)
+            insertaNodoEnArbolConRep(&(*SubArbol)->der, ptrNuvoNodo);
+    }
 }
 
 /**
@@ -2819,11 +2825,11 @@ void insertaNodoEnArbolConRep(NodoArbol **SubArbol, NodoArbol *ptrNuvoNodo)
  */
 void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud)
 {
-  int i;
-  for (i = 0; i < longitud; i++)
-  {
-    insertaNodoEnArbolConRep(&ArbolObjetivo->Raiz, creaNodoArbol(array[i]));
-  }
+    int i;
+    for (i = 0; i < longitud; i++)
+    {
+        insertaNodoEnArbolConRep(&ArbolObjetivo->Raiz, creaNodoArbol(array[i]));
+    }
 }
 
 /**
@@ -2835,457 +2841,481 @@ void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud)
  */
 void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dirIteradorDelArray)
 {
-  int bandera = 0;
-  if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
-  {
-    inOrdenArray(ptrNodoArbol->izq, arreglo, dirIteradorDelArray);
-    arreglo[*dirIteradorDelArray] = ptrNodoArbol->dato;
-    *dirIteradorDelArray = *dirIteradorDelArray + 1;
-    inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
-  }
+    int bandera = 0;
+    if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
+    {
+        inOrdenArray(ptrNodoArbol->izq, arreglo, dirIteradorDelArray);
+        arreglo[*dirIteradorDelArray] = ptrNodoArbol->dato;
+        *dirIteradorDelArray = *dirIteradorDelArray + 1;
+        inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
+    }
 }
 
-
 /**
- * funciones de lab 
- * 
+ * funciones de lab
+ *
 
  */
-
 
 /**
  * @brief Resta errada
- * 
- * @param n 
- * @return int 
+ *
+ * @param n
+ * @return int
  */
-int resta_errad(int n){
-  int res;
-  int ult = n%10;
-  if(ult == 0){
-    res = n/10;
-  }
-  else
-  {
-    res = n-1;
-  }
-  
-  return res;
+int resta_errad(int n)
+{
+    int res;
+    int ult = n % 10;
+    if (ult == 0)
+    {
+        res = n / 10;
+    }
+    else
+    {
+        res = n - 1;
+    }
+
+    return res;
 }
 
 /* devuelve uno cero si todos los digitos del anio son diferentes
 caso contrario devuelce -1*/
 /* funciona para anios de 4 dijitos pero se puede mejorar */
-int is_beautifull_year(int anio){
-  int unid, dec, cent, uni_mil, ret = 0;
+int is_beautifull_year(int anio)
+{
+    int unid, dec, cent, uni_mil, ret = 0;
 
-  unid = anio%10;
-  dec = ((anio%100) - unid)/10;
-  cent = ((anio %1000)- dec*10 - unid)/100;
-  uni_mil = ((anio%10000) - cent*100 - dec*10 - unid)/1000;
+    unid = anio % 10;
+    dec = ((anio % 100) - unid) / 10;
+    cent = ((anio % 1000) - dec * 10 - unid) / 100;
+    uni_mil = ((anio % 10000) - cent * 100 - dec * 10 - unid) / 1000;
 
-  if( unid == dec)
-    ret = -1;
+    if (unid == dec)
+        ret = -1;
 
-  if( unid == cent)
-    ret = -1;
+    if (unid == cent)
+        ret = -1;
 
-  if( unid == uni_mil)
-    ret = -1;
+    if (unid == uni_mil)
+        ret = -1;
 
-  if( cent == dec)
-    ret = -1;
+    if (cent == dec)
+        ret = -1;
 
-  if( uni_mil == dec)
-    ret = -1;
+    if (uni_mil == dec)
+        ret = -1;
 
-  if( uni_mil == cent)
-    ret = -1;
+    if (uni_mil == cent)
+        ret = -1;
 
-  return ret;
+    return ret;
 }
 
 /**
  * @brief calcula pasos
- * 
- * @param dist 
- * @return int 
+ *
+ * @param dist
+ * @return int
  */
 int calc_pasos(int dist)
 {
-  int pos = 0, pasos = 0 ,x = dist;
-  while (pos != x)
-  {
-    if(pos+5 <= x){
-      pasos++;
-      pos+=5;
-      break;
+    int pos = 0, pasos = 0, x = dist;
+    while (pos != x)
+    {
+        if (pos + 5 <= x)
+        {
+            pasos++;
+            pos += 5;
+            break;
+        }
+        if (pos + 4 <= x)
+        {
+            pasos++;
+            pos += 4;
+            break;
+        }
+        if (pos + 3 <= x)
+        {
+            pasos++;
+            pos += 3;
+            break;
+        }
+        if (pos + 2 <= x)
+        {
+            pasos++;
+            pos += 2;
+            break;
+        }
+        if (pos + 1 <= x)
+        {
+            pasos++;
+            pos += 1;
+            break;
+        }
     }
-    if(pos+4 <= x){
-      pasos++;
-      pos+=4;
-      break;
-    }
-    if(pos+3 <= x){
-      pasos++;
-      pos+=3;
-      break;
-    }
-    if(pos+2 <= x){
-      pasos++;
-      pos+=2;
-      break;
-    }
-    if(pos+1 <= x){
-      pasos++;
-      pos+=1;
-      break;
-    }
-  }
 
-  return pasos;
+    return pasos;
 }
 
 /**
  * @brief devuelve la minnima cantidad de pasos necesarios para subir la cima de una escalera teniendo en cuenta que se pueden tomar pasos de 1 o 2 escalonnes a la vez
- * 
- * @param n 
- * @return int 
+ *
+ * @param n
+ * @return int
  */
-int sube_escalera( int n ){
-  if( n < 0 )
-    return 0;
-  if( n == 0 )
-    return 1;
-  return sube_escalera(n-1) + sube_escalera(n-2);
+int sube_escalera(int n)
+{
+    if (n < 0)
+        return 0;
+    if (n == 0)
+        return 1;
+    return sube_escalera(n - 1) + sube_escalera(n - 2);
 }
 
 /**
- * @brief imprime el camino que recorrio una en una matriz 
- * 
- * @param fila 
- * @param col 
- * @param a 
+ * @brief imprime el camino que recorrio una en una matriz
+ *
+ * @param fila
+ * @param col
+ * @param a
  */
-void imprimeCamino( int fila, int col, int a[][col]) 
+void imprimeCamino(int fila, int col, int a[][col])
 {
-  int i, j, elem;
-  for(elem = 1; elem <= fila*col +1; elem++){
-    for ( i = 0; i < fila; i++)
+    int i, j, elem;
+    for (elem = 1; elem <= fila * col + 1; elem++)
     {
-      for ( j = 0; j < col; j++)
-      {
-        if( a[i][j] == elem){
-          printf("%c%d ", getLetra(i+1), j);
+        for (i = 0; i < fila; i++)
+        {
+            for (j = 0; j < col; j++)
+            {
+                if (a[i][j] == elem)
+                {
+                    printf("%c%d ", getLetra(i + 1), j);
+                }
+            }
         }
-      }
     }
-  }
 }
-
 
 /**
  * @brief verifica si el valor actual y el pasado suman una cantidad dada
- * 
- * @param arreglo1 
- * @param dim 
- * @param dias 
- * @return int 
+ *
+ * @param arreglo1
+ * @param dim
+ * @param dias
+ * @return int
  */
-int agendador(int arreglo1[], int dim, int dias){
+int agendador(int arreglo1[], int dim, int dias)
+{
 
-  int persecutor = 0, adelantado, contador = 0;
-  for( adelantado = 1; adelantado < dim; adelantado++)
-  {
-    while( arreglo1[adelantado]+arreglo1[persecutor] < dias){
-      arreglo1[adelantado]++; 
-      contador++;   
+    int persecutor = 0, adelantado, contador = 0;
+    for (adelantado = 1; adelantado < dim; adelantado++)
+    {
+        while (arreglo1[adelantado] + arreglo1[persecutor] < dias)
+        {
+            arreglo1[adelantado]++;
+            contador++;
+        }
+        persecutor++;
     }
-    persecutor++;
-  }
 
-  return contador;
+    return contador;
 }
 
-void aniadeUno(){
-  int pruebas, i, j, s, cont;
-  char nuemero[6];
-  char acum[15] = "";
-  char aux[15] = "";
-  int nuevos[6] = {0};
-  scanf("%d", &pruebas);
-  int result[pruebas];
-  char auxcad[2] = "";
+void aniadeUno()
+{
+    int pruebas, i, j, s, cont;
+    char nuemero[6];
+    char acum[15] = "";
+    char aux[15] = "";
+    int nuevos[6] = {0};
+    scanf("%d", &pruebas);
+    int result[pruebas];
+    char auxcad[2] = "";
 
-  for(i = 0; i<pruebas ; i++){
-    scanf("%s", nuemero );
+    for (i = 0; i < pruebas; i++)
+    {
+        scanf("%s", nuemero);
 
-    for( j = 0; j< strlen(nuemero); j++ ){
-      strcat(auxcad, &nuemero[j]);
-      cont = atoi(auxcad );
-      // itoa(aux, cont + 1, 10);  
-      strcat(acum, aux);
-      // auxcad[0] = '';
+        for (j = 0; j < strlen(nuemero); j++)
+        {
+            strcat(auxcad, &nuemero[j]);
+            cont = atoi(auxcad);
+            // itoa(aux, cont + 1, 10);
+            strcat(acum, aux);
+            // auxcad[0] = '';
+        }
+        result[i] = atoi(acum);
+
+        for (s = 0; s < 15; s++)
+        {
+            // acum[s] = '';
+        }
     }
-    result[i] = atoi(acum);
 
-    for( s = 0 ; s < 15; s++){
-      // acum[s] = '';
+    for (i = 0; i < pruebas; i++)
+    {
+        printf("%d", result[i]);
     }
-  }
-
-  for(i = 0; i<pruebas; i++){
-    printf("%d", result[i]);
-  }
 }
 
-
-//lab 5
+// lab 5
 /**
  * @brief Recibe un arreglo, un string y su dimension y copia los valores del arrego en el string
- * 
- * @param origen 
- * @param destino 
- * @param dim 
+ *
+ * @param origen
+ * @param destino
+ * @param dim
  */
-void copia_arreglo_aString( int origen[], char destino[], const int dim){
-  int i, cont = 0;
-  char digit;
-  for( i= 0; i<dim; i++){
-    digit = origen[i] + '0';
-    if(/* origen[i] != 0 && */ isdigit(digit) != 0 ){
-      destino[cont]=digit;
-      cont++;
+void copiaArregloDeEnterosAString(int origen[], char destino[], const int dim)
+{
+    int i;
+    for (i = 0; i < dim; i++)
+    {
+        char *digit = malloc(sizeof(int));
+        enteroAString(origen[i], digit);
+        strcat(destino, digit);
+        free(digit);
     }
-  }
 }
 
 /**
  * @brief Se ingresan casos de prueba y para cada caso imprime si los datos ingrasdos corresponden o no a un Cuadrado
- * 
+ *
  */
 void esCuadrado()
 {
-  int casosPrueba, i, aux;
-  scanf("%d", &casosPrueba);
-  char *respuestas[casosPrueba];
-  Rectangulo RecUno;
-  Rectangulo RecDos;
-  for ( i = 0; i < casosPrueba; i++)
-  {
-    scanf("%d", &aux);
-    RecUno.lado1 = aux;
-    scanf("%d", &aux);
-    RecUno.lado2 = aux;
-    scanf("%d", &aux);
-    RecDos.lado1 = aux;
-    scanf("%d", &aux);
-    RecDos.lado2 = aux;
-    respuestas[i] = "NO";
-    
-    if ( RecUno.lado1 == RecDos.lado1 && RecUno.lado1 == RecUno.lado2 + RecDos.lado2)
+    int casosPrueba, i, aux;
+    scanf("%d", &casosPrueba);
+    char *respuestas[casosPrueba];
+    Rectangulo RecUno;
+    Rectangulo RecDos;
+    for (i = 0; i < casosPrueba; i++)
     {
-        respuestas[i] = "SI";
-         
-    }
-    if ( RecUno.lado1 == RecDos.lado2 && RecDos.lado2 == RecUno.lado2 + RecDos.lado1)
-    {
-      respuestas[i] = "SI";
-      
-    }
-    if (RecUno.lado2 == RecDos.lado2 && RecDos.lado2 == RecUno.lado1 + RecDos.lado1)
-    {
-      respuestas[i] = "SI";
+        scanf("%d", &aux);
+        RecUno.lado1 = aux;
+        scanf("%d", &aux);
+        RecUno.lado2 = aux;
+        scanf("%d", &aux);
+        RecDos.lado1 = aux;
+        scanf("%d", &aux);
+        RecDos.lado2 = aux;
+        respuestas[i] = "NO";
 
-    }
-    if (RecUno.lado2 == RecDos.lado1 && RecDos.lado1 == RecUno.lado1 + RecDos.lado2)
-    {
-      respuestas[i] = "SI";
+        if (RecUno.lado1 == RecDos.lado1 && RecUno.lado1 == RecUno.lado2 + RecDos.lado2)
+        {
+            respuestas[i] = "SI";
+        }
+        if (RecUno.lado1 == RecDos.lado2 && RecDos.lado2 == RecUno.lado2 + RecDos.lado1)
+        {
+            respuestas[i] = "SI";
+        }
+        if (RecUno.lado2 == RecDos.lado2 && RecDos.lado2 == RecUno.lado1 + RecDos.lado1)
+        {
+            respuestas[i] = "SI";
+        }
+        if (RecUno.lado2 == RecDos.lado1 && RecDos.lado1 == RecUno.lado1 + RecDos.lado2)
+        {
+            respuestas[i] = "SI";
+        }
     }
 
-  }
-  
-  for ( i = 0; i < casosPrueba; i++)
-  {
-    printf( "%s", respuestas[i]);
-  }
-
-
+    for (i = 0; i < casosPrueba; i++)
+    {
+        printf("%s", respuestas[i]);
+    }
 }
 
 /**
  * @brief Inicializa un vector
- * 
- * @param V 
- * @param valorInicial 
+ *
+ * @param V
+ * @param valorInicial
  */
-void inicializaVector( Vector *V, int valorInicial){
-  V->x = valorInicial;
-  V->y = valorInicial;
-  V->z = valorInicial;
+void inicializaVector(Vector *V, int valorInicial)
+{
+    V->x = valorInicial;
+    V->y = valorInicial;
+    V->z = valorInicial;
 }
 
 /**
  * @brief Carga datos en el vector
- * 
- * @param V 
+ *
+ * @param V
  */
-void cargarVector( Vector *V){
-  int aux;
-  printf("Ingrese la componente de la fuerza en x: ");
-  scanf("%d", &aux);
-  V->x = aux;
-  printf("Ingrese la componente de la fuerza en Y: ");
-  scanf("%d", &aux);
-  V->y= aux;
-  printf("Ingrese la componente de la fuerza en z: ");
-  scanf("%d", &aux);
-  V->x = aux;
+void cargarVector(Vector *V)
+{
+    int aux;
+    printf("Ingrese la componente de la fuerza en x: ");
+    scanf("%d", &aux);
+    V->x = aux;
+    printf("Ingrese la componente de la fuerza en Y: ");
+    scanf("%d", &aux);
+    V->y = aux;
+    printf("Ingrese la componente de la fuerza en z: ");
+    scanf("%d", &aux);
+    V->x = aux;
 }
 
 /**
  * @brief Retorna cero si la sumatoria de fuerzas es cero
- * 
- * @param Fuerzas 
- * @param cantidad 
- * @return int 
+ *
+ * @param Fuerzas
+ * @param cantidad
+ * @return int
  */
-int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad){
-  int i = 0, x = 0, y = 0 , z = 0, bandera = 0;
-  for ( i = 0; i < cantidad; i++)
-  {
-    x += Fuerzas[i].x;
-    y += Fuerzas[i].y;
-    z += Fuerzas[i].z;
-  }
-  
-  return x+y+z;
+int FuerzasEnEquilibrio(Vector Fuerzas[], int cantidad)
+{
+    int i = 0, x = 0, y = 0, z = 0, bandera = 0;
+    for (i = 0; i < cantidad; i++)
+    {
+        x += Fuerzas[i].x;
+        y += Fuerzas[i].y;
+        z += Fuerzas[i].z;
+    }
+
+    return x + y + z;
 }
 
-//lab 8
+// lab 8
 /**
- * @brief 
- * 
- * @param numero 
- * @return int 
+ * @brief
+ *
+ * @param numero
+ * @return int
  */
-int esPrimo( long numero){ //retorna cero si el numero es primo
-  int contadorDivisores = 0, i;
-  int bandera = 0;
-  for( i = 1; i<= (numero/2); i++){ //un numero mayor a la mitad del numero recibido jamas sera divisor exacto
+int esPrimo(long numero)
+{ // retorna cero si el numero es primo
+    int contadorDivisores = 0, i;
+    int bandera = 0;
+    for (i = 1; i <= (numero / 2); i++)
+    { // un numero mayor a la mitad del numero recibido jamas sera divisor exacto
 
-    if( contadorDivisores > 1){ //el iterador empieza en uno, y el contador de divisore aumenta, si encuentra otro divisor exacto no es primo
+        if (contadorDivisores > 1)
+        { // el iterador empieza en uno, y el contador de divisore aumenta, si encuentra otro divisor exacto no es primo
 
-      bandera = 1;
-      break;
+            bandera = 1;
+            break;
+        }
+        else
+        {
+            if (numero % i == 0)
+            {
+                contadorDivisores++;
+            }
+        }
     }
-    else {
-      if (numero % i == 0)
-      {
-        contadorDivisores++;
-      }
-    }
-    
-  }
 
-  printf("bander = %d\t", bandera);
-  switch (bandera)
-  {
-  case 0:
-    return 0;
-    break;
-  case 1:
-    return 1;
-  default:
-    return 1;
-    break;
-  }
+    printf("bander = %d\t", bandera);
+    switch (bandera)
+    {
+    case 0:
+        return 0;
+        break;
+    case 1:
+        return 1;
+    default:
+        return 1;
+        break;
+    }
 }
 
 /**
  * @brief  retorna -1 si es impar 0 si es par y 1 si es primo
- * 
- * @param numero 
- * @return int 
+ *
+ * @param numero
+ * @return int
  */
-int tipoNumero( long numero)
+int tipoNumero(long numero)
 {
-  if( numero < 0)
-    numero = numero * -1;
-    
-  if( esPrimo(numero) != 1){
-    return 1;
-  }
-  else{
-    if ( numero % 2 == 0)
+    if (numero < 0)
+        numero = numero * -1;
+
+    if (esPrimo(numero) != 1)
     {
-      return 0;
+        return 1;
     }
     else
     {
-      return -1;
+        if (numero % 2 == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
-  }
-  
 }
 
-//lab 10
+// lab 10
 /**
  * @brief retorna 0 si los simbolos estan valanveados
- * 
- * @param cadena 
- * @param pilaContenedora 
- * @param simboloApertura 
- * @param simboloCierre 
- * @return int 
+ *
+ * @param cadena
+ * @param pilaContenedora
+ * @param simboloApertura
+ * @param simboloCierre
+ * @return int
  */
-int simbolosValanceados( char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre){
-  int bandera = 0, i= 0;
-  char aux;
-  while (cadena[i] != '\0' && cadena[i] != '\n')
-  {
-    printf("\n%c", cadena[i]);
-    if(cadena[i] == simboloApertura){
-      insertarCharEnCabeza( cadena[i], &pilaContenedora);// si encuentra apertura de parentesis agrega a la pila
+int simbolosValanceados(char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre)
+{
+    int bandera = 0, i = 0;
+    char aux;
+    while (cadena[i] != '\0' && cadena[i] != '\n')
+    {
+        printf("\n%c", cadena[i]);
+        if (cadena[i] == simboloApertura)
+        {
+            insertarCharEnCabeza(cadena[i], &pilaContenedora); // si encuentra apertura de parentesis agrega a la pila
+        }
+        if (cadena[i] == simboloCierre)
+        {
+            if (pilaContenedora.cantidadElem == 0)
+            { // si encuentra una cierre de parentesis y la pila esta vacia retorna bandera 1
+                bandera = 1;
+                break;
+            }
+            else
+            {
+                aux = extraerCabezaListaChar(&pilaContenedora);
+                printf("El valor extraido fue: %c", aux);
+            }
+        }
+        i++;
     }
-    if(cadena[i] == simboloCierre){
-      if(pilaContenedora.cantidadElem == 0){ // si encuentra una cierre de parentesis y la pila esta vacia retorna bandera 1 
+
+    // imprimeDesdeLaCabezaListaChar(&pilaContenedora);
+    if (pilaContenedora.cantidadElem != 0)
+    {
         bandera = 1;
-        break;
-      }
-      else {
-        aux = extraerCabezaListaChar( &pilaContenedora);
-        printf("El valor extraido fue: %c", aux);
-      }
     }
-    i++;
-  }
 
-  // imprimeDesdeLaCabezaListaChar(&pilaContenedora);
-  if(pilaContenedora.cantidadElem != 0){
-    bandera = 1;
-  }
-
-  return bandera;
+    return bandera;
 }
 
-//funciones extra
+// funciones extra
 
 /**
  * @brief determina si una palabra es un palindromo o no
- * 
- * @param cadena 
+ *
+ * @param cadena
  * @return int ( 1 si es palindromo 0 en caso contrario)
  */
-int esPalidromo( char cadena[]){
-  int longitud = strlen(cadena);
-  if( longitud <=1 ) return 1; // las palabras de una sola letra son siempre palindromos
-  int inicio = 0, fin = longitud - 1;
-  while (cadena[inicio] == cadena[fin])
-  {
-    if( inicio >= fin) return 1; // si sigue en el bucle e inicio y fin ya son iguales retorna 1(es palindromo)
-    inicio++;
-    fin--;
-  }
-  return 0; // si sale del bucle entonces no es palindromo
+int esPalidromo(char cadena[])
+{
+    int longitud = strlen(cadena);
+    if (longitud <= 1)
+        return 1; // las palabras de una sola letra son siempre palindromos
+    int inicio = 0, fin = longitud - 1;
+    while (cadena[inicio] == cadena[fin])
+    {
+        if (inicio >= fin)
+            return 1; // si sigue en el bucle e inicio y fin ya son iguales retorna 1(es palindromo)
+        inicio++;
+        fin--;
+    }
+    return 0; // si sale del bucle entonces no es palindromo
 }
