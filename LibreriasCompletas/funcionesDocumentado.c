@@ -28,6 +28,90 @@ int mayor(int arreglo[], const int longitud)
 }
 
 /**
+ * @brief retorna la cantidad de elementos diferentes en un array
+ *
+ * @param arreglo Arreglo
+ * @param longitud Dimension del arreglo
+ * @return int
+ */
+int cantidadElementosDiferentes(int arreglo[], const int longitud)
+{
+    int contador = 0, i, cantidad;
+    int dimension = longitud;
+    for (i = 0; i < longitud; i++)
+    {
+        cantidad = cantidadAparicionElemento(arreglo[i], &arreglo[i], dimension);
+        if (cantidad == 1)
+        {
+            contador++;
+        }
+        dimension--;
+    }
+    return contador;
+}
+
+/**
+ * @brief retorna la cantidad de apariciones de un elemento en un array
+ *
+ * @param valor
+ * @param arreglo Arreglo
+ * @param longitud Dimension del arreglo
+ * @return int
+ */
+int cantidadAparicionElemento(int valor, int arreglo[], int longitud)
+{
+    int i = 0;
+    int contador = 0;
+    for (i = 0; i < longitud; i++)
+    {
+        if (valor == arreglo[i])
+            contador++;
+    }
+    return contador;
+}
+
+/**
+ * @brief retorna la suma de todos los elementos de un array
+ *
+ * @param arreglo Arreglo
+ * @param longitud Dimension del arreglo
+ * @return int
+ */
+int sumaElementosArray(int arreglo[], int longitud)
+{
+    int s = 0;
+    int i = 0;
+    for (i = 0; i < longitud; i++)
+    {
+        s += arreglo[i];
+    }
+    return s;
+}
+
+/**
+ * @brief copia los elementos unicos de un array en otro
+ *
+ * @param arrayOrigen Arreglo del que se copiaran los elementos
+ * @param dimensionOrigen dimension del elemento origen
+ * @param arrayDestino Arreglo que recibira la copia de los elementos
+ */
+void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[])
+{
+    int contador = 0, i, cantidad;
+    int dimension = dimensionOrigen;
+    for (i = 0; i < dimensionOrigen; i++)
+    {
+        cantidad = cantidadAparicionElemento(arrayOrigen[i], &arrayOrigen[i], dimension);
+        if (cantidad == 1)
+        {
+            arrayDestino[contador] = arrayOrigen[i];
+            contador++;
+        }
+        dimension--;
+    }
+}
+
+/**
  * @brief Retorna el menor valor almacenado en un arreglo de enteros
  *
  * @param arreglo Arreglo
@@ -647,15 +731,17 @@ void leeConEspacios(char cadena[])
 {
     char c;
     int i = 0;
+    fflush(stdin);
     while ((c = getchar()) != '\n')
     {
         cadena[i++] = c;
     }
+    cadena[i] = '\0';
 }
 
 /**
  * @brief Separa las palabras de un enunciado en un array
- *
+ * @attention el array debe ser definido con una longitud estatica, ej: char *array[100] = {NULL};
  * @param array Array destino
  * @param enunciado Cadena a ser Spliteada
  * @param separador Caracter separador
@@ -663,10 +749,8 @@ void leeConEspacios(char cadena[])
  */
 int separaParabrasEnArray(char *array[], char enunciado[], char separador[])
 {
-
     int i = 0;
     char *ptrToken = strtok(enunciado, separador);
-
     while (ptrToken != NULL)
     {
         array[i] = ptrToken;
@@ -872,7 +956,7 @@ void ordSeleccionRecusiva(int arreglo[], int longitud)
  * @param arreglo Arreglo a ser ordeneado
  * @param longitud Dimension del arreglo
  */
-void burbuja_asc(int arreglo[], const int longitud)
+void burbujaAsc(int arreglo[], const int longitud)
 {
     int pasadas, i, almacenador;
 
@@ -1060,7 +1144,6 @@ void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimit
  */
 int enteroAleatorio(int limite)
 { // devuelve un numero entero positivo, negativo o cero aleatorio
-
     int valor1 = (rand() % limite);
     int valor2 = (rand() % limite);
 
@@ -1077,7 +1160,7 @@ int enteroAleatorio(int limite)
 
 int enteroAleatorioEntre(int limiteInf, int limiteSup)
 { // devuelve un numero aleatorio entre el limite inferior y el superior
-
+    srand(time(NULL));
     int valor = limiteInf + (rand() % (limiteSup - limiteInf));
     return valor;
 }
@@ -1714,11 +1797,14 @@ int extraerCabezaListaInt(ListaInt *listaObjetivo)
         NodoInt *ptrNodoObjetivo;
 
         ptrNodoObjetivo = listaObjetivo->cabeza;
-
         contenedor = ptrNodoObjetivo->dato;
+        if (ptrNodoObjetivo->sig != NULL)
+        {
+            listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+        }
+
         listaObjetivo->cabeza = ptrNodoObjetivo->sig;
-        listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
-        listaObjetivo->cantidadElem--;      // resta uno a la cantidad de elementos de la lista
+        listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
         if (listaObjetivo->cantidadElem == 0)
             listaObjetivo->cola = NULL;
 
@@ -2324,7 +2410,7 @@ void despliegaMenuColasDePrioridad()
 /**
  * @brief crea un arichivo y devuelve su apuntador
  *
- * @return FILE*
+ * @return Archivo*
  */
 Archivo *creaArchivo()
 {
@@ -2332,23 +2418,33 @@ Archivo *creaArchivo()
     char nombreArchivo[150] = "";
     char modo[5] = "";
     Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
+    ptrNuevoArchivo->punteroArchivo = NULL;
 
-    printf("Ingrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+    printf("\nIngrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
     scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
     printf("\nIngrese el codigo del Modo de apertura del archivo: ");
     scanf("%s", modo); // ingresa el formato de apertura del archivo
     if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, modo)) == NULL)
     {
         printf("No se pudo crear el archivo.\nERROR\n"); // retorna null si no se pudo abrir el archivo
-        return NULL;
     }
     else
     {
         ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
         ptrNuevoArchivo->registros = 0;         // establece la cantidad de registtros hab en cero
-        optenerCantidadElementos(ptrNuevoArchivo);
-        return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
+        // optenerCantidadElementos(ptrNuevoArchivo);
     }
+    printf("TOdo en orden");
+    return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
+}
+
+/**
+ *
+ */
+void cierraArchivo(Archivo *ArchivoObjetivo)
+{
+    fclose(ArchivoObjetivo->punteroArchivo);
+    free(ArchivoObjetivo);
 }
 
 /**
@@ -2515,7 +2611,7 @@ void actualizaRegistro(Archivo *ptrArchivo)
 void informeTxt(Archivo *ptrArchivo)
 {
 
-    FILE *ptrInforme; // apuntador al archivo Resultado
+    FILE *ptrInforme = malloc(sizeof(FILE *)); // apuntador al archivo Resultado
 
     RegistroArchivo datos = {0, 1, {0}}; // inicializar aqui el registro,
 
@@ -2540,6 +2636,27 @@ void informeTxt(Archivo *ptrArchivo)
                 printf("Registro Vacio\n"); // informa que no se pudo leer nada desde el archivo origen
             }
         }
+        fclose(ptrInforme); // cierra el archivo de informe
+        printf("\n\tInforme Generado exitosamente!\n\n");
+    }
+};
+
+void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen)
+{
+    FILE *ptrInforme = malloc(sizeof(FILE *)); // apuntador al archivo Resultadox
+
+    int valor = 0, i, iteraciones = ListaOrigen->cantidadElem;
+    printf("\nLa lista tiene %d elementos.", ListaOrigen->cantidadElem);
+    if ((ptrInforme = fopen("Informe.txt", "w")) == NULL)
+        printf("\n\tERROR: No se pudo crear el Archivo\n\n");
+    else
+    {
+        for (i = 0; i < iteraciones - 1; i++)
+        {
+            valor = extraerCabezaListaInt(ListaOrigen);
+            fprintf(ptrInforme, "%d\n", valor);
+        }
+
         fclose(ptrInforme); // cierra el archivo de informe
         printf("\n\tInforme Generado exitosamente!\n\n");
     }
@@ -2849,6 +2966,27 @@ void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dirIteradorDelArr
         *dirIteradorDelArray = *dirIteradorDelArray + 1;
         inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
     }
+}
+
+// pruebas con listas
+/**
+ * @brief Crea una lista de longitud aleatoria y con valores aleatorios en los registros
+ *
+ * @return *ListaInt
+ */
+ListaInt *creaListaIntAleatoria()
+{
+    int i;
+    ListaInt *Lista = malloc(sizeof(ListaInt));
+    int cantidadElementos = enteroAleatorioEntre(1, 15000); // por ahora dejo asi, en el momento de guardar cosas en archivos usare el que puede generar miles de numeros
+
+    NodoInt *nodoAux;
+    printf("Cantidad de elementos: %d", cantidadElementos);
+    for (i = 0; i < cantidadElementos; i++)
+    {
+        insertarIntEnCola(enteroAleatorio(100), Lista);
+    }
+    return (Lista);
 }
 
 /**

@@ -9,6 +9,10 @@
 /* Operaciones con arreglos */
 int mayor(int arreglo[], const int longitud); // devuelve el mayor elemento del arreglo
 int menor(int arreglo[], const int longitud); // devuelve el menor elemento del arreglo
+int cantidadElementosDiferentes(int arreglo[], const int longitud);
+int cantidadAparicionElemento(int, int arreglo[], int);
+int sumaElementosArray(int arreglo[], int longitud);
+void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[]);
 
 void copia_arreglo(int origen[], int destino[], const int dim); // copia el arreglo del primer argumento en el arreglo del segundo argumento
 void imprimeArreglo(int arreglo[], const int longitud);         // imprimie el arreglo
@@ -55,7 +59,7 @@ void enteroAString(int valor, char *cadena);
 void ordIntecambio(int arreglo[], int longitud);
 void ordSeleccion(int a[], int n);
 void ordSeleccionRecusiva(int arreglo[], int longitud);
-void burbuja_asc(int arreglo[], const int longitud);
+void burbujaAsc(int arreglo[], const int longitud);
 void burbuja_des(int arreglo[], const int longitud);
 void quickSort(double array[], int inicio, int fin);
 
@@ -250,6 +254,7 @@ typedef struct REGISTRORARCHIVO
 
 RegistroArchivo creaRegistroArchivo();
 Archivo *creaArchivo();
+void cierraArchivo(Archivo *ArchivoObjetivo);
 Archivo *creaArchivoBin(); // crea un archivo binario, si se especifica rb+ y el archivo no existe, primero lo crea y luego abre el archivo para actualizacion binaria
 void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar);
 void nuevoRegistro(Archivo *prtF);
@@ -260,6 +265,7 @@ void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una L
 void menuArchivos();
 void optenerCantidadElementos(Archivo *ptrArchivo);
 void despliegaMenuListasYArchivos();
+void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen);
 
 /**
  * @brief Definiciones de funciones y estructuras para manejo de Arboles y monticulos
@@ -293,6 +299,8 @@ void imprimirArbol(Arbol *);
 void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
 void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);
 
+// Purebas con listas
+ListaInt *creaListaIntAleatoria();
 /**
  * @brief Funciones utilizadas en el laboratorio
  *

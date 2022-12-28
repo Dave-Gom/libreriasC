@@ -92,7 +92,7 @@ void ordSeleccionRecusiva( int arreglo[], int longitud)
  * @param arreglo Arreglo a ser ordeneado
  * @param longitud Dimension del arreglo
  */
-void burbuja_asc( int arreglo[], const int longitud){
+void burbujaAsc( int arreglo[], const int longitud){
   int pasadas, i, almacenador;
 
   for( pasadas = 0; pasadas < longitud; pasadas ++){

@@ -53,7 +53,7 @@ void primeraAparicion(char exp[], char p);
 void ordIntecambio(int arreglo[], int longitud);
 void ordSeleccion(int a[], int n);
 void ordSeleccionRecusiva(int arreglo[], int longitud);
-void burbuja_asc(int arreglo[], const int longitud);
+void burbujaAsc(int arreglo[], const int longitud);
 void burbuja_des(int arreglo[], const int longitud);
 void quickSort(double array[], int inicio, int fin);
 
