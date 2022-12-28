@@ -4,9 +4,8 @@ int main()
 {
     int dato;
     ListaInt *NuevaLista = creaListaIntAleatoria();
-    // imprimeDesdeLaCabezaListaInt(NuevaLista);
-    // extraerCabezaListaInt(NuevaLista);/
-    guardaListaIntEnArchivoInforme(NuevaLista);
-    // printf("EL valor es %d", valor);
+    Archivo *NuevoArchivo = creaArchivo();
+    guardaListaIntEnArchivoNuevo(NuevaLista, NuevoArchivo);
+    cierraArchivo(NuevoArchivo);
     return 0;
 }

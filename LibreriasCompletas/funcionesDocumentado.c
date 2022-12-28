@@ -2410,7 +2410,7 @@ void despliegaMenuColasDePrioridad()
 /**
  * @brief crea un arichivo y devuelve su apuntador
  *
- * @return Archivo*
+ * @return *Archivo
  */
 Archivo *creaArchivo()
 {
@@ -2434,7 +2434,6 @@ Archivo *creaArchivo()
         ptrNuevoArchivo->registros = 0;         // establece la cantidad de registtros hab en cero
         // optenerCantidadElementos(ptrNuevoArchivo);
     }
-    printf("TOdo en orden");
     return ptrNuevoArchivo; // retorna el puntero al archivo si hubo exito
 }
 
@@ -2610,11 +2609,8 @@ void actualizaRegistro(Archivo *ptrArchivo)
  */
 void informeTxt(Archivo *ptrArchivo)
 {
-
     FILE *ptrInforme = malloc(sizeof(FILE *)); // apuntador al archivo Resultado
-
-    RegistroArchivo datos = {0, 1, {0}}; // inicializar aqui el registro,
-
+    RegistroArchivo datos = {0, 1, {0}};       // inicializar aqui el registro,
     if ((ptrInforme = fopen("Informe.txt", "w")) == NULL)
         printf("\n\tERROR: No se pudo crear el Archivo\n\n");
     else
@@ -2641,6 +2637,31 @@ void informeTxt(Archivo *ptrArchivo)
     }
 };
 
+/**
+ * @brief recibe un archivo
+ *
+ * @param *ListaInt
+ * @param *Archivo
+ */
+void guardaListaIntEnArchivoNuevo(ListaInt *ListaOrigen, Archivo *ArchivoDestino)
+{
+    int iteraciones = ListaOrigen->cantidadElem;
+    int i, valor;
+    rewind(ArchivoDestino->punteroArchivo);
+    for (i = 0; i < iteraciones; i++)
+    {
+        valor = extraerCabezaListaInt(ListaOrigen);
+        fprintf(ArchivoDestino->punteroArchivo, "%d\n", valor);
+        ArchivoDestino->cantidadElementos++;
+    }
+    rewind(ArchivoDestino->punteroArchivo);
+}
+
+/**
+ * @brief crea un archivo llamado informe.txt y en el almacena todos los elementos de de la lista int
+ *
+ * @param ListaInt*
+ */
 void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen)
 {
     FILE *ptrInforme = malloc(sizeof(FILE *)); // apuntador al archivo Resultadox

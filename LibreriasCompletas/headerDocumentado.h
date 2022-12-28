@@ -265,6 +265,7 @@ void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una L
 void menuArchivos();
 void optenerCantidadElementos(Archivo *ptrArchivo);
 void despliegaMenuListasYArchivos();
+void guardaListaIntEnArchivoNuevo(ListaInt *, Archivo *);
 void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen);
 
 /**
