@@ -1048,6 +1048,21 @@ void quickSort(double array[], int inicio, int fin)
 /**
  * @brief  Ingrese la fecha en formato dd/mm/aaaa
  *
+ * @param array[] arreglo a ser ordenado
+ * @param dimension dimension del arreglo
+ */
+void ordenaArrayConArboles(int array[], int dimension)
+{
+    Arbol *Arbol = malloc(sizeof(*Arbol));
+    int i = 0;
+    cargaArregloEnArbol(Arbol, array, 20);
+    inOrdenArray(Arbol->Raiz, array, &i);
+    free(Arbol);
+}
+
+/**
+ * @brief  Ingrese la fecha en formato dd/mm/aaaa
+ *
  * @param cadena
  */
 void leeFechaFormat(char cadena[])
@@ -1852,15 +1867,22 @@ int extraerColaListaInt(ListaInt *listaObjetivo)
  */
 void imprimeDesdeLaCabezaListaInt(const ListaInt *listaObjetivo)
 {
-    printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
-    NodoInt *ptrNodoObjetivo = listaObjetivo->cabeza;
-    while (ptrNodoObjetivo != NULL)
+    if (listaObjetivo->cabeza != NULL)
     {
-        printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
-        printf(" -> ");
-        ptrNodoObjetivo = ptrNodoObjetivo->sig;
+        printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+        NodoInt *ptrNodoObjetivo = listaObjetivo->cabeza;
+        while (ptrNodoObjetivo != NULL)
+        {
+            printf("(%d)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+            printf(" -> ");
+            ptrNodoObjetivo = ptrNodoObjetivo->sig;
+        }
+        printf("NULL\n");
     }
-    printf("NULL\n");
+    else
+    {
+        printf("La lista esta vacia");
+    }
 }
 
 /**
@@ -2438,6 +2460,7 @@ Archivo *creaArchivo()
 }
 
 /**
+ * @brief cierra el archivo que recibe y elimina
  *
  */
 void cierraArchivo(Archivo *ArchivoObjetivo)
@@ -2601,6 +2624,30 @@ void actualizaRegistro(Archivo *ptrArchivo)
 }
 
 /**
+ * @param ptrf*
+ *
+ */
+Archivo *abreArchivoParaLectura()
+{
+    char nombreArchivo[150] = "";
+    Archivo *ptrNuevoArchivo = malloc(sizeof(Archivo)); // inicializa el puntero al archivo en null
+    ptrNuevoArchivo->punteroArchivo = NULL;
+
+    printf("\nIngrese el Nombre Del Archivo SIN ESPACIOS y Su extension: ");
+    scanf("%s", nombreArchivo); // ingresa el nombre y formato del archivo
+    if ((ptrNuevoArchivo->punteroArchivo = fopen(nombreArchivo, "r")) == NULL)
+    {
+        printf("No se pudo abir el archivo\n"); // retorna null si no se pudo abrir el archivo
+    }
+    else
+    {
+        ptrNuevoArchivo->cantidadElementos = 0; // establece en cero la cantidad de elementos
+        ptrNuevoArchivo->registros = 0;         // establece la cantidad de registtros hab en cero
+    }
+    return ptrNuevoArchivo;
+}
+
+/**
  * @brief Crea un archivo de texto con formato para impresión
  * Obs: la definicion del archivo depende de los requerimientos del programa.
  *
@@ -2677,10 +2724,30 @@ void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen)
             valor = extraerCabezaListaInt(ListaOrigen);
             fprintf(ptrInforme, "%d\n", valor);
         }
-
+        // fprintf(ptrInforme, "%d\n", EOF);
         fclose(ptrInforme); // cierra el archivo de informe
         printf("\n\tInforme Generado exitosamente!\n\n");
     }
+}
+
+/**
+ * @brief guarda el contenido de una lista en un archivo recibido
+ *
+ * @param ListaInt*
+ * @param Archivo*
+ */
+void leeListaIntDeArchivoInforme(ListaInt *ListaDestino, Archivo *Archivo)
+{
+    int dato;
+    if (Archivo->punteroArchivo != NULL)
+    {
+        while (!feof(Archivo->punteroArchivo))
+        {
+            fscanf(Archivo->punteroArchivo, "%d", &dato);
+            insertarIntEnCola(dato, ListaDestino);
+        }
+    }
+    cierraArchivo(Archivo);
 }
 
 /**
@@ -2999,7 +3066,7 @@ ListaInt *creaListaIntAleatoria()
 {
     int i;
     ListaInt *Lista = malloc(sizeof(ListaInt));
-    int cantidadElementos = enteroAleatorioEntre(1, 15000); // por ahora dejo asi, en el momento de guardar cosas en archivos usare el que puede generar miles de numeros
+    int cantidadElementos = enteroAleatorioEntre(1, 2000); // por ahora dejo asi, en el momento de guardar cosas en archivos usare el que puede generar miles de numeros
 
     NodoInt *nodoAux;
     printf("Cantidad de elementos: %d", cantidadElementos);

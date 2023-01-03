@@ -56,14 +56,17 @@ void leeFechaFormat(char cadena[]);
 void enteroAString(int valor, char *cadena);
 
 /* ordenamientos */
+
 void ordIntecambio(int arreglo[], int longitud);
 void ordSeleccion(int a[], int n);
 void ordSeleccionRecusiva(int arreglo[], int longitud);
 void burbujaAsc(int arreglo[], const int longitud);
 void burbuja_des(int arreglo[], const int longitud);
 void quickSort(double array[], int inicio, int fin);
+void ordenaArrayConArboles(int array[], int dimension);
 
 /* pruebas y generacion aleatoria */
+
 void arrayAleatorio(int arreglo[], int longitud, int valorLimite);                  // asigna numeros aleatorios del cero hasta el valor del tercer argumento al arreglo
 void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite); // asigna numeros aleatorios del cero hasta el valor del tercer argumento a la matriz
 
@@ -83,7 +86,6 @@ typedef struct REGISTRO // registro de archivos
     int valor;
     /*   char nombre[60];
       double estadoDeCuenta; */
-
 } Registro;
 
 Registro creaRegistro();
@@ -260,6 +262,7 @@ void guardaRegistroEnArchivo(Archivo *ptrArchivo, RegistroArchivo *aGuardar);
 void nuevoRegistro(Archivo *prtF);
 void eliminaRegistro(Archivo *ptrF);
 void actualizaRegistro(Archivo *ptrF);
+Archivo *abreArchivoParaLectura();
 void informeTxt(Archivo *prtF);                                  // imprime un informe del archiv en txt
 void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una Lista y guarda los registros en un archivo desde la cabeza de la listavoid menuArchivos();
 void menuArchivos();
@@ -267,6 +270,7 @@ void optenerCantidadElementos(Archivo *ptrArchivo);
 void despliegaMenuListasYArchivos();
 void guardaListaIntEnArchivoNuevo(ListaInt *, Archivo *);
 void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen);
+void leeListaIntDeArchivoInforme(ListaInt *ListaInt, Archivo *Archivo);
 
 /**
  * @brief Definiciones de funciones y estructuras para manejo de Arboles y monticulos
