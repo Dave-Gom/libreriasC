@@ -137,7 +137,9 @@ typedef struct LISTAINT
     NodoInt *cabeza;
     NodoInt *cola;
     int cantidadElem;
-} ListaInt; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
+} ListaInt; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos. Eje de definicion: "malloc(sizeof(ListaInt));"
+
+#define INICIALIZAPUNTEROLISTAINT malloc(sizeof(ListaInt))
 
 typedef struct LISTACHAR
 {
@@ -245,7 +247,9 @@ typedef struct ESTRUCTURAARCHIVOS
     int cantidadElementos;
     int registros;
     FILE *punteroArchivo;
-} Archivo;
+} Archivo; // Para definir un puntero a este dato user "malloc(sizeof(Archivo));"
+
+#define INICIALIZAPUNTEROARCHIVO malloc(sizeof(Archivo))
 
 typedef struct REGISTRORARCHIVO
 {
@@ -302,7 +306,7 @@ void postOrden(NodoArbol *ptrNodoArbol);
 void imprimirArbol(Arbol *);
 
 void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud);
-void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dimension);
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int direccion);
 
 // Purebas con listas
 ListaInt *creaListaIntAleatoria();
