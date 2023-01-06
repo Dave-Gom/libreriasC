@@ -1054,9 +1054,8 @@ void quickSort(double array[], int inicio, int fin)
 void ordenaArrayConArboles(int array[], int dimension)
 {
     Arbol *Arbol = malloc(sizeof(*Arbol));
-    int i = 0;
-    cargaArregloEnArbol(Arbol, array, 20);
-    inOrdenArray(Arbol->Raiz, array, &i);
+    cargaArregloEnArbol(Arbol, array, dimension);
+    inOrdenArray(Arbol->Raiz, array, dimension);
     free(Arbol);
 }
 
@@ -3044,15 +3043,20 @@ void cargaArregloEnArbol(Arbol *ArbolObjetivo, int array[], int longitud)
  * @param arreglo
  * @param dirIteradorDelArray direccin de memoria del iterador
  */
-void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int *dirIteradorDelArray)
+void inOrdenArray(NodoArbol *ptrNodoArbol, int arreglo[], int dimension)
 {
     int bandera = 0;
+    static int iterador = 0;
     if (ptrNodoArbol != NULL) // Si el NodoArbol (que es un subarbol) No esta vacio
     {
-        inOrdenArray(ptrNodoArbol->izq, arreglo, dirIteradorDelArray);
-        arreglo[*dirIteradorDelArray] = ptrNodoArbol->dato;
-        *dirIteradorDelArray = *dirIteradorDelArray + 1;
-        inOrdenArray(ptrNodoArbol->der, arreglo, dirIteradorDelArray);
+        inOrdenArray(ptrNodoArbol->izq, arreglo, dimension);
+        arreglo[iterador] = ptrNodoArbol->dato;
+        iterador = iterador + 1;
+        inOrdenArray(ptrNodoArbol->der, arreglo, dimension);
+    }
+    if (iterador == dimension)
+    {
+        iterador = 0;
     }
 }
 

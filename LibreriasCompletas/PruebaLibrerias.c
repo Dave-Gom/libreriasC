@@ -1,14 +1,14 @@
 #include "headerDocumentado.h"
 
-int main()
+int main(void)
 {
-    Archivo *ArchivoInforme = malloc(sizeof(Archivo));
-    ListaInt *Lista = malloc(sizeof(ListaInt));
-    ListaInt *nuevaLista = creaListaIntAleatoria();
-    imprimeDesdeLaCabezaListaInt(nuevaLista);
-    guardaListaIntEnArchivoInforme(nuevaLista);
-    ArchivoInforme = abreArchivoParaLectura();
-    leeListaIntDeArchivoInforme(Lista, ArchivoInforme);
-    imprimeDesdeLaCabezaListaInt(Lista);
-    return 0;
+    int array[10];
+    arrayAleatorio(array, 10, 50);
+    imprimeArreglo(array, 10);
+    ordenaArrayConArboles(array, 10);
+    imprimeArreglo(array, 10);
+    int otroArray[10];
+    arrayAleatorio(otroArray, 10, 50);
+    ordenaArrayConArboles(otroArray, 10);
+    imprimeArreglo(otroArray, 10);
 }
