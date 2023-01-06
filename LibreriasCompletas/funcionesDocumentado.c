@@ -2719,7 +2719,7 @@ void guardaListaIntEnArchivoInforme(ListaInt *ListaOrigen)
         printf("\n\tERROR: No se pudo crear el Archivo\n\n");
     else
     {
-        for (i = 0; i < iteraciones - 1; i++)
+        for (i = 0; i < iteraciones; i++)
         {
             valor = extraerCabezaListaInt(ListaOrigen);
             fprintf(ptrInforme, "%d\n", valor);
