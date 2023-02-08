@@ -47,6 +47,7 @@ int cantidadElementosDiferentes(int arreglo[], const int longitud)
         }
         dimension--;
     }
+
     return contador;
 }
 
@@ -109,6 +110,8 @@ void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[
         }
         dimension--;
     }
+    ordSeleccion(arrayDestino, contador);
+    
 }
 
 /**
@@ -255,10 +258,10 @@ int posMayor(const int arreglo[], const int longitud)
  * @param dim Dimension del arreglo
  * @return int
  */
-int esMonotona(int array[], int dim)
+bool esMonotona(int array[], int dim)
 {
     int i;           // iterador
-    int bandera = 0; // su valor determina si es o no monotona
+    int bandera = true; // su valor determina si es o no monotona
     int primerValor; // primer valor del arreglo
     for (i = 0; i < dim; i++)
     {
@@ -267,7 +270,7 @@ int esMonotona(int array[], int dim)
 
         if (array[i] != primerValor)
         {
-            bandera = -1;
+            bandera = false;
             break;
         }
     }
@@ -321,14 +324,16 @@ void cargaMatriz(const int fila, const int colum, int matriz[][colum])
  * @param colum Cantidad de columnas de la matriz
  * @param matriz Matriz a ser cargada
  */
-void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum])
+void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum], bool introducePrimeraLinea)
 {
     int i, j, aux;
     /* solicita que  si ingrese la primera fila del arreglo */
-    for (j = 0; j < colum; j++)
-    {
-        scanf("%d", &aux);
-        matriz[0][j] = aux;
+    if(introducePrimeraLinea){
+        for (j = 0; j < colum; j++)
+        {
+            scanf("%d", &aux);
+            matriz[0][j] = aux;
+        }
     }
 
     /* copia los valores de la primera fila en el resto de la matriz */
@@ -349,7 +354,7 @@ void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colu
  * @param matriz Matriz a ser verificada
  * @return int
  */
-int verificaCeros(int fila, int col, int matriz[][col])
+bool hayCerosEnMatriz(int fila, int col, int matriz[][col])
 {
     int i, j;
     for (i = 0; i < fila; i++)
@@ -358,12 +363,12 @@ int verificaCeros(int fila, int col, int matriz[][col])
         {
             if (matriz[i][j] == 0)
             {
-                return -1;
+                return true;
             }
         }
     }
 
-    return 0;
+    return false;
 }
 
 /**
@@ -376,14 +381,13 @@ int verificaCeros(int fila, int col, int matriz[][col])
  * @param matriz Matriz a ser evaluada
  * @return int
  */
-int esHermosa(int fila, int columna, int matriz[][columna])
+bool esHermosa(int fila, int columna, int matriz[][columna])
 {
 
-    int isBeauty = 0; // presuponemos que es hermmosa
     if (fila != columna)
     {
         printf("No es Cuadrada\n");
-        return 1; // para se hermosa debe ser cuadrada
+        return false; // para se hermosa debe ser cuadrada
     }
     int i;
     int sumadeFilas[fila];
@@ -392,15 +396,15 @@ int esHermosa(int fila, int columna, int matriz[][columna])
     sumaDeColumnas(fila, columna, matriz, sumadeColumnas);
     sumaDeFilas(fila, columna, matriz, sumadeFilas);
 
-    if (sumadeColumnas[0] != sumadeFilas[0] || esMonotona(sumadeColumnas, fila) != 0 || esMonotona(sumadeColumnas, columna) != 0)
-        return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
+    if (sumadeColumnas[0] != sumadeFilas[0] || esMonotona(sumadeColumnas, fila) || esMonotona(sumadeColumnas, columna))
+        return false; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
 
-    if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz))
+    if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz) != sumadeColumnas[0])
     {
-        return -1; // si la condicion de arriba se cumple sabemos que no es monotna y devolvemos -1
+        return false; 
     }
 
-    return isBeauty;
+    return true;
 }
 
 /* Funciones de busqueda */
@@ -415,7 +419,7 @@ int esHermosa(int fila, int columna, int matriz[][columna])
  *
  * @author Dave Gomez
  */
-int busqueda_lineal(int arreglo[], const int longitud, int valorABuscar)
+int busquedaLineal(int arreglo[], const int longitud, int valorABuscar)
 {
     int i, bandera = 0;
     for (i = 0; i < longitud; i++)
@@ -1321,19 +1325,19 @@ Nodo *creaNodo(Registro dato)
  * @brief Retorna -1 si la lista esta vacia, 0 en caso contrario
  *
  * @param ListaVal Lista a ser Evaluada
- * @return int
+ * @return bool
  *
  * @author Dave Gomez
  */
-int listaEstaVacia(Lista ListaVal)
+bool listaEstaVacia(Lista ListaVal)
 {
     if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
     { // si la cabeza y la cola son iguales a NULL
-        return -1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
 
@@ -1355,7 +1359,7 @@ void insertarDatoEnCabeza(Registro dato, Lista *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaEstaVacia(*listaDestino) == -1)
+        if (listaEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -1386,7 +1390,7 @@ void insertarDatoEnCola(Registro dato, Lista *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaEstaVacia(*listaDestino) == -1)
+        if (listaEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -1435,7 +1439,7 @@ Registro extraerCabeza(Lista *listaObjetivo)
 {
 
     Registro Dato = {0}; // contenedor Auxiliar
-    if (listaEstaVacia(*listaObjetivo) != -1)
+    if (listaEstaVacia(*listaObjetivo))
     {
 
         Nodo *ptrNodoObjetivo;
@@ -1613,7 +1617,7 @@ void insertaEnOrden(Registro dato, Lista *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaEstaVacia(*listaDestino) == -1)
+        if (listaEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -1689,19 +1693,19 @@ NodoInt *creaNodoInt(int dato)
  * @brief Retorna -1 si la lista esta vacia, 0 en caso contrario
  *
  * @param ListaVal Lista a ser Evaluada
- * @return int
+ * @return bool
  *
  * @author Dave Gomez
  */
-int listaIntEstaVacia(ListaInt ListaVal)
+bool listaIntEstaVacia(ListaInt ListaVal)
 {
     if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
     { // si la cabeza y la cola son iguales a NULL
-        return -1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
 
@@ -1723,7 +1727,7 @@ void insertarIntEnCabeza(int dato, ListaInt *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaIntEstaVacia(*listaDestino) == -1)
+        if (listaIntEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -1754,7 +1758,7 @@ void insertarIntEnCola(int dato, ListaInt *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaIntEstaVacia(*listaDestino) == -1)
+        if (listaIntEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -1805,7 +1809,7 @@ int extraerCabezaListaInt(ListaInt *listaObjetivo)
 {
 
     int contenedor = 0; // contenedor Auxiliar
-    if (listaIntEstaVacia(*listaObjetivo) != -1)
+    if (listaIntEstaVacia(*listaObjetivo))
     {
 
         NodoInt *ptrNodoObjetivo;
@@ -1982,7 +1986,7 @@ void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino)
     if (ptrNuevoNodo != NULL)                  // se creo el nuevo nodo
     {
         listaDestino->cantidadElem++;               // aumenta la cantidad de elementos en la lista
-        if (listaIntEstaVacia(*listaDestino) == -1) // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+        if (listaIntEstaVacia(*listaDestino)) // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
         {
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -2056,22 +2060,22 @@ NodoChar *creaNodoChar(char dato)
 }
 
 /**
- * @brief Retorna -1 si la lista esta vacia, 0 en caso contrario
+ * @brief Retorna true si la lista esta vacia, false en caso contrario
  *
  * @param ListaVal Lista a ser Evaluada
- * @return int
+ * @return bool
  *
  * @author Dave Gomez
  */
-int listaCharEstaVacia(ListaChar ListaVal)
+bool listaCharEstaVacia(ListaChar ListaVal)
 {
     if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
     { // si la cabeza y la cola son iguales a NULL
-        return -1;
+        return true;
     }
     else
     {
-        return 0;
+        return false;
     }
 }
 
@@ -2092,7 +2096,7 @@ void insertarCharEnCabeza(char dato, ListaChar *listaDestino)
     if (ptrNuevoNodo != NULL)
     {
         listaDestino->cantidadElem++;
-        if (listaCharEstaVacia(*listaDestino) == -1)
+        if (listaCharEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -2123,7 +2127,7 @@ void insertarCharEnCola(char dato, ListaChar *listaDestino)
     {
         listaDestino->cantidadElem++;
 
-        if (listaCharEstaVacia(*listaDestino) == -1)
+        if (listaCharEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
         }
@@ -2176,7 +2180,7 @@ int extraerCabezaListaChar(ListaChar *listaObjetivo)
 {
 
     char contenedor = '\0'; // contenedor Auxiliar
-    if (listaCharEstaVacia(*listaObjetivo) != -1)
+    if (listaCharEstaVacia(*listaObjetivo))
     {
 
         NodoChar *ptrNodoObjetivo;
@@ -3112,9 +3116,10 @@ int resta_errad(int n)
 /* devuelve uno cero si todos los digitos del anio son diferentes
 caso contrario devuelce -1*/
 /* funciona para anios de 4 dijitos pero se puede mejorar */
-int is_beautifull_year(int anio)
+bool isBeautifullYear(int anio)
 {
-    int unid, dec, cent, uni_mil, ret = 0;
+    int unid, dec, cent, uni_mil;
+    bool ret = true;
 
     unid = anio % 10;
     dec = ((anio % 100) - unid) / 10;
@@ -3122,22 +3127,22 @@ int is_beautifull_year(int anio)
     uni_mil = ((anio % 10000) - cent * 100 - dec * 10 - unid) / 1000;
 
     if (unid == dec)
-        ret = -1;
+        ret = false;
 
     if (unid == cent)
-        ret = -1;
+        ret = false;
 
     if (unid == uni_mil)
-        ret = -1;
+        ret = false;
 
     if (cent == dec)
-        ret = -1;
+        ret = false;
 
     if (uni_mil == dec)
-        ret = -1;
+        ret = false;
 
     if (uni_mil == cent)
-        ret = -1;
+        ret = false;
 
     return ret;
 }

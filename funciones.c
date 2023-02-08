@@ -186,7 +186,7 @@ int sube_escalera( int n ){
 
 /* retorna la posicion de un valor dentro de un arreglo, -1 si el 
 no se encuentra */
-int busqueda_lineal(  int arreglo[], const int longitud, int valorABuscar){
+int busquedaLineal(  int arreglo[], const int longitud, int valorABuscar){
   int i, bandera = 0;
   for ( i = 0; i< longitud; i++){
     if(arreglo[i] == valorABuscar){
@@ -480,7 +480,7 @@ void separaParabrasEnArray( char *array[], char enunciado[], char separador[])
 }
 
 
-int verificaCeros(int fila, int col, int matriz[][col])  /* Verifica la existencia  de ceros en una matriz, si existe, devuelce -1 si no existen devuelce cero */
+int hayCerosEnMatriz(int fila, int col, int matriz[][col])  /* Verifica la existencia  de ceros en una matriz, si existe, devuelce -1 si no existen devuelce cero */
 {  int i, j;
   for( i = 0;i<fila; i++){
     for ( j = 0; j < col; j++)

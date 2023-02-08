@@ -21,7 +21,7 @@ void digitosInt( int arreglo[], int valor);
 void iniciaMatriz( const int fila, const int colum, int matriz[][colum] );//inicializa la matriz con todos los valores en cero
 void cargaMatriz( const int fila, const int colum, int matriz[][colum] );//asigna valores desde la entrada estandar al arreglo
 void copiaPrimerafilaEnMatriz( const int fila, const int colum, int matriz[][colum] );//copia la primera fila de la matriz en las demas filas
-int verificaCeros(int fila, int col, int matriz[][col]);
+int hayCerosEnMatriz(int fila, int col, int matriz[][col]);
 int esHermosa( int fila, int columna, int matriz[][columna]) ;
 void sumaDeColumnas(int fila, int col , int matriz[][col], int sumaCol[]);
 void sumaDeFilas(int fila, int col , int matriz[][col], int sumaFilas[]);

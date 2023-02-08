@@ -11,7 +11,7 @@
  *
  * @author Dave Gomez 
  */
-int busqueda_lineal(  int arreglo[], const int longitud, int valorABuscar){
+int busquedaLineal(  int arreglo[], const int longitud, int valorABuscar){
   int i, bandera = 0;
   for ( i = 0; i< longitud; i++){
     if(arreglo[i] == valorABuscar){

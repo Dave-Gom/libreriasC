@@ -5,6 +5,7 @@
 #include <math.h>
 #include <limits.h>
 #include <time.h>
+#include <stdbool.h>
 
 /* Operaciones con arreglos */
 int mayor(int arreglo[], const int longitud); // devuelve el mayor elemento del arreglo
@@ -20,15 +21,15 @@ void iniciaArreglo(int arreglo[], const int lingitud);          // inicializa el
 void cargaVector(int arreglo[], const int lenght);              // asigna valores desde la entrada estandar al arreglo
 int posMenor(const int arreglo[], const int longitud);          // develve la posicion del menor elemento del  menor elemento
 int posMayor(const int arreglo[], const int longitud);          // develve la posicion del mayor elemento del  menor elemento
-int esMonotona(int array[], int dim);
+bool esMonotona(int array[], int dim);
 void digitosInt(int arreglo[], int valor);
 
 /* Operaciones con matrices */
 void iniciaMatriz(const int fila, const int colum, int matriz[][colum]);             // inicializa la matriz con todos los valores en cero
 void cargaMatriz(const int fila, const int colum, int matriz[][colum]);              // asigna valores desde la entrada estandar al arreglo
-void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum]); // copia la primera fila de la matriz en las demas filas
-int verificaCeros(int fila, int col, int matriz[][col]);
-int esHermosa(int fila, int columna, int matriz[][columna]);
+void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum], bool introducePrimeraLinea); // copia la primera fila de la matriz en las demas filas
+bool hayCerosEnMatriz(int fila, int col, int matriz[][col]);
+bool esHermosa(int fila, int columna, int matriz[][columna]);
 void sumaDeColumnas(int fila, int col, int matriz[][col], int sumaCol[]);
 void sumaDeFilas(int fila, int col, int matriz[][col], int sumaFilas[]);
 int sumaDiagonalPrincipal(int fila, int columna, int matriz[][columna]);
@@ -38,7 +39,7 @@ void cargaMatrizDeDigitos(int fila, int columna, int mat[][columna]);
 
 /* funciones de busqueda */
 
-int busqueda_lineal(int arreglo[], const int longitud, int valorABuscar);
+int busquedaLineal(int arreglo[], const int longitud, int valorABuscar);
 int busquedaBinaria(int arreglo[], int valBuscado, int inicio, int fin);
 int busquedaBinariaRecursiva(int arreglo[], int busqueda, int izquierda, int derecha);
 
@@ -163,7 +164,7 @@ typedef struct LISTASTRING
 
 // listas de registros
 Nodo *creaNodo(Registro);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-int listaEstaVacia(Lista);                                     // retorna -1 si la lista esta vacia, 0 si no
+bool listaEstaVacia(Lista);                                     // retorna -1 si la lista esta vacia, 0 si no
 void insertarDatoEnCabeza(Registro dato, Lista *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarDatoEnCola(Registro dato, Lista *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabeza(Lista *listaDestino);
@@ -180,7 +181,7 @@ void despliegaMenuListas();                              // despliega menu de op
 
 // listas int
 NodoInt *creaNodoInt(int);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-int listaIntEstaVacia(ListaInt);                            // retorna -1 si la lista esta vacia, 0 si no
+bool listaIntEstaVacia(ListaInt);                            // retorna -1 si la lista esta vacia, 0 si no
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarIntEnCola(int dato, ListaInt *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaInt(ListaInt *listaDestino);
@@ -197,7 +198,7 @@ void despliegaMenuListasInt();
 
 // listas de char
 NodoChar *creaNodoChar(char);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-int listaCharEstaVacia(ListaChar);                             // retorna -1 si la lista esta vacia, 0 si no
+bool listaCharEstaVacia(ListaChar);                             // retorna -1 si la lista esta vacia, 0 si no
 void insertarCharEnCabeza(char dato, ListaChar *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarCharEnCola(char dato, ListaChar *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaChar(ListaChar *listaDestino);
@@ -294,7 +295,7 @@ typedef struct ARBOL
     NodoArbol *Raiz;
 } Arbol;
 
-NodoArbol *creaNodoArbol();
+NodoArbol *creaNodoArbol(int dato);
 void cargaArbol(Arbol *ArbolObjetivo, int valor);
 void despliegaMenuArboles();
 void insertaNodoEnArbol(NodoArbol **, NodoArbol *);
@@ -316,7 +317,7 @@ ListaInt *creaListaIntAleatoria();
  */
 // lab 2
 int resta_errad(int n);
-int is_beautifull_year(int anio);
+bool isBeautifullYear(int anio);
 int calc_pasos(int dist);
 // lab3
 int sube_escalera(int n);
@@ -336,7 +337,6 @@ typedef struct rectangulo
     int lado2;
 } Rectangulo;
 
-void esRectangulo();
 
 // define una estructura para un vector en 3 dimensiones
 typedef struct vector

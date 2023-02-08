@@ -247,7 +247,7 @@ void copiaPrimerafilaEnMatriz( const int fila, const int colum, int matriz[][col
  * @param matriz Matriz a ser verificada
  * @return int 
  */
-int verificaCeros(int fila, int col, int matriz[][col])
+int hayCerosEnMatriz(int fila, int col, int matriz[][col])
 {  
   int i, j;
   for( i = 0;i<fila; i++){

@@ -36,7 +36,7 @@ void iniciaMatriz( const int fila, const int colum, int matriz[][colum] );//inic
 void cargaMatriz( const int fila, const int colum, int matriz[][colum] );//asigna valores desde la entrada estandar al arreglo
 void copiaPrimerafilaEnMatriz( const int fila, const int colum, int matriz[][colum] );//copia la primera fila de la matriz en las demas filas
 void matrizAleatoria(int fila, int columna, int arreglo[][columna], int valLimite);//asigna numeros aleatorios del cero hasta el valor del tercer argumento a la matriz
-int verificaCeros(int fila, int col, int matriz[][col]);
+int hayCerosEnMatriz(int fila, int col, int matriz[][col]);
 int esHermosa( int fila, int columna, int matriz[][columna]) ;
 void sumaDeColumnas(int fila, int col , int matriz[][col], int sumaCol[]);
 void sumaDeFilas(int fila, int col , int matriz[][col], int sumaFilas[]);
@@ -67,7 +67,7 @@ void burbuja_des( int arreglo[], const int longitud);
 void quickSort( double array[], int inicio, int fin);
 
 /* funciones de busqueda */
-int busqueda_lineal(  int arreglo[], const int longitud, int valorABuscar);
+int busquedaLineal(  int arreglo[], const int longitud, int valorABuscar);
 int busquedaBinaria( int arreglo[], int valBuscado, int inicio, int fin);
 
 /* Estructuras de datos */

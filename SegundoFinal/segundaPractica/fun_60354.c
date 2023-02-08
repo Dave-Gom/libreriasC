@@ -264,7 +264,7 @@ void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colu
  * @param matriz Matriz a ser verificada
  * @return int
  */
-int verificaCeros(int fila, int col, int matriz[][col])
+int hayCerosEnMatriz(int fila, int col, int matriz[][col])
 {
   int i, j;
   for (i = 0; i < fila; i++)
@@ -330,7 +330,7 @@ int esHermosa(int fila, int columna, int matriz[][columna])
  *
  * @author Dave Gomez
  */
-int busqueda_lineal(int arreglo[], const int longitud, int valorABuscar)
+int busquedaLineal(int arreglo[], const int longitud, int valorABuscar)
 {
   int i, bandera = 0;
   for (i = 0; i < longitud; i++)
