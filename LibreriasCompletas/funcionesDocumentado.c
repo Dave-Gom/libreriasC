@@ -111,7 +111,6 @@ void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[
         dimension--;
     }
     ordSeleccion(arrayDestino, contador);
-    
 }
 
 /**
@@ -146,7 +145,7 @@ int menor(int arreglo[], const int longitud)
  * @param destino Arreglo que recibira la copia de los elementos
  * @param dim dimension de ambos arreglos (Debe ser igual)
  */
-void copia_arreglo(int origen[], int destino[], const int dim)
+void copiaArreglo(int origen[], int destino[], const int dim)
 {
     int i; // iterador
     for (i = 0; i < dim; i++)
@@ -260,9 +259,9 @@ int posMayor(const int arreglo[], const int longitud)
  */
 bool esMonotona(int array[], int dim)
 {
-    int i;           // iterador
+    int i;              // iterador
     int bandera = true; // su valor determina si es o no monotona
-    int primerValor; // primer valor del arreglo
+    int primerValor;    // primer valor del arreglo
     for (i = 0; i < dim; i++)
     {
         if (i == 0)
@@ -328,7 +327,8 @@ void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colu
 {
     int i, j, aux;
     /* solicita que  si ingrese la primera fila del arreglo */
-    if(introducePrimeraLinea){
+    if (introducePrimeraLinea)
+    {
         for (j = 0; j < colum; j++)
         {
             scanf("%d", &aux);
@@ -401,7 +401,7 @@ bool esHermosa(int fila, int columna, int matriz[][columna])
 
     if (sumaDiagonalPrincipal(fila, columna, matriz) != sumaDiagonalSecundaria(fila, columna, matriz) != sumadeColumnas[0])
     {
-        return false; 
+        return false;
     }
 
     return true;
@@ -439,6 +439,7 @@ int busquedaLineal(int arreglo[], const int longitud, int valorABuscar)
 
 /**
  * @brief Retorna la posicion de un valor dentro de un arreglo, -1 si el valor no se encuentra en el arreglo por el metodo de la busqueda binaria de forma iterativa
+ * obs: Solo funciona en arreglos ordenados
  *
  * @param arreglo Arreglo en el cual se buscara
  * @param valBuscado Valor buscado
@@ -754,7 +755,9 @@ void leeConEspacios(char cadena[])
 int separaParabrasEnArray(char *array[], char enunciado[], char separador[])
 {
     int i = 0;
-    char *ptrToken = strtok(enunciado, separador);
+    char texto[strlen(enunciado)];
+    strcpy(texto, enunciado);
+    char *ptrToken = strtok(texto, separador);
     while (ptrToken != NULL)
     {
         array[i] = ptrToken;
@@ -1009,10 +1012,10 @@ void burbuja_des(int arreglo[], const int longitud)
  * @param inicio Inicio de rango a ordenar
  * @param fin Fin de rango a ordenar
  */
-void quickSort(double array[], int inicio, int fin)
+void quickSortD(double array[], int inicio, int fin)
 {
-    int i,       // iterador
-        j,       // iterador
+    int i = 0,   // iterador
+        j = 0,   // iterador
         central; // indicador del centro del array
     double pivote;
     central = (inicio + fin) / 2; // ubica el centro del array
@@ -1039,14 +1042,113 @@ void quickSort(double array[], int inicio, int fin)
     } while (i <= j);
 
     if (inicio <= j)
-    {                                // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-        quickSort(array, inicio, j); // recursadesde el inicio hasta la posicion
+    {                                 // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
+        quickSortD(array, inicio, j); // recursadesde el inicio hasta la posicion
     }
 
     if (i < fin)
-    {                             // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-        quickSort(array, i, fin); // recursa desde la posicion hasta el fin
+    {                              // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
+        quickSortD(array, i, fin); // recursa desde la posicion hasta el fin
     }
+}
+
+/**
+ * @brief Ordena un arreglo de forma ascendente por el metodo de ordenacion rapida (Quicksort)
+ * @param array
+ * @param izquierda
+ * @param derecha
+ *
+ * @author David Gomez
+ */
+void quickSortI(int arreglo[], int izquierda, int derecha)
+{
+    int izq, der, temporal, pivote;
+    izq = izquierda;
+    der = derecha;
+    pivote = arreglo[(izq + der) / 2];
+
+    do
+    {
+        while (arreglo[izq] < pivote && izq < derecha)
+            izq++;
+
+        while (pivote < arreglo[der] && der > izquierda)
+            der--;
+
+        if (izq <= der)
+        {
+            temporal = arreglo[izq];
+            arreglo[izq] = arreglo[der];
+            arreglo[der] = temporal;
+            izq++;
+            der--;
+        }
+    } while (izq < der);
+
+    if (izquierda < der)
+    {
+        quickSortI(arreglo, izquierda, der);
+    }
+    if (derecha > izq)
+    {
+        quickSortI(arreglo, izq, derecha);
+    }
+}
+
+/**
+ * @brief Ordena un array por el medodo de Mezcla
+ * @param array
+ * @param longitud
+ *
+ * @author David Gomez
+ */
+void mergeSortArrays(int array[], int longitud)
+{
+    int medio = longitud / 2;
+    if (longitud != 1)
+    {
+        mergeSortArrays(&array[0], medio);
+        mergeSortArrays(&array[medio], longitud - medio);
+    }
+    mezclaEnOrden(&array[0], medio, &array[medio], longitud % 2 == 0 ? medio : medio + 1, array);
+}
+
+/**
+ * @brief Combina dos arrays ordenados en un unico array ya ordenado
+ * @param array1
+ * @param dim1
+ * @param array2
+ * @param dim2
+ * @param arrayDestino
+ *
+ * @author David Gomez
+ */
+void mezclaEnOrden(int array1[], int dim1, int array2[], int dim2, int arrayDestino[])
+{
+    int i1 = 0, i2 = 0, iAux = 0;
+    int arrayAux[dim1 + dim2];
+
+    while (i1 < dim1 || i2 < dim2)
+    {
+        if (i1 < dim1 && array1[i1] <= array2[i2])
+        {
+            arrayAux[iAux] = array1[i1];
+            i1++;
+        }
+        else if (i2 < dim2)
+        {
+            arrayAux[iAux] = array2[i2];
+            i2++;
+        }
+        else
+        {
+            arrayAux[iAux] = array1[i1];
+            i1++;
+        }
+        iAux++;
+    }
+
+    copiaArreglo(arrayAux, arrayDestino, dim1 + dim2);
 }
 
 /**
@@ -1054,6 +1156,8 @@ void quickSort(double array[], int inicio, int fin)
  *
  * @param array[] arreglo a ser ordenado
  * @param dimension dimension del arreglo
+ *
+ * @author David Gomez
  */
 void ordenaArrayConArboles(int array[], int dimension)
 {
@@ -1106,9 +1210,71 @@ void leeFechaFormat(char cadena[])
     sprintf(cadena, "%d/%d/%d\n", dias, mes, anio);
 }
 
+/**
+ * @brief  Ingrese la fecha en formato dd/mm/aaaa
+ *
+ * @param cadena
+ * @author David Gomez
+ */
 void enteroAString(int valor, char *cadena)
 {
     sprintf(cadena, "%d", valor);
+}
+
+/**
+ * @brief  Ingrese la fecha en formato dd/mm/aaaa
+ *
+ * @param *palabras[] array de palabras a ser impreso
+ * @param longitud int longitud del array
+ *
+ * @return void
+ * @author David Gomez
+ */
+void imprimeArrayDePalabras(char *palabras[], int longitud)
+{
+    int i = 0;
+    for (i = 0; i < longitud; i++)
+    {
+        printf("%s\t", palabras[i]);
+    }
+}
+
+/**
+ * @brief Recibe una cadena cuenta cuantas palabras hay en base a un separador
+ * @param palabras
+ * @param separador
+ * @return int
+ *
+ * @author David Gomez
+ */
+int cantidadDePalabras(char palabras[], char separador[])
+{
+    int i = 0;
+    char texto[strlen(palabras)];
+    strcpy(texto, palabras);
+    char *ptrToken = strtok(texto, separador);
+    while (ptrToken != NULL)
+    {
+        ptrToken = strtok(NULL, separador);
+        i++;
+    }
+    return i;
+}
+
+/**
+ * @brief Recibe un array de palabras  e inicializa todos los punteros a null
+ * @param palabras
+ * @param longitudArray
+ *
+ * @author David Gomez
+ */
+void inicializaArrayPalabras(char *palabras[], int longitudArray)
+{
+    int i;
+    for (i = 0; i < longitudArray; i++)
+    {
+        palabras[i] = NULL;
+    }
 }
 
 /* Funciones de Pruebas y generacion aleatoria */
@@ -1125,7 +1291,7 @@ void enteroAString(int valor, char *cadena)
 void arrayAleatorio(int arreglo[], int longitud, int valorLimite)
 {
     int i, j;
-    srand(time(NULL));
+    srand(time(0));
     for (i = 0; i < longitud; i++)
     {
         arreglo[i] = rand() % valorLimite;
@@ -1818,7 +1984,7 @@ int extraerCabezaListaInt(ListaInt *listaObjetivo)
         contenedor = ptrNodoObjetivo->dato;
         if (ptrNodoObjetivo->sig != NULL)
         {
-            listaObjetivo->cabeza->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+            ptrNodoObjetivo->sig->ante = NULL; // asigna null al puntero anterior del nodo cabeza
         }
 
         listaObjetivo->cabeza = ptrNodoObjetivo->sig;
@@ -1985,7 +2151,7 @@ void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino)
     NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea un nuevo nodoInt
     if (ptrNuevoNodo != NULL)                  // se creo el nuevo nodo
     {
-        listaDestino->cantidadElem++;               // aumenta la cantidad de elementos en la lista
+        listaDestino->cantidadElem++;         // aumenta la cantidad de elementos en la lista
         if (listaIntEstaVacia(*listaDestino)) // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
         {
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
@@ -2271,6 +2437,207 @@ void imprimeDesdeLaColaListaChar(const ListaChar *listaObjetivo)
     printf("NULL\n");
 }
 
+// listas de string
+/**
+ * @brief Crea un nodo a cadena en base a la cadena suministrada
+ * @param string
+ * @return *NodoString
+ *
+ * @author David Gomez
+ */
+
+NodoString *creaNodoString(char *string)
+{
+    NodoString *nuevoNodo = malloc(sizeof(NodoString)); // liberamos espacio en memoria del tamanio de un nodo int
+    if (nuevoNodo != NULL)
+    {
+        nuevoNodo->dato = malloc(sizeof(string));
+        strcpy(nuevoNodo->dato, string);
+        nuevoNodo->sig = NULL;
+        nuevoNodo->ante = NULL;
+        return nuevoNodo;
+    }
+    else
+    {
+        printf("No de pudo crear el Nuevo Nodo, Memoria insuficiente");
+        return NULL;
+    }
+}
+
+/**
+ * @brief verifica si una lista de string esta vacia
+ * @param ListaVal
+ * @return boolean
+ *
+ * @author David Gomez
+ *
+ */
+bool listaStringEstaVacia(ListaString ListaVal)
+{
+    if (ListaVal.cabeza == NULL && ListaVal.cola == NULL)
+    { // si la cabeza y la cola son iguales a NULL
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+/**
+ * @brief Inserta una cadena en la lista desde la cabeza
+ * @param dato
+ * @param listaDestino
+ *
+ * @author David Gomez
+ *
+ */
+void insertarStringEnCabeza(char dato[], ListaString *listaDestino)
+{
+    NodoString *ptrNuevoNodo = creaNodoString(dato); // crea el nodo con el dato
+
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
+        if (listaStringEstaVacia(*listaDestino))
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                              // si la lista no esta vacia
+            ptrNuevoNodo->sig = listaDestino->cabeza;  // asigna a al puntero siguiente del nuevo nodo la direccion de la cabeza de la lista
+            listaDestino->cabeza->ante = ptrNuevoNodo; // asigna al puntero anterior de la cabeza de la lista la direccion del nuevo nodo
+            listaDestino->cabeza = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
+    }
+}
+
+/**
+ * @brief Inserta una cadena en la lista desde la cola
+ * @param dato
+ * @param listaDestino
+ *
+ * @author David Gomez
+ */
+void insertarStringEnCola(char dato[], ListaString *listaDestino)
+{
+    /* Obs: la lista ya debe esta inicializada Lista = {NULL, NULL, 0} */
+    NodoString *ptrNuevoNodo = creaNodoString(dato);
+
+    if (ptrNuevoNodo != NULL)
+    {
+        listaDestino->cantidadElem++;
+
+        if (listaStringEstaVacia(*listaDestino))
+        { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
+            listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
+        }
+        else
+        {                                            // si la lista no esta vacia
+            ptrNuevoNodo->ante = listaDestino->cola; // asigna a al puntero anterior del nuevo nodo la direccion de la cola de la lista
+            listaDestino->cola->sig = ptrNuevoNodo;  // asigna al puntero siguiente de la cola de la lista la direccion del nuevo nodo
+            listaDestino->cola = ptrNuevoNodo;       // asigna al almacenador de la direccion de la cola de la lista la direccion del nuevo nodo
+        }
+    }
+}
+
+/**
+ * @brief inserta un nuevo string en la caabeza de la lista
+ * @param ACargar
+ * @author David Gomez
+ */
+void insertarEnCabezaListaString(ListaString *ACargar)
+{
+    char valor[100];
+    printf("Ingrese un texto de entre 0 y 100 caracteres: ");
+    leeConEspacios(valor);
+    insertarStringEnCabeza(valor, ACargar);
+}
+/**
+ * @brief inserta un nuevo string en la cola de la lista
+ * @param ACargar
+ * @author David Gomez
+ */
+void insertarEnColaListaString(ListaString *ACargar)
+{
+    char valor[100];
+    printf("Ingrese un texto de entre 0 y 100 caracteres: ");
+    leeConEspacios(valor);
+    insertarStringEnCola(valor, ACargar);
+}
+/**
+ * @brief Imprime una lista de Strings desde la cabeza
+ * @param listaObjetivo
+ */
+void imprimeDesdeLaCabezaListaString(const ListaString *listaObjetivo)
+{
+    if (listaObjetivo->cabeza != NULL)
+    {
+        printf("\nLa lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+        NodoString *ptrNodoObjetivo = listaObjetivo->cabeza;
+        while (ptrNodoObjetivo != NULL)
+        {
+            printf("(%s)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+            printf(" -> ");
+            ptrNodoObjetivo = ptrNodoObjetivo->sig;
+        }
+        printf("NULL\n");
+    }
+    else
+    {
+        printf("La lista esta vacia");
+    }
+}
+
+/**
+ * @brief Imprime una lista de Strings desde la cola
+ * @param listaObjetivo
+ */
+void imprimeDesdeLaColaListaString(const ListaString *listaObjetivo)
+{
+    printf("La lista cuenta con %d Elementos.\n", listaObjetivo->cantidadElem);
+    NodoString *ptrNodoObjetivo = listaObjetivo->cola;
+    while (ptrNodoObjetivo != NULL)
+    {
+        printf("(%s)", ptrNodoObjetivo->dato); // imprimie el registro asociado al nodo
+        printf(" -> ");
+        ptrNodoObjetivo = ptrNodoObjetivo->ante;
+    }
+    printf("NULL\n");
+}
+
+/**
+ * @brief Extrea el dato de la cabeza de la lista string
+ * @param listaObjetivo
+ * @return
+ */
+char *extraerCabezaListaString(ListaString *listaObjetivo)
+{
+
+    char *contenedor = malloc(sizeof(char *)); // contenedor Auxiliar
+    if (!listaStringEstaVacia(*listaObjetivo))
+    {
+        NodoString *ptrNodoObjetivo;
+
+        ptrNodoObjetivo = listaObjetivo->cabeza;
+        contenedor = ptrNodoObjetivo->dato;
+        if (ptrNodoObjetivo->sig != NULL)
+        {
+            ptrNodoObjetivo->sig->ante = NULL; // asigna null al puntero anterior del nodo cabeza
+        }
+
+        listaObjetivo->cabeza = ptrNodoObjetivo->sig;
+        listaObjetivo->cantidadElem--; // resta uno a la cantidad de elementos de la lista
+        if (listaObjetivo->cantidadElem == 0)
+            listaObjetivo->cola = NULL;
+
+        free(ptrNodoObjetivo); // libera el espacio en memoria ocupado por el nodo extraido
+    }
+    else
+        printf("\nLa lista esta vacia\n");
+
+    return contenedor; // retorna una copia del registro extraido
+}
 /* Funciones de colas de prioridad */
 
 /**

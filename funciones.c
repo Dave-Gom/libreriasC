@@ -329,7 +329,7 @@ int agendador(int arreglo1[], const int dim, const int dias){
   return contador;
 }
 
-void copia_arreglo( int origen[], int destino[], const int dim){
+void copiaArreglo( int origen[], int destino[], const int dim){
   int i;
   for( i= 0; i<dim; i++){
     destino[i]=origen[i];
@@ -393,7 +393,7 @@ void copiaPrimerafilaEnMatriz( const int fila, const int colum, int matriz[][col
 
 
 
-void quickSort( double array[], int inicio, int fin){
+void quickSortD( double array[], int inicio, int fin){
   int i,j,central;
   double pivote;
   central = (inicio + fin)/2;
@@ -417,11 +417,11 @@ void quickSort( double array[], int inicio, int fin){
   } while (i<=j);
 
   if( inicio <= j){
-    quickSort(array, inicio, j);
+    quickSortD(array, inicio, j);
   }
 
   if( i< fin){
-    quickSort( array, i, fin);
+    quickSortD( array, i, fin);
   }
 
 }

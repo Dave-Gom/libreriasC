@@ -6,7 +6,7 @@
 int mayor( int arreglo[], const int longitud);//devuelve el mayor elemento del arreglo
 int menor( int arreglo[], const int longitud);//devuelve el menor elemento del arreglo
 
-void copia_arreglo( int origen[], int destino[], const int dim);//copia el arreglo del primer argumento en el arreglo del segundo argumento
+void copiaArreglo( int origen[], int destino[], const int dim);//copia el arreglo del primer argumento en el arreglo del segundo argumento
 void imprimeArreglo( int arreglo[], const int longitud);// imprimie el arreglo
 void iniciaArreglo( int arreglo[], const int lingitud);//inicializa el arreglo con todos los valores en cero
 void cargaVector( int arreglo[], const int lenght);//asigna valores desde la entrada estandar al arreglo

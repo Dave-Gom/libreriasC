@@ -59,7 +59,7 @@ int menor(int arreglo[], const int longitud)
  * @param destino Arreglo que recibira la copia de los elementos
  * @param dim dimension de ambos arreglos (Debe ser igual)
  */
-void copia_arreglo(int origen[], int destino[], const int dim)
+void copiaArreglo(int origen[], int destino[], const int dim)
 {
   int i; // iterador
   for (i = 0; i < dim; i++)
@@ -920,7 +920,7 @@ void burbuja_des(int arreglo[], const int longitud)
  * @param inicio Inicio de rango a ordenar
  * @param fin Fin de rango a ordenar
  */
-void quickSort(double array[], int inicio, int fin)
+void quickSortD(double array[], int inicio, int fin)
 {
   int i,       // iterador
       j,       // iterador
@@ -951,12 +951,12 @@ void quickSort(double array[], int inicio, int fin)
 
   if (inicio <= j)
   {                              // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort(array, inicio, j); // recursadesde el inicio hasta la posicion
+    quickSortD(array, inicio, j); // recursadesde el inicio hasta la posicion
   }
 
   if (i < fin)
   {                           // si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort(array, i, fin); // recursa desde la posicion hasta el fin
+    quickSortD(array, i, fin); // recursa desde la posicion hasta el fin
   }
 }
 

@@ -15,18 +15,18 @@ int cantidadAparicionElemento(int, int arreglo[], int);
 int sumaElementosArray(int arreglo[], int longitud);
 void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[]);
 
-void copia_arreglo(int origen[], int destino[], const int dim); // copia el arreglo del primer argumento en el arreglo del segundo argumento
-void imprimeArreglo(int arreglo[], const int longitud);         // imprimie el arreglo
-void iniciaArreglo(int arreglo[], const int lingitud);          // inicializa el arreglo con todos los valores en cero
-void cargaVector(int arreglo[], const int lenght);              // asigna valores desde la entrada estandar al arreglo
-int posMenor(const int arreglo[], const int longitud);          // develve la posicion del menor elemento del  menor elemento
-int posMayor(const int arreglo[], const int longitud);          // develve la posicion del mayor elemento del  menor elemento
+void copiaArreglo(int origen[], int destino[], const int dim); // copia el arreglo del primer argumento en el arreglo del segundo argumento
+void imprimeArreglo(int arreglo[], const int longitud);        // imprimie el arreglo
+void iniciaArreglo(int arreglo[], const int lingitud);         // inicializa el arreglo con todos los valores en cero
+void cargaVector(int arreglo[], const int lenght);             // asigna valores desde la entrada estandar al arreglo
+int posMenor(const int arreglo[], const int longitud);         // develve la posicion del menor elemento del  menor elemento
+int posMayor(const int arreglo[], const int longitud);         // develve la posicion del mayor elemento del  menor elemento
 bool esMonotona(int array[], int dim);
 void digitosInt(int arreglo[], int valor);
 
 /* Operaciones con matrices */
-void iniciaMatriz(const int fila, const int colum, int matriz[][colum]);             // inicializa la matriz con todos los valores en cero
-void cargaMatriz(const int fila, const int colum, int matriz[][colum]);              // asigna valores desde la entrada estandar al arreglo
+void iniciaMatriz(const int fila, const int colum, int matriz[][colum]);                                         // inicializa la matriz con todos los valores en cero
+void cargaMatriz(const int fila, const int colum, int matriz[][colum]);                                          // asigna valores desde la entrada estandar al arreglo
 void copiaPrimerafilaEnMatriz(const int fila, const int colum, int matriz[][colum], bool introducePrimeraLinea); // copia la primera fila de la matriz en las demas filas
 bool hayCerosEnMatriz(int fila, int col, int matriz[][col]);
 bool esHermosa(int fila, int columna, int matriz[][columna]);
@@ -55,16 +55,20 @@ void vocales(char exp[]);
 void primeraAparicion(char exp[], char p);
 void leeFechaFormat(char cadena[]);
 void enteroAString(int valor, char *cadena);
+void imprimeArrayDePalabras(char *palabras[], int longitud);
+int cantidadDePalabras(char palabras[], char separador[]);
+void inicializaArrayPalabras(char *palabras[], int longitudArray);
 
 /* ordenamientos */
-
 void ordIntecambio(int arreglo[], int longitud);
 void ordSeleccion(int a[], int n);
 void ordSeleccionRecusiva(int arreglo[], int longitud);
 void burbujaAsc(int arreglo[], const int longitud);
 void burbuja_des(int arreglo[], const int longitud);
-void quickSort(double array[], int inicio, int fin);
-void ordenaArrayConArboles(int array[], int dimension);
+void quickSortD(double array[], int inicio, int fin);
+void quickSortI(int array[], int inicio, int fin);
+void mergeSortArrays(int array[], int longitud);
+void mezclaEnOrden(int array1[], int dim1, int array2[], int dim2, int arrayDestino[]);
 
 /* pruebas y generacion aleatoria */
 
@@ -119,12 +123,12 @@ typedef struct NODOCHAR // nodo nodo cuyo dato es un caracter
 
 #define LONGITUDMAXSTRINGDENODO 100
 
-typedef struct NODOSTRING               // nodo cuyo dato es una cadena
-{                                       // los nodos tendran un registro dentro para mayor
-    char dato[LONGITUDMAXSTRINGDENODO]; // EL DATO PUEDE SER DE CUALQUIER TIPO
+typedef struct NODOSTRING // nodo cuyo dato es una cadena
+{
+    char *dato;
     struct NODOSTRING *sig;
     struct NODOSTRING *ante;
-} NodoSting; // define un alias para una estructura NODO
+} NodoString; // define un alias para una estructura NODO
 
 typedef struct LISTA
 {
@@ -132,6 +136,11 @@ typedef struct LISTA
     Nodo *cola;
     int cantidadElem;
 } Lista, Pila, Cola; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
+
+#define INICIALIZALISTA \
+    {                   \
+        NULL, NULL, 0   \
+    }
 
 typedef struct LISTAINT
 {
@@ -149,12 +158,14 @@ typedef struct LISTACHAR
     int cantidadElem;
 } ListaChar; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
 
+#define INICIALIZAPUNTEROLISTAICHAR malloc(sizeof(ListaChar))
 typedef struct LISTASTRING
 {
-    NodoSting *cabeza;
-    NodoSting *cola;
+    NodoString *cabeza;
+    NodoString *cola;
     int cantidadElem;
 } ListaString; // Una lista doblemente enlazada puede ser una Pila o una Cola dependiendo de como se carguen y lean los Nodos
+#define INICIALIZAPUNTEROLISTASTRING malloc(sizeof(ListaString))
 
 /**
  * @brief Funciones de Listas
@@ -164,7 +175,7 @@ typedef struct LISTASTRING
 
 // listas de registros
 Nodo *creaNodo(Registro);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-bool listaEstaVacia(Lista);                                     // retorna -1 si la lista esta vacia, 0 si no
+bool listaEstaVacia(Lista);                                    // retorna -1 si la lista esta vacia, 0 si no
 void insertarDatoEnCabeza(Registro dato, Lista *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarDatoEnCola(Registro dato, Lista *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabeza(Lista *listaDestino);
@@ -181,7 +192,7 @@ void despliegaMenuListas();                              // despliega menu de op
 
 // listas int
 NodoInt *creaNodoInt(int);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-bool listaIntEstaVacia(ListaInt);                            // retorna -1 si la lista esta vacia, 0 si no
+bool listaIntEstaVacia(ListaInt);                           // retorna -1 si la lista esta vacia, 0 si no
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarIntEnCola(int dato, ListaInt *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaInt(ListaInt *listaDestino);
@@ -198,7 +209,7 @@ void despliegaMenuListasInt();
 
 // listas de char
 NodoChar *creaNodoChar(char);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-bool listaCharEstaVacia(ListaChar);                             // retorna -1 si la lista esta vacia, 0 si no
+bool listaCharEstaVacia(ListaChar);                            // retorna -1 si la lista esta vacia, 0 si no
 void insertarCharEnCabeza(char dato, ListaChar *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarCharEnCola(char dato, ListaChar *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabezaListaChar(ListaChar *listaDestino);
@@ -207,12 +218,23 @@ int extraerCabezaListaChar(ListaChar *listaObjetivo);
 int extraerColaListaChar(ListaChar *listaObjetivo);
 void imprimeDesdeLaCabezaListaChar(const ListaChar *); // imprime una lista desde la cabeza (tambien valido para una Cola)
 void imprimeDesdeLaColaListaChar(const ListaChar *);   // imprime una lista desde la cola (tambien valido para una Pila)
-NodoInt *dirMayorEnListaChar(char Dato, ListaChar *listaDestino);
+/* NodoInt *dirMayorEnListaChar(char Dato, ListaChar *listaDestino);
 void insertaDatoAntesDeEnListaChar(NodoChar *nodoMayor, char dato);
 void insertaNodoAntesDeEnListaChar(NodoChar *nodoMayor, NodoChar *ptrNuevoNodo);
 void insertaEnOrdenEnListaChar(char dato, NodoChar *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
-void despliegaMenuListasChar();
+void despliegaMenuListasChar(); */
 int simbolosValanceados(char cadena[], ListaChar pilaContenedora, char simboloApertura, char simboloCierre);
+
+// lista de strings(palabras)
+NodoString *creaNodoString(char *string);
+bool listaStringEstaVacia(ListaString);
+void insertarStringEnCabeza(char dato[], ListaString *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
+void insertarStringEnCola(char dato[], ListaString *);
+void insertarEnCabezaListaString(ListaString *ACargar);
+void insertarEnColaListaString(ListaString *ACargar);
+void imprimeDesdeLaCabezaListaString(const ListaString *);
+void imprimeDesdeLaColaListaString(const ListaString *listaObjetivo);
+char *extraerCabezaListaString(ListaString *listaObjetivo);
 
 /* funciones de Colas de prioridad */
 #define CANTIDADPRIORIDADES 4
@@ -336,7 +358,6 @@ typedef struct rectangulo
     int lado1;
     int lado2;
 } Rectangulo;
-
 
 // define una estructura para un vector en 3 dimensiones
 typedef struct vector

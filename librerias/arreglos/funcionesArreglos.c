@@ -57,7 +57,7 @@ int menor( int arreglo[], const int longitud){
  * @param destino Arreglo que recibira la copia de los elementos
  * @param dim dimension de ambos arreglos (Debe ser igual)
  */
-void copia_arreglo( int origen[], int destino[], const int dim){
+void copiaArreglo( int origen[], int destino[], const int dim){
   int i; //iterador
   for( i= 0; i<dim; i++){
     destino[i]=origen[i];

@@ -10,7 +10,7 @@
 int mayor(int arreglo[], const int longitud); // devuelve el mayor elemento del arreglo
 int menor(int arreglo[], const int longitud); // devuelve el menor elemento del arreglo
 
-void copia_arreglo(int origen[], int destino[], const int dim); // copia el arreglo del primer argumento en el arreglo del segundo argumento
+void copiaArreglo(int origen[], int destino[], const int dim); // copia el arreglo del primer argumento en el arreglo del segundo argumento
 void imprimeArreglo(int arreglo[], const int longitud);         // imprimie el arreglo
 void iniciaArreglo(int arreglo[], const int lingitud);          // inicializa el arreglo con todos los valores en cero
 void cargaVector(int arreglo[], const int lenght);              // asigna valores desde la entrada estandar al arreglo
@@ -55,7 +55,7 @@ void ordSeleccion(int a[], int n);
 void ordSeleccionRecusiva(int arreglo[], int longitud);
 void burbujaAsc(int arreglo[], const int longitud);
 void burbuja_des(int arreglo[], const int longitud);
-void quickSort(double array[], int inicio, int fin);
+void quickSortD(double array[], int inicio, int fin);
 
 /* pruebas y generacion aleatoria */
 void arrayAleatorio(int arreglo[], int longitud, int valorLimite);                  // asigna numeros aleatorios del cero hasta el valor del tercer argumento al arreglo

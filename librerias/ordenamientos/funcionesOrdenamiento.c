@@ -135,7 +135,7 @@ void burbuja_des( int arreglo[], const int longitud){
  * @param inicio Inicio de rango a ordenar
  * @param fin Fin de rango a ordenar
  */
-void quickSort( double array[], int inicio, int fin){
+void quickSortD( double array[], int inicio, int fin){
   int i,//iterador
   j, //iterador
   central; //indicador del centro del array
@@ -162,11 +162,11 @@ void quickSort( double array[], int inicio, int fin){
   } while (i<=j); 
 
   if( inicio <= j){ //si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort(array, inicio, j); //recursadesde el inicio hasta la posicion
+    quickSortD(array, inicio, j); //recursadesde el inicio hasta la posicion
   }
 
   if( i< fin){//si el inico es menor o igual a la posicion del primer elemento mayor al pivote
-    quickSort( array, i, fin); //recursa desde la posicion hasta el fin
+    quickSortD( array, i, fin); //recursa desde la posicion hasta el fin
   }
 
 }
