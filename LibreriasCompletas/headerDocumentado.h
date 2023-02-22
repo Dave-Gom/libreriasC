@@ -281,7 +281,7 @@ typedef struct REGISTRORARCHIVO
     Registro Dato;
 } RegistroArchivo;
 
-RegistroArchivo creaRegistroArchivo();
+// RegistroArchivo creaRegistroArchivo();
 Archivo *creaArchivo();
 void cierraArchivo(Archivo *ArchivoObjetivo);
 Archivo *creaArchivoBin(); // crea un archivo binario, si se especifica rb+ y el archivo no existe, primero lo crea y luego abre el archivo para actualizacion binaria
@@ -290,8 +290,8 @@ void nuevoRegistro(Archivo *prtF);
 void eliminaRegistro(Archivo *ptrF);
 void actualizaRegistro(Archivo *ptrF);
 Archivo *abreArchivoParaLectura();
-void informeTxt(Archivo *prtF);                                  // imprime un informe del archiv en txt
-void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una Lista y guarda los registros en un archivo desde la cabeza de la listavoid menuArchivos();
+void informeTxt(Archivo *prtF); // imprime un informe del archiv en txt
+// void guardaColaEnArchivo(Archivo *ptrArchivo, Lista ListaDatos); // recibe una Lista y guarda los registros en un archivo desde la cabeza de la listavoid menuArchivos();
 void menuArchivos();
 void optenerCantidadElementos(Archivo *ptrArchivo);
 void despliegaMenuListasYArchivos();

@@ -1344,7 +1344,7 @@ int enteroAleatorio(int limite)
 
 int enteroAleatorioEntre(int limiteInf, int limiteSup)
 { // devuelve un numero aleatorio entre el limite inferior y el superior
-    srand(time(NULL));
+    // srand(time(NULL));
     int valor = limiteInf + (rand() % (limiteSup - limiteInf));
     return valor;
 }
@@ -1370,8 +1370,8 @@ float flotanteAleatorio()
  * @return char
  */
 char caracterAleatorio()
-{                                                            // devuelve un caracter aleatorio
-    char caracter = enteroAleatorioEntre(0, CHAR_MAX) + '0'; // asigna el valor aleatorio la variable
+{                                                       // devuelve un caracter aleatorio
+    char caracter = enteroAleatorioEntre(40, 80) + '0'; // asigna el valor aleatorio la variable
     return caracter;
 }
 
@@ -1388,7 +1388,7 @@ void cadenaAleatoria(char *cadena, int longitud)
     {
         cadena[i] = caracterAleatorio(); // asigna caracteres de forma aleatoria a la cadena
     }
-    cadena[longitud - 1] = '\n'; // asigna caracter de escape al ultimo caracter de la cadena
+    // cadena[longitud - 1] = '\n'; // asigna caracter de escape al ultimo caracter de la cadena
 }
 
 /**
@@ -1398,7 +1398,7 @@ void cadenaAleatoria(char *cadena, int longitud)
  */
 char *cadenaAleatoriaLongAleatoria()
 { // devuelve el apuntador a una cadena de longitud aleatoria
-    int longitud = enteroAleatorioEntre(40, 500);
+    int longitud = enteroAleatorioEntre(0, CHAR_MAX);
     char *Cadena = (char *)malloc(longitud);
     cadenaAleatoria(Cadena, longitud);
     return Cadena;
@@ -1887,6 +1887,7 @@ bool listaIntEstaVacia(ListaInt ListaVal)
  */
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino)
 {
+    printf("estoy aca");
     NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea el nodo con el dato
 
     if (ptrNuevoNodo != NULL)
@@ -1975,7 +1976,7 @@ int extraerCabezaListaInt(ListaInt *listaObjetivo)
 {
 
     int contenedor = 0; // contenedor Auxiliar
-    if (listaIntEstaVacia(*listaObjetivo))
+    if (!listaIntEstaVacia(*listaObjetivo))
     {
 
         NodoInt *ptrNodoObjetivo;
