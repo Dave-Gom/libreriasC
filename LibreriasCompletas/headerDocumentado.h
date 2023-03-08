@@ -235,6 +235,7 @@ void insertarEnColaListaString(ListaString *ACargar);
 void imprimeDesdeLaCabezaListaString(const ListaString *);
 void imprimeDesdeLaColaListaString(const ListaString *listaObjetivo);
 char *extraerCabezaListaString(ListaString *listaObjetivo);
+char *extraerColaListaString(ListaString *listaObjetivo);
 
 /* funciones de Colas de prioridad */
 #define CANTIDADPRIORIDADES 4
