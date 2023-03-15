@@ -95,6 +95,8 @@ int sumaElementosArray(int arreglo[], int longitud)
  * @param arrayOrigen Arreglo del que se copiaran los elementos
  * @param dimensionOrigen dimension del elemento origen
  * @param arrayDestino Arreglo que recibira la copia de los elementos
+ *
+ * @author David Gomez
  */
 void arraySimplificado(int arrayOrigen[], int dimensionOrigen, int arrayDestino[])
 {
@@ -907,10 +909,11 @@ void ordIntecambio(int arreglo[], int longitud)
  *
  * @param arreglo Arreglo a ser ordeneado
  * @param longitud Dimension del arreglo
+ *
+ * @author David Gomez
  */
 void ordSeleccion(int arreglo[], int longitud) // ejemplo joyanes
 {
-    printf("seleccion\n");
     int indiceMenor, // pos menor
         i,           // iterador
         j;           // iterador
@@ -939,6 +942,8 @@ void ordSeleccion(int arreglo[], int longitud) // ejemplo joyanes
  *
  * @param arreglo Arreglo a ser ordeneado
  * @param longitud Dimension del arreglo
+ *
+ * @author David Gomez
  */
 void ordSeleccionRecusiva(int arreglo[], int longitud)
 {
@@ -3952,3 +3957,19 @@ int esPalidromo(char cadena[])
     }
     return 0; // si sale del bucle entonces no es palindromo
 }
+
+/**
+ * @brief calcula recursivamente la cantidad de digitos de un entero
+ * @param valor
+ * @return int
+ */
+int cantidadDigitosInt(int valor)
+{
+    int contenedor = 1;
+    if (valor > 10)
+    {
+        contenedor += cantidadDigitosInt(valor / 10);
+    }
+
+    return contenedor;
+};

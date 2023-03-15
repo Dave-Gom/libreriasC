@@ -378,3 +378,4 @@ int tipoNumero(long numero);
 
 // funciones extra
 int esPalidromo(char cadena[]);
+int cantidadDigitosInt(int valor);
