@@ -1783,11 +1783,9 @@ void insertaEnOrden(Registro dato, Lista *listaDestino)
 {
 
     Nodo *ptrNuevoNodo = creaNodo(dato);
-
     if (ptrNuevoNodo != NULL)
     {
         listaDestino->cantidadElem++;
-
         if (listaEstaVacia(*listaDestino))
         { // si la lista esta vacia asigna la direccion del nuevo nodo a la cabeza y la cola
             listaDestino->cabeza = listaDestino->cola = ptrNuevoNodo;
@@ -1892,7 +1890,6 @@ bool listaIntEstaVacia(ListaInt ListaVal)
  */
 void insertarIntEnCabeza(int dato, ListaInt *listaDestino)
 {
-    printf("estoy aca");
     NodoInt *ptrNuevoNodo = creaNodoInt(dato); // crea el nodo con el dato
 
     if (ptrNuevoNodo != NULL)
@@ -2093,11 +2090,34 @@ void imprimeDesdeLaColaListaInt(const ListaInt *listaObjetivo)
  */
 NodoInt *dirMayorEnListaInt(int Dato, ListaInt *listaDestino)
 {
-    printf("Hola");
     NodoInt *ptrNodoEvaluado = listaDestino->cabeza;
     while (ptrNodoEvaluado != NULL)
     {
-        if (ptrNodoEvaluado->dato > Dato)
+        if (ptrNodoEvaluado->dato >= Dato)
+        { // compara el valor
+            return ptrNodoEvaluado;
+        }
+        else
+            ptrNodoEvaluado = ptrNodoEvaluado->sig;
+    }
+    return NULL;
+}
+
+/**
+ * @brief Retorna la direccion del primer nodo que contenga un dato igual al valor recibido como parametro
+ *
+ * @param Dato Entero que sera comparado
+ * @param listaDestino Lista en la que se buscara
+ * @return Nodo*
+ *
+ * @author Dave Gomez
+ */
+NodoInt *dirEnListaInt(int Dato, ListaInt *listaDestino)
+{
+    NodoInt *ptrNodoEvaluado = listaDestino->cabeza;
+    while (ptrNodoEvaluado != NULL)
+    {
+        if (ptrNodoEvaluado->dato == Dato)
         { // compara el valor
             return ptrNodoEvaluado;
         }
@@ -2136,7 +2156,6 @@ void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato)
  */
 void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo)
 {
-    printf("Aqui estoy");
     ptrNuevoNodo->sig = nodoMayor;        // asigna la direccion del nodo mayor al puntero siguiente del nuevo nodo
     ptrNuevoNodo->ante = nodoMayor->ante; // asigna la direccion del del puntero anterior del nodo mayor a puntero anterior del nuevo nodo
     nodoMayor->ante->sig = ptrNuevoNodo;
@@ -2173,7 +2192,6 @@ void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino)
             {
                 if (ptrNodoMayor != NULL)
                 {
-                    printf("\nPrimer Valor mayor al valor actual ");
                     insertaNodoAntesDeEnListaInt(ptrNodoMayor, ptrNuevoNodo);
                 }
                 else
@@ -2203,6 +2221,38 @@ void despliegaMenuListasInt()
     printf("6 - Salir\n");
     printf("Su Opcion = ");
 }
+
+/**
+ * @brief Elimina el nodo del argumento nodo de la Lista int
+ * Obs: Se debe asegurar que el nodo exista en la Lista
+ * @param Nodo
+ * @param Lista
+ */
+void eliminaNodoDeListaInt(NodoInt *Nodo, ListaInt *Lista)
+{
+    NodoInt *NodoAnter = INICIALIZAPUNTEROLISTAINT;
+    NodoInt *NodoSiguiente = INICIALIZAPUNTEROLISTAINT;
+
+    if (Lista->cabeza == Nodo)
+    {
+        extraerCabezaListaInt(Lista);
+    }
+    else
+    {
+        if (Lista->cola == Nodo)
+        {
+            extraerColaListaInt(Lista);
+        }
+        else
+        {
+            NodoAnter = Nodo->ante;
+            NodoSiguiente = Nodo->sig;
+            NodoAnter->sig = NodoSiguiente;
+            NodoSiguiente->ante = NodoAnter;
+            free(Nodo);
+        }
+    }
+};
 
 // Listas enlazadas de Caracteres
 /**
@@ -3482,6 +3532,24 @@ ListaInt *creaListaIntAleatoria()
     NodoInt *nodoAux;
     printf("Cantidad de elementos: %d", cantidadElementos);
     for (i = 0; i < cantidadElementos; i++)
+    {
+        insertarIntEnCola(enteroAleatorio(100), Lista);
+    }
+    return (Lista);
+}
+
+// pruebas con listas
+/**
+ * @brief Crea una lista de longitud aleatoria y con valores aleatorios en los registros
+ *
+ * @param int cantElem cantidad de elementos de la lista
+ * @return *ListaInt
+ */
+ListaInt *creaListaInt(int cantElem)
+{
+    int i;
+    ListaInt *Lista = malloc(sizeof(ListaInt));
+    for (i = 0; i < cantElem; i++)
     {
         insertarIntEnCola(enteroAleatorio(100), Lista);
     }

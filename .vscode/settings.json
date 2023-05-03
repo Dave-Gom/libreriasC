@@ -14,5 +14,6 @@
     "headerdocumentado.h": "c",
     "__locale": "c",
     "cstring": "c"
-  }
+  },
+  "C_Cpp.doxygen.generatedStyle": "/**"
 }

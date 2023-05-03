@@ -174,8 +174,8 @@ typedef struct LISTASTRING
  */
 
 // listas de registros
-Nodo *creaNodo(Registro);                                      // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
-bool listaEstaVacia(Lista);                                    // retorna -1 si la lista esta vacia, 0 si no
+Nodo *creaNodo(Registro); // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
+ListaInt *creaListaInt(int cantElem);
 void insertarDatoEnCabeza(Registro dato, Lista *listaDestino); // Inserta Por la cabeza de la lista (tabien valido para pilas)
 void insertarDatoEnCola(Registro dato, Lista *);               // Inserta Por la cola de la lista (tabien valido para Colas)
 void insertarEnCabeza(Lista *listaDestino);
@@ -202,10 +202,12 @@ int extraerColaListaInt(ListaInt *listaObjetivo);
 void imprimeDesdeLaCabezaListaInt(const ListaInt *); // imprime una lista desde la cabeza (tambien valido para una Cola)
 void imprimeDesdeLaColaListaInt(const ListaInt *);   // imprime una lista desde la cola (tambien valido para una Pila)
 NodoInt *dirMayorEnListaInt(int Dato, ListaInt *listaDestino);
+NodoInt *dirEnListaInt(int Dato, ListaInt *listaDestino);
 void insertaDatoAntesDeEnListaInt(NodoInt *nodoMayor, int dato);
 void insertaNodoAntesDeEnListaInt(NodoInt *nodoMayor, NodoInt *ptrNuevoNodo);
 void insertaEnOrdenEnListaInt(int dato, ListaInt *listaDestino); // Carga un Dato en una Lista Ya ordenada en Orden
 void despliegaMenuListasInt();
+void eliminaNodoDeListaInt(NodoInt *Nodo, ListaInt *Lista);
 
 // listas de char
 NodoChar *creaNodoChar(char);                                  // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
