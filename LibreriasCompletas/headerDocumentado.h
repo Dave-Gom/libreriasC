@@ -89,8 +89,8 @@ typedef struct REGISTRO // registro de archivos
 {
     /* Aqui deben ir los Argumentos del registro */
     int valor;
-    /*   char nombre[60];
-      double estadoDeCuenta; */
+    char nombre[60];
+    double estadoDeCuenta;
 } Registro;
 
 Registro creaRegistro();
@@ -172,7 +172,6 @@ typedef struct LISTASTRING
  *
  * @author Dave Gomez
  */
-
 // listas de registros
 Nodo *creaNodo(Registro); // crea un nuevo nodo, le asigna el dato que recibe de parametro y devuelve su ubicacion en memoria
 ListaInt *creaListaInt(int cantElem);
@@ -381,3 +380,6 @@ int tipoNumero(long numero);
 // funciones extra
 int esPalidromo(char cadena[]);
 int cantidadDigitosInt(int valor);
+
+void imprimeArregloFloat(float arreglo[], const int longitud);
+void imprimeMatrizFloatFormat(int filas, int columnas, float Matriz[][columnas]);

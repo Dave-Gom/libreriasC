@@ -15,5 +15,6 @@
     "__locale": "c",
     "cstring": "c"
   },
-  "C_Cpp.doxygen.generatedStyle": "/**"
+  "C_Cpp.doxygen.generatedStyle": "/**",
+  "C_Cpp.errorSquiggles": "enabled"
 }

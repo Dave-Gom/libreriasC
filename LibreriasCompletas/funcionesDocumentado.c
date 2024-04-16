@@ -173,6 +173,22 @@ void imprimeArreglo(int arreglo[], const int longitud)
 }
 
 /**
+ * @brief Imprimie un arreglo unidimensional separado por tabulaciones
+ *
+ * @param arreglo Arreglo a ser impreso
+ * @param longitud Dimension del arreglo
+ */
+void imprimeArregloFloat(float arreglo[], const int longitud)
+{
+    int i;
+    for (i = 0; i < longitud; i++)
+    {
+        printf(" %f\t", arreglo[i]);
+    }
+    printf("\n");
+}
+
+/**
  * @brief Asigna el valor inicial 0 a todas las posiciones del arreglo
  *
  * @param arreglo Arreglo a ser inicializado
@@ -633,6 +649,31 @@ void imprimeMatrizFormat(int filas, int columnas, int Matriz[][columnas])
         for (j = 0; j < columnas; j++)
         {
             printf(" %d\t", Matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n");
+}
+
+/**
+ * @brief Imprimie una matriz formateada en forma de Table
+ *
+ * @param filas Cantidad de filas
+ * @param columnas Cantidad de columnas
+ * @param Matriz Matriz a ser impresa
+ */
+void imprimeMatrizFloatFormat(int filas, int columnas, float Matriz[][columnas])
+{
+    int i;
+    int j;
+
+    /* printf("\n\nEste es el tablero:\n\n "); */
+    for (i = 0; i < filas; i++)
+    {
+        for (j = 0; j < columnas; j++)
+        {
+            printf(" %f\t", Matriz[i][j]);
         }
         printf("\n");
     }
